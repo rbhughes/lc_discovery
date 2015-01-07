@@ -1,0 +1,5 @@
+:stats:
+  :deep_scan: false
+  :project_homes:
+    - c:/programdata/geographix/projects
+
