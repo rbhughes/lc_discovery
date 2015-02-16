@@ -15,7 +15,7 @@
     :extracts: []
   - :path: c:/programdata/geographix/projects/eiq_test
     :label: blue
-    :active: true
+    :active: false
     :extracts: []
   - :path: c:/programdata/geographix/projects/KS_BOURBON
     :label: blue
@@ -30,7 +30,7 @@
     :active: true
     :extracts: []
 - :path: c:/temp
-  :active: false
+  :active: true
   :label: unlabeled
   :scan_date: 2015-02-08 14:16:31.746501000 -08:00
   :scan_deep: false
