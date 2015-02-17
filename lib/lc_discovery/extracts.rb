@@ -21,7 +21,7 @@ module Extracts
   
   # accepts an array of number indexes for selected types,
   # returns types and sum of 2**n values (bit banging)
-  def sum_extracts(nums)
+  def decode_array(nums)
     types = []
     sum = nums.map do |n|
       if (0...self.constants.size).to_a.include? n
@@ -29,11 +29,11 @@ module Extracts
         self.const_get self.constants[n]
       end
     end.inject(:+)
-    {:types => types, :extracts => sum}
+    {:types => types, :extract_code => sum}
   end
 
 
-  def extract_types
+  def data_types
     types = []
     self.constants.each_with_index do |type,i|
       types << sprintf("%4s -- %-20s", i, type)
@@ -44,7 +44,7 @@ module Extracts
 
   
   # decode the extract number and return array of types
-  def assigned_extracts(extracts)
+  def assigned(extracts)
     types = []
     self.constants.each do |type|
       types << type if (extracts & self.const_get(type) > 0)

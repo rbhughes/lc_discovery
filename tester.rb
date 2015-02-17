@@ -2,16 +2,18 @@ require_relative "lib/lc_discovery/extracts"
 
 
 
+printf("%10s", "blahh")
 
-puts Extracts.list_types
+#puts Extracts.data_types
 
-a = [0,1,4]
+#a = [0,1,4]
 
-puts Extracts.sum_extracts a
+#puts Extracts.decode_array a
 
 
-puts "----------------"
-puts Extracts.assigned_extracts 19
+#puts "----------------"
+#puts Extracts.assigned(1)
+#puts "----------------"
 
 
 =begin

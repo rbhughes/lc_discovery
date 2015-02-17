@@ -227,7 +227,7 @@ command :set_extracts do |c|
         end
                    
         system("cls")
-        puts "\nEnter project number(s) to toggle active status for projects in"
+        puts "\nEnter project number(s) to define extracts for projects in"
         puts "#{@config[:homes][i][:path]}:\n\n"
 
         puts "\n    active?  path\n    -------  ----\n"
@@ -240,20 +240,26 @@ command :set_extracts do |c|
         @config[:homes][i][:projects].each_with_index do |proj, j|
           if proj_choices.include? j
             system("cls")
-            ap @config[:homes][i][:projects][j]
+            
+            puts "\nSelect extracts for project:\n"
+            puts "\n#{proj[:path]}\n\n"
+            puts "\nAssigned Extracts:\n\n"
+            Extracts.assigned(proj[:extract_code]).each do |e|
+              printf("        %s\n", e)
+            end
 
+            puts "\n\n\nAvailable Extracts:\n\n"
+            puts Extracts.data_types.join("\n")
+            puts "\nEnter extract number(s) for specifc data types."
+            
+            extract_choices = validate_numeric_stdin(Extracts.data_types)
+            x = Extracts.decode_array(extract_choices)
+            @config[:homes][i][:projects][j][:extract_code] = x[:extract_code]
+            puts "\n\nSelected Extracts:\n\n"
+            x[:types].each{ |e| printf("        %s\n", e) }
+            sleep 3
 
-            #toggle = ! @config[:homes][i][:projects][j][:active]
-            #puts "set active=#{toggle} for project #{j}: " \
-            #"#{@config[:homes][i][:projects][j][:path]}"
-            #@config[:homes][i][:projects][j][:active] = toggle
-            #proj_choices.delete(j)
           end
-        end
-
-        unless proj_choices.empty?
-          puts "\n\n(unchanged: #{proj_choices.join','})"
-          sleep 1
         end
 
       end
@@ -263,7 +269,6 @@ command :set_extracts do |c|
 
     sleep 1
     show_config
-
 
   end
 end
@@ -350,7 +355,7 @@ command :list_projects do |c|
             path: path,
             label: home[:label],
             active: true,
-            extracts: []
+            extract_code: 0
           }
         end
         home[:scan_date] = Time.now
