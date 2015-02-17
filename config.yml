@@ -6,16 +6,16 @@
 - :path: c:/programdata/geographix/projects
   :active: true
   :label: blue
-  :scan_date: 2015-02-08 13:35:36.129646000 -08:00
+  :scan_date: 2015-02-16 13:42:46.474014000 -08:00
   :scan_deep: false
   :projects:
   - :path: c:/programdata/geographix/projects/California
     :label: blue
-    :active: true
+    :active: false
     :extracts: []
   - :path: c:/programdata/geographix/projects/eiq_test
     :label: blue
-    :active: false
+    :active: true
     :extracts: []
   - :path: c:/programdata/geographix/projects/KS_BOURBON
     :label: blue
@@ -32,6 +32,16 @@
 - :path: c:/temp
   :active: true
   :label: unlabeled
-  :scan_date: 2015-02-08 14:16:31.746501000 -08:00
+  :scan_date: 2015-02-16 13:42:46.474014000 -08:00
   :scan_deep: false
   :projects: []
+- :path: c:/fake_ggx_home
+  :active: true
+  :label: unlabeled
+  :scan_date: 2015-02-16 13:42:46.474014000 -08:00
+  :scan_deep: false
+  :projects:
+  - :path: c:/fake_ggx_home/KS_HARPER
+    :label: unlabeled
+    :active: true
+    :extracts: []

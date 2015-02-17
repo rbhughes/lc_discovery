@@ -1,7 +1,20 @@
+require_relative "lib/lc_discovery/extracts"
 
 
 
 
+puts Extracts.list_types
+
+a = [0,1,4]
+
+puts Extracts.sum_extracts a
+
+
+puts "----------------"
+puts Extracts.assigned_extracts 19
+
+
+=begin
 a = "c:\\drive\\thing space\\thing"
 b = "\\\\server\\share space\\path"
 c = "//server/sher/th aig"
@@ -11,12 +24,6 @@ c = "//server/sher/th aig"
 if ( /^\/\/.*|[a-z]:.*/i =~ c )
   puts "MATCH"
 end
-
-
-
-
-
-=begin
 require "yaml"
 
 cfg = {

@@ -2,6 +2,7 @@
 require "awesome_print"
 require "yaml"
 require 'gli'
+require_relative "../lib/lc_discovery/extracts"
 require_relative "../lib/lc_discovery/discovery"
  
 include GLI::App
@@ -9,22 +10,14 @@ include GLI::App
 ENV["GLI_DEBUG"] = "true"
 
 
-#----------
-# show numbered list of known project homes
-# user can pick number or wildcard string match
-def numbered_homes
-  s = "\n    active?  path\n    -------  ----\n"
-  @config[:homes].each_with_index do |home, i|
-    s << sprintf("%-4d %-7s %s\n", i, home[:active], home[:path])
-  end
-  return s
-end
-
-
 
 
 def no_projects?
   @config[:homes].map{ |x| x[:projects] }.flatten.empty?
+end
+
+def no_homes?
+  @config[:homes].empty?
 end
 
 
@@ -67,52 +60,59 @@ post do |global_options, command, options, args|
 end
 
 
+################################################################################
+
+
+#----------
+desc "Show current configuration."
+long_desc "long desc for show config"
+command :show_config do |c|
+  c.action do |global_options,options,args|
+    show_config
+  end
+end
 
 
 
 #----------
 desc "Toggle the active state for selected homes."
 long_desc "long description"
-command :home_toggle do |c|
+command :home_activate do |c|
   c.action do |global_options,options,args|
-    if @config[:homes].empty?
-      puts "There are no homes yet! Use \"add_home\" first."
-    else
 
-      puts "\nEnter home number(s) to toggle active status (T/F)...\n\n"
+    help_now! "No homes! Run 'add_home' first" if no_homes?
 
-      puts "\n    active?  path\n    -------  ----\n"
-      @config[:homes].each_with_index do |home, i|
-        printf("%-4d %-7s %s\n", i, home[:active], home[:path])
-      end
+    system("cls")
+    puts "\nEnter home number(s) to toggle active status...\n\n"
 
-      print "\n(use commas for multiple selections):"
-
-      #slop to filter out any out-of-range or non-integer text
-      choices = gets.chomp.split(",").select{ |x| /\d+/.match x }.uniq.map{ |y|
-       y.to_i }.reject{ |z| z >= @config[:homes].size }
-      
-      if choices.empty?
-        puts "Numbers must be in range: 0 to #{@config[:homes].size - 1}."
-      else
-
-        # show what numbered homes have been modified
-        @config[:homes].each_with_index do |home, i|
-          if choices.include? i
-            toggle = ! @config[:homes][i][:active]
-            puts "set active=#{toggle} for home #{i}: " \
-            "#{@config[:homes][i][:path]}"
-            @config[:homes][i][:active] = toggle
-            choices.delete(i)
-          end
-        end
-
-      end
-
-      puts "\n(unchanged: #{choices.join','})" unless choices.empty?
-
+    puts "\n    active?  path\n    -------  ----\n"
+    @config[:homes].each_with_index do |home, i|
+      printf("%-4d %-7s %s\n", i, home[:active], home[:path])
     end
+
+    home_choices = validate_numeric_stdin(@config[:homes])
+    
+    if home_choices.empty?
+      help_now! "Numbers must be in range: 0 to #{@config[:homes].size - 1}."
+    end
+
+    # show what numbered homes have been modified
+    @config[:homes].each_with_index do |home, i|
+      if home_choices.include? i
+        toggle = ! @config[:homes][i][:active]
+        puts "set active=#{toggle} for home #{i}: " \
+        "#{@config[:homes][i][:path]}"
+        @config[:homes][i][:active] = toggle
+        home_choices.delete(i)
+      end
+    end
+
+    puts "\n\n(unchanged: #{home_choices.join','})" unless home_choices.empty?
+    sleep 2
+    show_config
+
   end
+
 end
 
 
@@ -120,90 +120,74 @@ end
 #----------
 desc "Toggle the active state for selected projects."
 long_desc "long description for proj_toggle"
-command :proj_toggle do |c|
+command :proj_activate do |c|
   c.action do |global_options,options,args|
-    if @config[:homes].empty?
-      puts "There are no homes yet! Use \"add_home\" first."
-    else
-      system("cls")
-      puts "\nSelect home number(s) containing your projects...\n\n"
 
-      puts "\n    active?  path\n    -------  ----\n"
-      @config[:homes].each_with_index do |home, i|
-        printf("%-4d %-7s %s\n", i, home[:active], home[:path])
-      end
+    help_now! "No homes! Run 'add_home' first" if no_homes?
+    help_now! "No projects! Run 'list_projects' first" if no_projects?
 
-      home_choices = validate_numeric_stdin(@config[:homes])
-      
-      # default to first home if no valid choices given
-      if home_choices.empty?
-        puts "Numbers must be in range: 0 to #{@config[:homes].size - 1}."
-        puts "Defaulting to home 0..."
-        homes_choices = [0];
-      end
+    system("cls")
+    puts "\nEnter home number(s) containing your projects...\n\n"
 
-      @config[:homes].each_with_index do |home, i|
-        if home_choices.include? i
-          if @config[:homes][i][:projects].empty?
-            system("cls")
-            puts "No projects in: #{@config[:homes][i][:path]}"
-            puts "Try running a scan first..."
-            sleep 3
-            system("cls")
-            next
-          end
-                     
+    puts "\n    active?  path\n    -------  ----\n"
+    @config[:homes].each_with_index do |home, i|
+      printf("%-4d %-7s %s\n", i, home[:active], home[:path])
+    end
+
+    home_choices = validate_numeric_stdin(@config[:homes])
+    
+    if home_choices.empty?
+      help_now! "Numbers must be in range: 0 to #{@config[:homes].size - 1}."
+    end
+
+    @config[:homes].each_with_index do |home, i|
+
+      if home_choices.include? i
+        if @config[:homes][i][:projects].empty?
           system("cls")
-          puts "\nEnter project number(s) to toggle active status for"
-          puts "projects in #{@config[:homes][i][:path]}:\n\n"
-
-          puts "\n    active?  path\n    -------  ----\n"
-          @config[:homes][i][:projects].each_with_index do |proj, j|
-            printf("%-4d %-7s %s\n", j, proj[:active], proj[:path])
-          end
-
-          proj_choices = validate_numeric_stdin(@config[:homes][i][:projects])
-
-          @config[:homes][i][:projects].each_with_index do |proj, j|
-            if proj_choices.include? j
-              toggle = ! @config[:homes][i][:projects][j][:active]
-              puts "set active=#{toggle} for project #{j}: " \
-              "#{@config[:homes][i][:projects][j][:path]}"
-              @config[:homes][i][:projects][j][:active] = toggle
-            end
-          end
-
-          #home_choices.delete(i)
+          puts "No projects in: #{@config[:homes][i][:path]}"
+          puts "Try running 'list_projects' first..."
+          sleep 2
+          system("cls")
+          next
         end
-        
+                   
+        system("cls")
+        puts "\nEnter project number(s) to toggle active status for projects in"
+        puts "#{@config[:homes][i][:path]}:\n\n"
 
-      end #end homes loop
+        puts "\n    active?  path\n    -------  ----\n"
+        @config[:homes][i][:projects].each_with_index do |proj, j|
+          printf("%-4d %-7s %s\n", j, proj[:active], proj[:path])
+        end
 
-      show_config
+        proj_choices = validate_numeric_stdin(@config[:homes][i][:projects])
 
-    end
+        @config[:homes][i][:projects].each_with_index do |proj, j|
+          if proj_choices.include? j
+            toggle = ! @config[:homes][i][:projects][j][:active]
+            puts "set active=#{toggle} for project #{j}: " \
+            "#{@config[:homes][i][:projects][j][:path]}"
+            @config[:homes][i][:projects][j][:active] = toggle
+            proj_choices.delete(j)
+          end
+        end
+
+        unless proj_choices.empty?
+          puts "\n\n(unchanged: #{proj_choices.join','})"
+          sleep 1
+        end
+
+      end
+      
+
+    end #end homes loop
+
+    sleep 1
+    show_config
+
   end
 end
-
-
-
-
-#----------
-desc "Scan all selected projects and extract data types"
-long_desc "long scsan"
-command :scan_projects do |c|
-  c.action do |global_options,options,args|
-    if no_homes?
-      puts "Oh noes! You need to add some homes and scan for projects first!"
-    else
-      puts numbered_homes
-      choice = gets.chomp
-
-    end
-  end
-end
-
-
 
 
 
@@ -211,13 +195,101 @@ end
 #----------
 desc "Choose which data types to extract from projects."
 long_desc "long description for extracts"
-command :extracts do |c|
+command :set_extracts do |c|
   c.action do |global_options,options,args|
+    help_now! "No homes! Run 'add_home' first" if no_homes?
+    help_now! "No projects! Run 'list_projects' first" if no_projects?
+
+    system("cls")
+    puts "\nEnter home number(s) containing your projects...\n\n"
+
+    puts "\n    active?  path\n    -------  ----\n"
+    @config[:homes].each_with_index do |home, i|
+      printf("%-4d %-7s %s\n", i, home[:active], home[:path])
+    end
+
+    home_choices = validate_numeric_stdin(@config[:homes])
+    
+    if home_choices.empty?
+      help_now! "Numbers must be in range: 0 to #{@config[:homes].size - 1}."
+    end
+
+    @config[:homes].each_with_index do |home, i|
+
+      if home_choices.include? i
+        if @config[:homes][i][:projects].empty?
+          system("cls")
+          puts "No projects in: #{@config[:homes][i][:path]}"
+          puts "Try running 'list_projects' first..."
+          sleep 2
+          system("cls")
+          next
+        end
+                   
+        system("cls")
+        puts "\nEnter project number(s) to toggle active status for projects in"
+        puts "#{@config[:homes][i][:path]}:\n\n"
+
+        puts "\n    active?  path\n    -------  ----\n"
+        @config[:homes][i][:projects].each_with_index do |proj, j|
+          printf("%-4d %-7s %s\n", j, proj[:active], proj[:path])
+        end
+
+        proj_choices = validate_numeric_stdin(@config[:homes][i][:projects])
+
+        @config[:homes][i][:projects].each_with_index do |proj, j|
+          if proj_choices.include? j
+            system("cls")
+            ap @config[:homes][i][:projects][j]
+
+
+            #toggle = ! @config[:homes][i][:projects][j][:active]
+            #puts "set active=#{toggle} for project #{j}: " \
+            #"#{@config[:homes][i][:projects][j][:path]}"
+            #@config[:homes][i][:projects][j][:active] = toggle
+            #proj_choices.delete(j)
+          end
+        end
+
+        unless proj_choices.empty?
+          puts "\n\n(unchanged: #{proj_choices.join','})"
+          sleep 1
+        end
+
+      end
+      
+
+    end #end homes loop
+
+    sleep 1
+    show_config
+
+
   end
 end
 
 
-########## DONE BELOW
+
+#----------
+desc "Scan all selected projects and extract data types"
+long_desc "long scsan"
+command :run_extracts do |c|
+  c.action do |global_options,options,args|
+    help_now! "No homes! Run 'add_home' first" if no_homes?
+    help_now! "No projects! Run 'list_projects' first" if no_projects?
+
+    puts "RUN_EXTRACTS"
+
+  end
+end
+
+
+
+
+
+
+
+
 
 #----------
 desc "Add a new project home."
@@ -226,6 +298,8 @@ command :add_home do |c|
   c.switch [:d, :deep]
   c.flag [:l, :label], :default_value => "unlabeled"
   c.action do |global_options,options,args|
+
+    help_now! "Project home cannot be blank." if args.empty?
 
     path = args[0].gsub("\\", "/")
     selected = @config[:homes].select{ |h| h[:path].casecmp(path)==0 }.first
@@ -240,12 +314,14 @@ command :add_home do |c|
     }
 
     if selected
-      puts "Home is already in the list (but I'll activate it):\n #{path}"
+      puts "Home is already in the list (but I'll re-scan it):\n #{path}"
       selected[:active] = true
     else
       if /^\/\/\w.*|^[a-z]:\/{1}\w.*/i =~ path
         @config[:homes] << default_opts
         puts "Home added: #{path}"
+        sleep 2
+        show_config
       else
         puts "Invalid path? #{path}"
       end
@@ -260,7 +336,7 @@ end
 #---------- 
 desc "Recurse through active homes and (re)build project list."
 long_desc "long description of find_projects"
-command :find_projects do |c|
+command :list_projects do |c|
   c.action do
 
     @config[:homes].each do |home|
@@ -281,6 +357,8 @@ command :find_projects do |c|
       end
       
     end
+    sleep 2
+    show_config
 
   end
 end

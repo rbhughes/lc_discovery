@@ -33,12 +33,13 @@ module Extracts
   end
 
 
-  def list_types
-    list = []
+  def extract_types
+    types = []
     self.constants.each_with_index do |type,i|
-      list << sprintf("%4s -- %-20s", i, type)
+      types << sprintf("%4s -- %-20s", i, type)
     end
-    list.join("\n")
+    #types.join("\n")
+    types
   end
 
   
