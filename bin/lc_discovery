@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+
 require "awesome_print"
 require "yaml"
 require 'gli'
@@ -6,6 +7,7 @@ require_relative "../lib/lc_discovery/extracts"
 require_relative "../lib/lc_discovery/discovery"
  
 include GLI::App
+
 
 ENV["GLI_DEBUG"] = "true"
 
@@ -253,11 +255,11 @@ command :set_extracts do |c|
             puts "\nEnter extract number(s) for specifc data types."
             
             extract_choices = validate_numeric_stdin(Extracts.data_types)
-            x = Extracts.decode_array(extract_choices)
-            @config[:homes][i][:projects][j][:extract_code] = x[:extract_code]
+            x = Extracts.decode(extract_choices)
+            @config[:homes][i][:projects][j][:extract_code] = x[:code]
             puts "\n\nSelected Extracts:\n\n"
             x[:types].each{ |e| printf("        %s\n", e) }
-            sleep 3
+            sleep 2
 
           end
         end
@@ -283,7 +285,15 @@ command :run_extracts do |c|
     help_now! "No homes! Run 'add_home' first" if no_homes?
     help_now! "No projects! Run 'list_projects' first" if no_projects?
 
-    puts "RUN_EXTRACTS"
+
+    #this needs to dispatch projects to a queue
+    
+    @config[:homes].select{ |h| h[:active] }.each do |home|
+      home[:projects].select{ |p| p[:active] }.each do |proj|
+        Discovery.process_project(proj)
+      end
+    end
+
 
   end
 end

@@ -11,26 +11,26 @@
   :projects:
   - :path: c:/programdata/geographix/projects/California
     :label: blue
-    :active: true
-    :extract_code: 31
+    :active: false
+    :extract_code: 1
   - :path: c:/programdata/geographix/projects/eiq_test
     :label: blue
     :active: true
     :extract_code: 1
   - :path: c:/programdata/geographix/projects/KS_BOURBON
     :label: blue
-    :active: true
-    :extract_code: 5
+    :active: false
+    :extract_code: 1
   - :path: c:/programdata/geographix/projects/KS_HARPER
     :label: blue
-    :active: true
-    :extract_code: 17
+    :active: false
+    :extract_code: 1
   - :path: c:/programdata/geographix/projects/Stratton
     :label: blue
     :active: true
     :extract_code: 1
 - :path: c:/temp
-  :active: true
+  :active: false
   :label: unlabeled
   :scan_date: 2015-02-16 19:04:03.290567000 -08:00
   :scan_deep: false

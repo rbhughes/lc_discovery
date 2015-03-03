@@ -1,4 +1,15 @@
+require_relative "x_meta"
+
 module Discovery
+
+
+  def self.process_project(proj)
+    puts "-"*30
+    puts "DO PROCESS THIS PROJECT:  #{proj}"
+    puts proj
+    puts Extracts.assigned(proj[:extract_code])
+    puts "-"*30
+  end
 
   #----------
   def self.project_list(root, deep_scan)
