@@ -5,7 +5,7 @@ require "filesize"
 require "nokogiri"
 require "date"
 
-module Stats
+module Meta
   #@table_name = "ggx_stats"
   @proj = nil
   @gxdb = nil

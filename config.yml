@@ -1,47 +1,47 @@
 ---
-:elasticsearch:
-  :host: localhost
-  :port: 9200
-:homes:
-- :path: c:/programdata/geographix/projects
-  :active: true
-  :label: blue
-  :scan_date: 2015-02-16 19:04:03.290567000 -08:00
-  :scan_deep: false
-  :projects:
-  - :path: c:/programdata/geographix/projects/California
-    :label: blue
-    :active: false
-    :extract_code: 1
-  - :path: c:/programdata/geographix/projects/eiq_test
-    :label: blue
-    :active: true
-    :extract_code: 1
-  - :path: c:/programdata/geographix/projects/KS_BOURBON
-    :label: blue
-    :active: false
-    :extract_code: 1
-  - :path: c:/programdata/geographix/projects/KS_HARPER
-    :label: blue
-    :active: false
-    :extract_code: 1
-  - :path: c:/programdata/geographix/projects/Stratton
-    :label: blue
-    :active: true
-    :extract_code: 1
-- :path: c:/temp
-  :active: false
-  :label: unlabeled
-  :scan_date: 2015-02-16 19:04:03.290567000 -08:00
-  :scan_deep: false
-  :projects: []
-- :path: c:/fake_ggx_home
-  :active: true
-  :label: unlabeled
-  :scan_date: 2015-02-16 19:04:03.290567000 -08:00
-  :scan_deep: false
-  :projects:
-  - :path: c:/fake_ggx_home/KS_HARPER
-    :label: unlabeled
-    :active: true
-    :extract_code: 29
+elasticsearch:
+  host: localhost
+  port: 9200
+homes:
+- path: c:/programdata/geographix/projects
+  active: true
+  label: red
+  scan_date: 2015-04-16 06:27:40.688772000 -07:00
+  scan_deep: false
+  projects:
+  - path: c:/programdata/geographix/projects/California
+    label: red
+    active: true
+    extract_code: 3
+    scan_date: 
+  - path: c:/programdata/geographix/projects/eiq_test
+    label: red
+    active: true
+    extract_code: 1
+    scan_date: 
+  - path: c:/programdata/geographix/projects/KS_BOURBON
+    label: red
+    active: true
+    extract_code: 3
+    scan_date: 
+  - path: c:/programdata/geographix/projects/KS_HARPER
+    label: red
+    active: true
+    extract_code: 16381
+    scan_date: 
+  - path: c:/programdata/geographix/projects/Stratton
+    label: red
+    active: true
+    extract_code: 1
+    scan_date: 
+- path: c:/fake_ggx_home
+  active: true
+  label: zzz
+  scan_date: 2015-04-16 06:27:40.688772000 -07:00
+  scan_deep: true
+  projects:
+  - path: c:/fake_ggx_home/KS_HARPER
+    label: zzz
+    active: true
+    extract_code: 29
+    scan_date: 

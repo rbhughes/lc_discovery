@@ -5,7 +5,7 @@ module Discovery
     puts '-' * 30
     puts "DO PROCESS THIS PROJECT:  #{proj}"
     puts proj
-    puts Extracts.assigned(proj[:extract_code])
+    puts Extracts.assigned(proj['extract_code'])
     puts '-' * 30
   end
 
