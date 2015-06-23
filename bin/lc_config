@@ -271,8 +271,8 @@ command :add_home do |c|
 
     default_opts = {
       'path'      => path,
-      'active'    => true,
       'label'     => options[:label],
+      'active'    => true,
       'scan_date' => nil,
       'scan_deep' => options[:deep],
       'projects'  => []
