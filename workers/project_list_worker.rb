@@ -1,39 +1,38 @@
 require "sidekiq"
-require "awesome_print"
-
-
-require_relative '../lib/lc_discovery/discovery.rb'
+require_relative '../lib/lc_discovery/discovery'
+require_relative '../lib/lc_discovery/redis_queue'
 
 class ProjectListWorker
   include Sidekiq::Worker
+  EXPIRY = 60
 
   def perform(root='c:/programdata/geographix/projects', deep_scan=false)
+    logger.info "processing qid: #{qid}"
+    puts "processing qid: #{qid}"
 
-    rows = []
-    Discovery.project_list(root, deep_scan).each do |proj|
-      rows << proj
+    begin
+      
+      rq = RedisQueue.redis
+      rq.set qid, 'working'
+
+      rq.rpush "#{qid}_payload", "NOT EXIST?: #{root}" unless File.exists?(root)
+
+      projects = Discovery.project_list(root, deep_scan)
+      rq.rpush "#{qid}_payload", "NO PROJECTS IN: #{root}" if projects.empty?
+      
+      projects.each do |proj|
+        rq.rpush "#{qid}_payload", proj
+      end
+      rq.set qid, 'done'
+
+    rescue Exception => e
+      rq.rpush "#{qid}_payload", e.backtrace.inspect
+      rq.set qid, 'fail'
+    ensure
+      rq.expire "#{qid}_payload", EXPIRY
+      rq.expire qid, EXPIRY
     end
 
-    ap rows
-
-
-    ##s = "worker #{self.class} received #{lc_id} at #{Time.now}"
-    #p = Project.where(:lc_id => lc_id).first
-
-    #db = Sequel.sqlanywhere(:conn_string => p.connect_string)
-
-    #dataset = db[:WellHeader].select(:"well id", :"well name", :"latitude")
-
-    #rows = ""
-    #dataset.each do |w|
-    #  rows << "#{w}\n"
-    #end
-
-    #rows = %w( meta aaaaa bbb );
-    #rows << lc_id
-    #rows << '________________'
-
-    
   end
 
   private
@@ -42,10 +41,5 @@ class ProjectListWorker
     @qid ||= ['lc_discovery', self.class.name, self.jid].join('_').downcase
   end
 
-
-
 end
-
-
-#require_relative 'well'
 

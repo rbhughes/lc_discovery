@@ -4,12 +4,11 @@ require 'lc_discovery/extracts'
 #require 'lc_discovery/stats'
 require 'lc_discovery/sybase'
 require 'lc_discovery/utility'
+require 'lc_discovery/redis_queue'
 #require 'sidekiq'
 
 
 #module LcDiscovery
 
-require 'redis'
-@redis = Redis.new(:host => '127.0.0.1', :port => 6379)
 
 #end
