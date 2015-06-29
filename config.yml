@@ -12,17 +12,17 @@ homes:
   - path: c:/programdata/geographix/projects/California
     label: red
     active: true
-    extract_code: 3
+    extract_code: 117
     scan_date: 
   - path: c:/programdata/geographix/projects/eiq_test
     label: red
     active: true
-    extract_code: 1
+    extract_code: 1080
     scan_date: 
   - path: c:/programdata/geographix/projects/KS_BOURBON
     label: red
     active: true
-    extract_code: 3
+    extract_code: 1
     scan_date: 
   - path: c:/programdata/geographix/projects/KS_HARPER
     label: red

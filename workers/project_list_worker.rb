@@ -8,7 +8,7 @@ class ProjectListWorker
 
   def perform(root='c:/programdata/geographix/projects', deep_scan=false)
     logger.info "processing qid: #{qid}"
-    puts "processing qid: #{qid}"
+    puts "#{Time.now}  processing qid: #{qid}"
 
     begin
       

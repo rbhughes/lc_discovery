@@ -222,10 +222,10 @@ command :set_extracts do |c|
         end
 
         puts "\n\n\nAvailable Extracts:\n\n"
-        puts Extracts.data_types.join("\n")
+        puts Extracts.data_types_for_cli.join("\n")
         puts "\nEnter extract number(s) for specifc data types."
 
-        extract_choices = validate_numeric_stdin(Extracts.data_types)
+        extract_choices = validate_numeric_stdin(Extracts.data_types_for_cli)
         x = Extracts.decode(extract_choices)
         @config['homes'][i]['projects'][j]['extract_code'] = x[:code]
         puts "\n\nSelected Extracts:\n\n"

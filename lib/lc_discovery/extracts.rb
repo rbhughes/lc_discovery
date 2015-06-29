@@ -23,7 +23,7 @@ module Extracts
 
   # accepts an array of number indexes for selected types,
   # returns a hash of types and sum of 2**n values (bit banging)
-  # {:types =["PROJ_META"], code => 1}
+  # {:types =["META"], code => 1}
   def decode(nums)
     types = []
     sum = nums.map do |n|
@@ -36,20 +36,26 @@ module Extracts
   end
 
   # returns a formatted array of strings with integer and data type. e.g.
-  # * 0 -- PROJ_META
+  # * 0 -- META
   # * 1 -- WELL
   # * 2 -- SURVEY
   # * 3 -- FORMATION
   # * 4 -- DIGITAL_CURVES
   # * etc...
   # The integers are used in command-line selections.
-  def data_types
+  def data_types_for_cli
     types = []
     constants.each_with_index do |type, i|
       types << format('%4s -- %-20s', i, type)
     end
     types
   end
+
+
+  def data_types
+    self.types
+  end
+
 
   # Decode the extract number (integer) and return array of matching
   # data type as constant strings

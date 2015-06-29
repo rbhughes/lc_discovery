@@ -1,8 +1,7 @@
 require_relative "lib/lc_discovery/extracts"
 
+puts Extracts.data_types
 
-
-printf("%10s", "blahh")
 
 #puts Extracts.data_types
 
