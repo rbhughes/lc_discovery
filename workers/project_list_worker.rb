@@ -15,15 +15,31 @@ class ProjectListWorker
       rq = RedisQueue.redis
       rq.set qid, 'working'
 
-      rq.rpush "#{qid}_payload", "NOT EXIST?: #{root}" unless File.exists?(root)
+      #rq.rpush "#{qid}_payload", "NOT EXIST?: #{root}" unless File.exists?(root)
 
-      projects = Discovery.project_list(root, deep_scan)
-      rq.rpush "#{qid}_payload", "NO PROJECTS IN: #{root}" if projects.empty?
+      #projects = Discovery.project_list(root, deep_scan)
+      #rq.rpush "#{qid}_payload", "NO PROJECTS IN: #{root}" if projects.empty?
       
-      projects.each do |proj|
-        rq.rpush "#{qid}_payload", proj
+      #projects.each do |proj|
+      #  rq.rpush "#{qid}_payload", proj
+      #end
+
+      if File.exists?(root)
+        projects = Discovery.project_list(root, deep_scan)
+
+        if projects.empty?
+          rq.rpush "#{qid}_payload", "No projects found in: #{root}"
+          rq.set qid, 'fail'
+        else
+          projects.each { |proj| rq.rpush "#{qid}_payload", proj }
+          rq.set qid, 'done'
+        end
+
+      else
+        rq.rpush "#{qid}_payload", "Worker cannot resolve path: #{root}"
+        rq.set qid, 'fail'
       end
-      rq.set qid, 'done'
+
 
     rescue Exception => e
       rq.rpush "#{qid}_payload", e.backtrace.inspect

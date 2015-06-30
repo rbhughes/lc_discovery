@@ -51,12 +51,6 @@ module Extracts
     types
   end
 
-
-  def data_types
-    self.types
-  end
-
-
   # Decode the extract number (integer) and return array of matching
   # data type as constant strings
   def assigned(extracts)
