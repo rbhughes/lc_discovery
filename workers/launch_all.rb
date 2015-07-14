@@ -8,5 +8,5 @@ Sidekiq.configure_server do |config|
   config.redis = { :namespace => 'logicalcat' }
 end
 
-#require_relative 'meta'
 require_relative 'project_list_worker'
+require_relative 'meta_worker'
