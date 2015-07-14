@@ -43,5 +43,5 @@ homes:
   - path: c:/fake_ggx_home/KS_HARPER
     label: zzz
     active: true
-    extract_code: 29
+    extract_code: 49
     scan_date: 
