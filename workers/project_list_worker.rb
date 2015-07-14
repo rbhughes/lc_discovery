@@ -15,6 +15,8 @@ class ProjectListWorker
       rq = RedisQueue.redis
       rq.set qid, 'working'
 
+      rq.publish('lc_relay', "working on #{qid}")
+
       #rq.rpush "#{qid}_payload", "NOT EXIST?: #{root}" unless File.exists?(root)
 
       #projects = Discovery.project_list(root, deep_scan)
