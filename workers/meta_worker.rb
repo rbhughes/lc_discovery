@@ -9,9 +9,10 @@ class MetaWorker
   include Sidekiq::Worker
   EXPIRY = 60
 
-  def perform(opts)
+  def perform(path, label)
     puts '-'*30
-    puts opts
+    puts "path ---- #{path}"
+    puts "label --- #{label}"
     logger.info "processing meta_worker"
     puts "#{Time.now}  processing METAWORKER"
   end
