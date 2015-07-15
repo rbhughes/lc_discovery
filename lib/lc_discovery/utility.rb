@@ -19,6 +19,7 @@ module Utility
     str.to_s.split('_').map {|w| w.capitalize}.join.constantize
   end
 
+
   # The string identifying a remote worker's semaphore
   #def qid(args)
   #  "#{args['queue']}_#{args['worker']}_#{args['jid']}".gsub(/\s/,'').downcase

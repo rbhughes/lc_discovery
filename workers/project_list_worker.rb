@@ -10,7 +10,12 @@ class ProjectListWorker
     logger.info "processing qid: #{qid}"
     puts "#{Time.now}  processing qid: #{qid}"
 
+
     begin
+
+      puts '.'*40
+      puts self.inspect
+      puts '.'*40
       
       rq = RedisQueue.redis
       rq.set qid, 'working'

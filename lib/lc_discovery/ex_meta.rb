@@ -1,14 +1,14 @@
-require_relative "discovery"
-#require_relative "mssql"
-require_relative "sybase"
 require "filesize"
 require "nokogiri"
 require "date"
 
-module Meta
-  #@table_name = "ggx_stats"
-  @proj = nil
-  @gxdb = nil
+require_relative "sybase"
+require_relative "discovery"
+
+class ExMeta
+  #@project = nil
+  #@gxdb = nil
+  #@label = nil
 
   #@table_schema = Proc.new do
   #  primary_key :id
@@ -43,48 +43,91 @@ module Meta
   #end
 
   #----------
-  # kinda like mattr_accessor, but define @mssql too
-  def self.set_opts=(options)
-    @opts = options
-    #@mssql = MSSQL.new(options)
+  # kinda like mattr_accessor
+  #def self.opts=(opts)
+  #  @project = opts[:project]
+  #  @label = opts[:label]
+  #end
+
+  #mattr_accessor :project, :label, :gxdb
+
+  attr_reader :project, :label
+
+  def initialize(opts)
+    @project = opts[:project]
+    @label = opts[:label]
+    @gxdb = nil
   end
 
   #----------
-  #
-  #def self.drop_table
-  #  @mssql.drop_table(@table_name)
-  #end
+  def extract
+    begin
+
+      print "#{self.class.name} --> #{@project}"
+
+      project_server = Discovery.parse_host(@project)
+      project_home = Discovery.parse_home(@project)
+      project_name = File.basename(@project)
+
+      doc = {
+        project_server: project_server,
+        project_home: project_home,
+        project_name: project_name
+      }
+
+      @gxdb = Sybase.new(@project).db
+
+      doc.merge! interpreters
+      print "."
+      doc.merge! version_and_coordsys
+      print "."
+      doc.merge! file_stats
+      print "."
+      doc.merge! db_stats
+      print "."
+      doc.merge! surface_extents
+      print "."
+      puts
+
+      ages = doc.select{ |k,v| k.to_s.match /^age/ }.values.compact
+      doc = doc.reject{ |k,v| k.to_s.match /^age/ }
+
+      doc[:activity_score] = ages.inject(:+)/ages.size
+
+      doc
+
+    rescue Exception => e
+      raise e
+    ensure
+      @gxdb.disconnect
+      @gxdb = @project = @label = nil
+    end
+
+  end
+
+  ##############################################################################
+
+  # for ElasticSearch
+  class Meta
+
+  end
+
+  ##############################################################################
+
+
+  private
 
   #----------
-  #
-  #def self.create_table
-  #  @mssql.create_table(@table_name, @table_schema)
-  #end
-
-  #----------
-  #def self.empty_table
-  #  @mssql.empty_table(@table_name)
-  #end
-
-  #----------
-  #def self.read_table
-  #  @mssql.read_data(@table_name)
-  #end
-
-
-  #----------
-  #
-  def self.interpreters
-    uf = File.join(@proj, "User Files")
+  def interpreters
+    uf = File.join(@project, "User Files")
     return {interpreters: nil} unless File.exists?(uf)
     ints = Dir.glob(File.join(uf,"*")).map{ |f| File.basename(f) }.join(", ")
     { interpreters: ints }
   end
 
   #----------
-  #
-  def self.version_and_coordsys
-    pxml = File.join(@proj, "Project.ggx.xml")
+  def version_and_coordsys
+    pxml = File.join(@project, "Project.ggx.xml")
     return unless File.exists?(pxml)
 
     f = File.open(pxml)
@@ -107,8 +150,7 @@ module Meta
   end
 
   #----------
-  #
-  def self.db_stats
+  def db_stats
     stats = {}
 
     sql = "select WC, WD, DC, DD, RC, RD, FC, FD, ZC, ZD, YC, YD "\
@@ -165,9 +207,8 @@ module Meta
 
 
   #----------
-  #
-  def self.file_stats
-    dir = File.join(@proj, "**/*")
+  def file_stats
+    dir = File.join(@project, "**/*")
 
     map_num, sei_num, file_count, byte_size = 0, 0, 0, 0 
     sei_ago, map_ago, file_ago = [], [], []
@@ -218,8 +259,7 @@ module Meta
   end
 
   #----------
-  #
-  def self.surface_extents
+  def surface_extents
 
     sql = "select "\
       "min(surface_longitude) as min_longitude, "\
@@ -236,73 +276,4 @@ module Meta
     
   end
 
-
-  def self.collect_stats
-
-    project_server = Discovery.parse_host(@proj)
-    project_home = Discovery.parse_home(@proj)
-    project_name = File.basename(@proj)
-
-    print "ggx_stats --> #{project_server}/#{project_home}/#{project_name}"
-
-    @gxdb = Sybase.new(@proj).db
-
-    stats = {
-      project_server: project_server,
-      project_home: project_home,
-      project_name: project_name
-    }
-
-    stats.merge! interpreters
-    print "."
-    stats.merge! version_and_coordsys
-    print "."
-    stats.merge! file_stats
-    print "."
-    stats.merge! db_stats
-    print "."
-    stats.merge! surface_extents
-    print "."
-
-    ages = stats.select{ |k,v| k.to_s.match /^age/ }.values.compact
-    stats = stats.reject{ |k,v| k.to_s.match /^age/ }
-
-    stats[:activity_score] = ages.inject(:+)/ages.size
-
-    @gxdb.disconnect
-    puts
-    return stats
-  end
-
-
-  #----------
-  #
-  def self.process_projects
-    begin
-
-      #@mssql.empty_table(@table_name)
-
-      all_projects = []
-
-      #@opts[:project_homes].each do |home|
-      #  Discovery.project_list(home, @opts[:deep_scan]).each do |proj|
-      #    @proj = proj
-      #    all_projects << collect_stats
-      #  end
-      #end
-      
-      require "awesome_print"
-      ap all_projects
-
-      #@mssql.write_data(@table_name, all_projects)
-
-    rescue Exception => e
-      raise e
-    end
-  end
-
-
-
-
 end
-

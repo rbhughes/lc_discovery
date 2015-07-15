@@ -1,107 +1,25 @@
-require_relative "lib/lc_discovery/extracts"
-
-puts Extracts.data_types
-
-
-#puts Extracts.data_types
-
-#a = [0,1,4]
-
-#puts Extracts.decode_array a
+require_relative "lib/lc_discovery/meta"
+require 'awesome_print'
 
 
-#puts "----------------"
-#puts Extracts.assigned(1)
-#puts "----------------"
-
-
-=begin
-a = "c:\\drive\\thing space\\thing"
-b = "\\\\server\\share space\\path"
-c = "//server/sher/th aig"
-
-
-#
-if ( /^\/\/.*|[a-z]:.*/i =~ c )
-  puts "MATCH"
-end
-require "yaml"
-
-cfg = {
-
-  elasticsearch: {
-    host: "localhost",
-    port: 9200
-  },
-
-  homes: [
-    { 
-      path: "//server/home_a", 
-      active: true,
-      scan_date: Time.now,
-      scan_deep: false,
-      projects: [
-        { path: "//server/home_a/proj_one", active: true },
-        { path: "//server/home_a/proj_two", active: true },
-        { path: "//server/home_a/proj_three", active: true },
-        { path: "//server/home_a/proj_four", active: true }
-      ]
-    },
-    { 
-      path: "//server/home_b", 
-      active: true,
-      scan_date: Time.now,
-      scan_deep: false,
-      projects: []
-    },
-    { 
-      path: "//server/home_c", 
-      active: true,
-      scan_date: Time.now,
-      scan_deep: false,
-      projects: []
-    },
-    { 
-      path: "//server/home_d", 
-      active: false,
-      scan_date: Time.now,
-      scan_deep: false,
-      projects: []
-    }
-  ]
+#Meta.set_opts({gxdb: 'asfd', proj: 'blalh'})
+#puts m.process_projects
 
 
 
+#Meta.opts= {project: 'c:/programdata/geographix/projects/stratton', label: 'otter'}
+#Meta.opts = {project: 'c:/programdata/geographix/projects/ks_harper', label: 'otter'}
+
+#Meta.project = 'c:/programdata/geographix/projects/ks_harper'
+#Meta.label = 'blahdy'
 
 
+extractor = Meta.new(
+  project: 'c:/programdata/geographix/projects/ks_harper',
+  label: 'boof'
+)
 
-}
+ap extractor.extract
 
+#ap Meta.extract
 
-path = "c:/dev/lc_discovery/config.yml"
-#puts cfg.to_yaml
-
-File.open(path,'w') do |h| 
-   h.write cfg.to_yaml
-end
-
-y = YAML.load_file(path)
-
-#puts "\n    active?  path\n    -------  ----"
-#y[:homes].each_with_index do |home, i|
-#  printf("%-4d %-7s %s\n", i, home[:active], home[:path])
-#end
-require "awesome_print"
-
-test = "//server/home_b"
-#sel = y[:homes].select{ |h| h[:path].casecmp(test)==0 }.first[:path]
-sel = y[:homes].select{ |h| h[:path].casecmp(test)==0 }.first
-
-sel[:path] = "XXXXXXXXXX"
-puts "---------------"
-puts y
-
-
-
-
-=end

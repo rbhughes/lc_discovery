@@ -1,20 +1,44 @@
 require "sidekiq"
-require "awesome_print"
+#require "filesize"
+#require "nokogiri"
+#require "date"
+
+#require_relative "../lib/lc_discovery/sybase"
+#require_relative "../lib/lc_discovery/discovery"
+#require_relative '../lib/lc_discovery/meta'
+
 
 require_relative '../lib/lc_discovery/redis_queue'
 
+require "awesome_print"
 
 
 class MetaWorker
   include Sidekiq::Worker
-  EXPIRY = 60
 
   def perform(path, label)
-    puts '-'*30
-    puts "path ---- #{path}"
-    puts "label --- #{label}"
-    logger.info "processing meta_worker"
-    puts "#{Time.now}  processing METAWORKER"
+    begin
+      rq = RedisQueue.redis
+      msg = "lc_discovery #{self.class.name}: #{path} -- #{label}"
+      logger.info msg
+      rq.publish('lc_relay', msg)
+
+      require 'awesome_print'
+      extractor = ExMeta.new(project: path, label: label)
+
+
+      ap extractor.extract
+      rq.publish('lc_relay', '...')
+
+    rescue Exception => e
+      logger.error e.message
+      logger.error e.backtrace
+      rq.publish('lc_relay', e.message)
+    end
+
   end
 
+
 end
+
+
