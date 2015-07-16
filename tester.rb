@@ -1,4 +1,4 @@
-require_relative "lib/lc_discovery/meta"
+require_relative "lib/lc_discovery/ex_meta"
 require 'awesome_print'
 
 
@@ -14,7 +14,7 @@ require 'awesome_print'
 #Meta.label = 'blahdy'
 
 
-extractor = Meta.new(
+extractor = ExMeta.new(
   project: 'c:/programdata/geographix/projects/ks_harper',
   label: 'boof'
 )

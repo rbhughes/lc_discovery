@@ -5,7 +5,7 @@ require "sidekiq"
 
 #require_relative "../lib/lc_discovery/sybase"
 #require_relative "../lib/lc_discovery/discovery"
-#require_relative '../lib/lc_discovery/meta'
+require_relative '../lib/lc_discovery/ex_meta'
 
 
 require_relative '../lib/lc_discovery/redis_queue'
@@ -26,8 +26,11 @@ class MetaWorker
       require 'awesome_print'
       extractor = ExMeta.new(project: path, label: label)
 
+      #m = ExMeta::Meta.new
+      #ap m
 
       ap extractor.extract
+
       rq.publish('lc_relay', '...')
 
     rescue Exception => e
