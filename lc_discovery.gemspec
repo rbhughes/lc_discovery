@@ -29,7 +29,14 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sidekiq' #, '~> 3.3'
   spec.add_dependency 'redis' #, '~> 3.2'
 
+  #gem 'elasticsearch', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git'
+  #gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-rails.git', require: 'elasticsearch/model'
+  spec.add_dependency 'elasticsearch-persistence'
+
+
+
   spec.add_development_dependency 'bundler' #, '~> 1.7'
   spec.add_development_dependency 'rake' #, '~> 10.0'
+
     
 end
