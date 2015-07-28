@@ -10,7 +10,7 @@ module Discovery
   end
 
   # Given a root directory (generally a Project Home) return a list of all
-  # qualifying directories that qualify as Discovery projects. Only directories
+  # directories that qualify as Discovery projects. Only directories
   # directly in the root are checked. Optionally, use *deep_scan=true* to
   # recurse through all subdirectories (potentially slow)
   def self.project_list(root, deep_scan)

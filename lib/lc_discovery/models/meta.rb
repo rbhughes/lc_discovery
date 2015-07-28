@@ -2,27 +2,30 @@
 require 'elasticsearch/persistence'
 
 
-#class Meta
-#
-#  attr_reader :attributes
-#
-#  def initialize(attributes={})
-#    @attributes = attributes
-#  end
-#
-#  def to_hash
-#    @attributes
-#  end
-#
-#end
-
 class Meta
-  attr_reader :id, :lc_id, :project_server, :num_files
+
+  attr_reader :attributes
+
+  def initialize(attributes={})
+    @attributes = attributes
+  end
+
+  def to_hash
+    @attributes
+  end
+
+end
+
+=begin
+class Meta
+  attr_reader :id, :lc_id, :project_server, :num_files, :blip, :hang
 
   def initialize(attr={})
     @id = attr[:id]
     @lc_id = attr[:lc_id]
+    @blip = attr[:blip]
     @project_server = attr[:project_server]
+    @hang = attr[:hang]
     @num_files = attr[:num_files]
   end
 
@@ -33,11 +36,15 @@ class Meta
   def to_hash
     {
       id: @id, 
-      blip: 'thing says blip',
-      num_files: @num_files
+      lc_id: @lc_id,
+      blip: @blip,
+      num_files: @num_files,
+      hang: @hang,
+      project_server: @project_server
     }
   end
 end
+=end
 
 
   #include Elasticsearch::Persistence::Model
@@ -142,10 +149,13 @@ class MetaRepository
 
   settings number_of_shards: 1 do
     mapping do
-      indexes :project_server,  analyzer: 'snowball'
-      #indexes :lc_id, index: 'not_analyzed'   # <-***
-      indexes :lc_id, analyzer: 'standard'   # <-***
+      #indexes :project_server,  analyzer: 'snowball'
+      indexes :project_server,  index: 'not_analyzed'
+      indexes :lc_id, index: 'not_analyzed'   # <-***
+      #indexes :lc_id, analyzer: 'standard'   # <-***
       indexes :num_files, index: 'not_analyzed', type: 'long'
+      indexes :blip, analyzer: 'standard'
+      indexes :hang, type: 'object'
       # Do not index images
       #indexes :image, index: 'no'
     end
@@ -169,6 +179,3 @@ class MetaRepository
 
 
 end
-
-
-

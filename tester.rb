@@ -36,18 +36,57 @@ repository.client.transport.logger.formatter = proc { |s, d, p, m| "\e[2m# #{m}\
 
 repository.create_index! force: true
 
+puts "type==========#{repository.type}"
+puts "klass=========#{repository.klass}"
+ap repository.mappings
 
-m = Meta.new(id: 'xxx', lc_id: 'aaaaa', project_server: 'OKC1GGX0002', num_files: 234)
+#m = Meta.new(id: 'xxx', lc_id: 'aaaaa', project_server: 'OKC1GGX0002', num_files: 234)
+m = Meta.new(
+  id: 'xxx',
+  lc_id: 'aaaaa',
+  project_server: 'OKC1GGX0002',
+  blip: 'florida has some flowers',
+  hang: {alpha: 'rotterdam', beta: 'the hague', gamma: 'amsterdam'},
+  num_files: 234
+)
+
+
 ap '-'*30
 ap m
 ap '-'*30
+
+
 #repository.save(m)
 #repository.serialize(m)
 repository.save(m)
+sleep 1
 
+#r = repository.search(query: { match: { hang.beta: "hague" } })
+r = repository.search( "hague" )
+#r = repository.search(query: { match: { 'hang.beta' => "hague" } })
+#r = repository.search(query: { wildcard: { 'hang.beta' => "hag*" } })
+#r = repository.search(query: { wildcard: { 'beta' => "hag*" } })
+#r = repository.search(query: { match: { 'meta.hang.beta' => "hague" } })
+#r = repository.search( "hague" )
+puts '---------------'
+#r = repository.search(query: { match: { blip: "florida" } })
+#puts '---------------'
+#r = repository.search(query: { term: { lc_id: "aaaaa" } }).first
+
+#r = repository.search(query: { wildcard: { project_server: 'OKC1GGX*' } }).first
+#r = repository.search(query: { match: { blip: 'florida' } }).first
+#ap Meta.extract
 
 #x = repository.find('xxx')
 #puts x
+
+
+r.each_with_hit do |meta, hit|
+  #puts "* #{meta.attributes[:lc_id]}, score: #{hit._score}"
+  puts "* #{meta}, score: #{hit._score}"
+end
+
+
 
 #puts '-------------'
 
@@ -71,9 +110,6 @@ y = Meta.find('xxx')
 ap y
 puts '..............'
 
-z  repository.search(query: { wildcard: { project_server: 'OKC1GGX*' } }).first
-ap z
-#ap Meta.extract
 
 =end
 
