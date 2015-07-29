@@ -2,10 +2,10 @@ require "filesize"
 require "nokogiri"
 require "date"
 
-require_relative "sybase"
-require_relative "discovery"
+require_relative "../sybase"
+require_relative "../discovery"
 
-class ExMeta
+class MetaExtractor
   #@project = nil
   #@gxdb = nil
   #@label = nil

@@ -126,7 +126,7 @@ command :proj_activate do |c|
     @config['homes'].each_index do |i|
       next unless home_choices.include? i
 
-      if @config['homes'][i][:projects].empty?
+      if @config['homes'][i]['projects'].empty?
         system('cls')
         puts "No projects in: #{@config['homes'][i]['path']}"
         puts "Try running 'list_projects' first..."

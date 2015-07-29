@@ -1,0 +1,68 @@
+2015-07-29T16:41:40.501Z 8676 TID-9ggzo INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-07-29T16:41:40.556Z 8676 TID-9ggzo INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
+2015-07-29T16:41:40.557Z 8676 TID-9ggzo INFO: See LICENSE and the LGPL-3.0 for licensing details.
+2015-07-29T16:41:40.557Z 8676 TID-9ggzo INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
+2015-07-29T16:41:40.561Z 8676 TID-9ggzo INFO: Starting processing, hit Ctrl-C to stop
+2015-07-29T16:46:24.653Z 8676 TID-9d0lc WARN: {"class"=>"MetaWorker", "args"=>["c:/programdata/geographix/projects/KS_HARPER", "home_1"], "jid"=>"08315ab7ef16d274392c2775", "retry"=>true, "enqueued_at"=>1438188384.623903}
+2015-07-29T16:46:24.654Z 8676 TID-9d0lc WARN: NameError: uninitialized constant MetaWorker
+2015-07-29T16:46:24.654Z 8676 TID-9d0lc WARN: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/activesupport-4.2.1/lib/active_support/inflector/methods.rb:261:in `const_get'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/activesupport-4.2.1/lib/active_support/inflector/methods.rb:261:in `block in constantize'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/activesupport-4.2.1/lib/active_support/inflector/methods.rb:259:in `each'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/activesupport-4.2.1/lib/active_support/inflector/methods.rb:259:in `inject'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/activesupport-4.2.1/lib/active_support/inflector/methods.rb:259:in `constantize'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/activesupport-4.2.1/lib/active_support/core_ext/string/inflections.rb:66:in `constantize'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:46:in `process'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:26:in `public_send'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:26:in `dispatch'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:122:in `dispatch'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/cell.rb:60:in `block in invoke'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/cell.rb:71:in `block in task'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/actor.rb:357:in `block in task'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/tasks.rb:57:in `block in initialize'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/tasks/task_fiber.rb:15:in `block in create'
+2015-07-29T16:46:24.666Z 8676 TID-9d0lc WARN: {"class"=>"MetaWorker", "args"=>["c:/programdata/geographix/projects/Stratton", "home_1"], "jid"=>"0f3beedcd714cd26df9bb9c6", "retry"=>true, "enqueued_at"=>1438188384.638914}
+2015-07-29T16:46:24.666Z 8676 TID-9d0lc WARN: NameError: uninitialized constant MetaWorker
+2015-07-29T16:46:24.668Z 8676 TID-9d0lc WARN: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/activesupport-4.2.1/lib/active_support/inflector/methods.rb:261:in `const_get'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/activesupport-4.2.1/lib/active_support/inflector/methods.rb:261:in `block in constantize'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/activesupport-4.2.1/lib/active_support/inflector/methods.rb:259:in `each'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/activesupport-4.2.1/lib/active_support/inflector/methods.rb:259:in `inject'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/activesupport-4.2.1/lib/active_support/inflector/methods.rb:259:in `constantize'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/activesupport-4.2.1/lib/active_support/core_ext/string/inflections.rb:66:in `constantize'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:46:in `process'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:26:in `public_send'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:26:in `dispatch'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:122:in `dispatch'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/cell.rb:60:in `block in invoke'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/cell.rb:71:in `block in task'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/actor.rb:357:in `block in task'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/tasks.rb:57:in `block in initialize'
+c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/tasks/task_fiber.rb:15:in `block in create'
+2015-07-29T16:47:59.225Z 8676 TID-9d0lc ProjectListWorker JID-1b882503ca1ae521ca7cb206 INFO: start
+2015-07-29T16:47:59.225Z 8676 TID-9d0lc ProjectListWorker JID-1b882503ca1ae521ca7cb206 INFO: processing qid: lc_discovery_projectlistworker_1b882503ca1ae521ca7cb206
+2015-07-29T16:47:59.270Z 8676 TID-9d0lc ProjectListWorker JID-1b882503ca1ae521ca7cb206 INFO: done: 0.044 sec
+2015-07-29T16:48:14.038Z 8676 TID-9ggzo INFO: Shutting down
+2015-07-29T16:48:15.093Z 8676 TID-klyu0 INFO: Terminating 10 quiet workers
+2015-07-29T16:52:57.572Z 10820 TID-9m39c INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-07-29T16:53:49.460Z 11392 TID-9qaz0 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-07-29T16:54:09.290Z 9572 TID-az94w INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-07-29T16:54:23.924Z 7244 TID-9hvk8 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-07-29T16:54:57.065Z 3576 TID-2a0i0 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-07-29T16:55:38.389Z 10624 TID-auc58 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-07-29T16:55:38.633Z 10624 TID-auc58 INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
+2015-07-29T16:55:38.633Z 10624 TID-auc58 INFO: See LICENSE and the LGPL-3.0 for licensing details.
+2015-07-29T16:55:38.633Z 10624 TID-auc58 INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
+2015-07-29T16:55:38.639Z 10624 TID-auc58 INFO: Starting processing, hit Ctrl-C to stop
+2015-07-29T16:55:49.113Z 10624 TID-auc58 INFO: Shutting down
+2015-07-29T16:55:50.087Z 10624 TID-cnlko INFO: Terminating 10 quiet workers
+2015-07-29T16:56:02.919Z 6608 TID-azyfg INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-07-29T16:56:15.902Z 2700 TID-ax5ac INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-07-29T16:56:16.137Z 2700 TID-ax5ac INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
+2015-07-29T16:56:16.137Z 2700 TID-ax5ac INFO: See LICENSE and the LGPL-3.0 for licensing details.
+2015-07-29T16:56:16.137Z 2700 TID-ax5ac INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
+2015-07-29T16:56:16.141Z 2700 TID-ax5ac INFO: Starting processing, hit Ctrl-C to stop
+2015-07-29T17:03:00.387Z 2700 TID-m19nk MetaWorker JID-73c9cd5b33c1918b9a6d50d9 INFO: start
+2015-07-29T17:03:00.387Z 2700 TID-m19nk MetaWorker JID-73c9cd5b33c1918b9a6d50d9 INFO: lc_discovery MetaWorker: c:/programdata/geographix/projects/KS_HARPER -- home_1
+2015-07-29T17:03:00.504Z 2700 TID-m1ll0 MetaWorker JID-d3663dff0a99b32d5b71dd75 INFO: start
+2015-07-29T17:03:00.523Z 2700 TID-m1ll0 MetaWorker JID-d3663dff0a99b32d5b71dd75 INFO: lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton -- home_1
+2015-07-29T17:03:02.212Z 2700 TID-m1ll0 MetaWorker JID-d3663dff0a99b32d5b71dd75 INFO: done: 1.709 sec
+2015-07-29T17:03:02.689Z 2700 TID-m19nk MetaWorker JID-73c9cd5b33c1918b9a6d50d9 INFO: done: 2.302 sec

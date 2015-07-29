@@ -1,6 +1,8 @@
 require "sidekiq"
-require_relative '../lib/lc_discovery/discovery'
-require_relative '../lib/lc_discovery/redis_queue'
+#require_relative '../lib/lc_discovery/discovery'
+#require_relative '../lib/lc_discovery/redis_queue'
+require_relative '../discovery'
+require_relative '../redis_queue'
 
 class ProjectListWorker
   include Sidekiq::Worker
