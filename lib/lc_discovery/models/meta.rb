@@ -1,6 +1,4 @@
-#require 'elasticsearch/persistence/model'
 require 'elasticsearch/persistence'
-
 
 class Meta
 
@@ -16,35 +14,6 @@ class Meta
 
 end
 
-=begin
-class Meta
-  attr_reader :id, :lc_id, :project_server, :num_files, :blip, :hang
-
-  def initialize(attr={})
-    @id = attr[:id]
-    @lc_id = attr[:lc_id]
-    @blip = attr[:blip]
-    @project_server = attr[:project_server]
-    @hang = attr[:hang]
-    @num_files = attr[:num_files]
-  end
-
-  def say
-    puts "#{@project_server} stuff"
-  end
-
-  def to_hash
-    {
-      id: @id, 
-      lc_id: @lc_id,
-      blip: @blip,
-      num_files: @num_files,
-      hang: @hang,
-      project_server: @project_server
-    }
-  end
-end
-=end
 
 
   #include Elasticsearch::Persistence::Model
@@ -141,7 +110,7 @@ class MetaRepository
   include Elasticsearch::Persistence::Repository
 
   def initialize(options={})
-    index  options[:index] || 'logicalcat-development'
+    index  options[:index] || 'lc-devBROKEN'
     client Elasticsearch::Client.new url: options[:url], log: options[:log]
   end
 
@@ -149,17 +118,52 @@ class MetaRepository
 
   settings number_of_shards: 1 do
     mapping do
-      #indexes :project_server,  analyzer: 'snowball'
+
+      indexes :id, index: 'not_analyzed'
       indexes :project_server,  index: 'not_analyzed'
-      indexes :lc_id, index: 'not_analyzed'   # <-***
+      indexes :project_home,    index: 'not_analyzed'
+      indexes :project_path,    analyzer: 'standard' #check path hierarchy tokenizer
+      indexes :project_name,    index: 'not_analyzed'
+      indexes :schema_version,  index: 'not_analyzed'
+      indexes :db_coordsys,     index: 'not_analyzed'
+      indexes :map_coordsys,    index: 'not_analyzed'
+      indexes :esri_coordsys,   index: 'not_analyzed' #maybe hierarchy
+      indexes :unit_system,     index: 'not_analyzed'
+
+      indexes :num_layers_maps, type: 'long'
+      indexes :num_sv_interps,  type: 'long'
+      indexes :num_wells,       type: 'long'
+      indexes :num_vectors,     type: 'long'
+      indexes :num_rasters,     type: 'long'
+      indexes :num_formations,  type: 'long'
+      indexes :num_zone_attr,   type: 'long'
+      indexes :num_dir_surveys, type: 'long'
+
+      indexes :oldest_file_mod, type: 'date'
+      indexes :newest_file_mod, type: 'date'
+
+      indexes :byte_size,       type: 'long'
+      indexes :human_size,      index: 'not_analyzed'
+      indexes :file_count,      type: 'long'
+
+      indexes :min_longitude,   type: 'double'
+      indexes :max_longitude,   type: 'double'
+      indexes :min_latitude,    type: 'double'
+      indexes :max_latitude,    type: 'double'
+
+      indexes :activity_score,  type: 'long'
+
+      #indexes :project_server,  analyzer: 'snowball'
+      #indexes :project_server,  index: 'not_analyzed'
+      #indexes :lc_id, index: 'not_analyzed'   # <-***
       #indexes :lc_id, analyzer: 'standard'   # <-***
-      indexes :num_files, index: 'not_analyzed', type: 'long'
-      indexes :blip, analyzer: 'standard'
-      indexes :hang, type: 'object'
-      # Do not index images
-      #indexes :image, index: 'no'
+      #indexes :num_files, index: 'not_analyzed', type: 'long'
+      #indexes :blip, analyzer: 'standard'
+      #indexes :hang, type: 'object'
+
     end
   end
+
 
   # Base64 encode the "image" field in the document
   #

@@ -4,52 +4,9 @@ require "date"
 
 require_relative "../sybase"
 require_relative "../discovery"
+require_relative "../utility"
 
 class MetaExtractor
-  #@project = nil
-  #@gxdb = nil
-  #@label = nil
-
-  #@table_schema = Proc.new do
-  #  primary_key :id
-  #  String :project_server
-  #  String :project_home
-  #  String :project_name, :null => false
-  #  Fixnum :activity_score
-  #  Bignum :file_count
-  #  Bignum :byte_size
-  #  String :human_size
-  #  DateTime :oldest_file_mod
-  #  DateTime :newest_file_mod
-  #  String :interpreters, :text => true
-  #  String :schema_version
-  #  String :unit_system
-  #  String :db_coordsys, :text => true
-  #  String :map_coordsys, :text => true
-  #  String :esri_coordsys, :text => true
-  #  Bignum :num_wells
-  #  Bignum :num_digital_curves
-  #  Bignum :num_raster_curves
-  #  Bignum :num_formations
-  #  Bignum :num_zone_attr
-  #  Bignum :num_layers_maps
-  #  Bignum :num_dir_surveys
-  #  Bignum :num_sv_interps
-  #  Float :min_longitude
-  #  Float :max_longitude
-  #  Float :min_latitude
-  #  Float :max_latitude
-  #  DateTime :row_created_date, :default => Sequel.function(:getdate)
-  #end
-
-  #----------
-  # kinda like mattr_accessor
-  #def self.opts=(opts)
-  #  @project = opts[:project]
-  #  @label = opts[:label]
-  #end
-
-  #mattr_accessor :project, :label, :gxdb
 
   attr_reader :project, :label
 
@@ -69,9 +26,13 @@ class MetaExtractor
       project_home = Discovery.parse_home(@project)
       project_name = File.basename(@project)
 
+      germ = "#{@project} #{@label}" #ensure this matches clowder
+
       doc = {
+        id: Utility.lc_id(germ),
         project_server: project_server,
         project_home: project_home,
+        project_path: @project,
         project_name: project_name
       }
 
@@ -97,14 +58,14 @@ class MetaExtractor
       doc
 
     rescue Exception => e
+      puts e
       raise e
     ensure
-      @gxdb.disconnect
+      @gxdb.disconnect if @gxdb
       @gxdb = @project = @label = nil
     end
 
   end
-
 
 
   private
@@ -113,8 +74,8 @@ class MetaExtractor
   def interpreters
     uf = File.join(@project, "User Files")
     return {interpreters: nil} unless File.exists?(uf)
-    ints = Dir.glob(File.join(uf,"*")).map{ |f| File.basename(f) }.join(", ")
-    { interpreters: ints }
+    intrps = Dir.glob(File.join(uf,"*")).map{ |f| File.basename(f) }.join(", ")
+    { interpreters: intrps }
   end
 
   #----------
@@ -178,24 +139,23 @@ class MetaExtractor
       "as YD from wellsurveydir y) yd"
 
     @gxdb[sql].all.each do |x|
-      stats[:num_wells] =          x[:wc]
-      stats[:age_wells] =          x[:wd]
-      stats[:num_digital_curves] = x[:dc]
-      stats[:age_digital_curves] = x[:dd]
-      stats[:num_raster_curves] =  x[:rc]
-      stats[:age_raster_curves] =  x[:rd]
-      stats[:num_formations] =     x[:fc]
-      stats[:age_formations] =     x[:fd]
-      stats[:num_zone_attr] =      x[:zc]
-      stats[:age_zone_attr] =      x[:zd]
-      stats[:num_dir_surveys] =    x[:yc]
-      stats[:age_dir_surveys] =    x[:yd]
+      stats[:num_wells]          = x[:wc]
+      stats[:age_wells]          = x[:wd]
+      stats[:num_vectors]        = x[:dc]
+      stats[:age_vectors]        = x[:dd]
+      stats[:num_rasters]        = x[:rc]
+      stats[:age_rasters]        = x[:rd]
+      stats[:num_formations]     = x[:fc]
+      stats[:age_formations]     = x[:fd]
+      stats[:num_zone_attr]      = x[:zc]
+      stats[:age_zone_attr]      = x[:zd]
+      stats[:num_dir_surveys]    = x[:yc]
+      stats[:age_dir_surveys]    = x[:yd]
     end
 
     stats
     
   end
-
 
 
   #----------
@@ -238,8 +198,8 @@ class MetaExtractor
     {
       num_layers_maps: map_num,
       num_sv_interps: sei_num,
-      oldest_file_mod: oldest_file_mod,
-      newest_file_mod: newest_file_mod,
+      oldest_file_mod: oldest_file_mod.utc.iso8601,
+      newest_file_mod: newest_file_mod.utc.iso8601,
       byte_size: byte_size,
       human_size: Filesize.from("#{byte_size} B").pretty.gsub('i',''),
       file_count: file_count,
