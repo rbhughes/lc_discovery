@@ -35,7 +35,7 @@ module Utility
       client = model.gateway.client
       index_name = model.index_name
 
-      #TODO: define where logger happens!
+      #TODO: define where logger needs to happen
       #client.transport.logger.formatter = proc { |s, d, p, m| "\e[2m# #{m}\n\e[0m" }
 
       client.indices.delete index: index_name rescue nil
