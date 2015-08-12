@@ -1,13 +1,11 @@
 require 'awesome_print'
 
-require_relative 'lib/lc_discovery/extractors/meta_extractor'
-require_relative 'lib/lc_discovery/models/meta'
-#require_relative 'lib/lc_discovery/extractors/well_extractor'
-#require_relative 'lib/lc_discovery/models/well'
+require_relative 'lib/lc_discovery/extractors/well_extractor'
+require_relative 'lib/lc_discovery/models/well'
 require_relative 'lib/lc_discovery/utility'
 
 
-Utility.init_index('meta')
+Utility.init_index('well')
 
 opts1 = {
   project: 'c:/programdata/geographix/projects/ks_harper',
@@ -21,10 +19,12 @@ opts2 = {
 
 
 #returns an array
-[opts1, opts2].each do |o|
-  a = MetaExtractor.new(o).extract
+#[opts1, opts2].each do |o|
+[opts1].each do |o|
+  a = WellExtractor.new(o).extract
   a.each do |x|
-    Meta.create(x)
+    ap x
+    #Meta.create(x)
   end
 end
 

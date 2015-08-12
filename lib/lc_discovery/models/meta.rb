@@ -1,13 +1,6 @@
 require 'elasticsearch/persistence/model'
 
-require 'filesize'
-require 'nokogiri'
-require 'date'
-
-require_relative '../sybase'
-require_relative '../discovery'
-require_relative '../utility'
-
+#TODO: move index init, mappings (es_na, etc) elsewhere, like Utility?
 
 class Meta
   include Elasticsearch::Persistence::Model
@@ -33,273 +26,254 @@ class Meta
     }
   }
 
-  map_na = { mapping: { index: 'not_analyzed' } }
+  es_na = { mapping: { index: 'not_analyzed' }}
+  es_pa = { mapping: { analyzer: 'path_analyzer' }}
+  es_s  = { mapping: { type: 'string' }}
+  es_o  = { mapping: { type: 'object' }}
 
-  attribute :id,              String, mapping: { index: 'not_analyzed' }
+  FIELDS = {
+    id: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    label: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    project: {
+      virtus_type: String,
+      es_mapping: es_pa,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    project_server: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    project_home: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    schema_version: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    db_coordsys: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    map_coordsys: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    esri_coordsys: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    unit_system: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    interpreters: {
+      virtus_type: Array,
+      es_mapping: es_s,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    num_layers_maps: {
+      virtus_type: Integer,
+      es_mapping: {},
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    num_sv_interps: {
+      virtus_type: Integer,
+      es_mapping: {},
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    num_wells: {
+      virtus_type: Integer,
+      es_mapping: {},
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    num_vectors: {
+      virtus_type: Integer,
+      es_mapping: {},
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    num_rasters: {
+      virtus_type: Integer,
+      es_mapping: {},
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    num_formations: {
+      virtus_type: Integer,
+      es_mapping: {},
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    num_zone_attr: {
+      virtus_type: Integer,
+      es_mapping: {},
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    num_dir_surveys: {
+      virtus_type: Integer,
+      es_mapping: {},
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    oldest_file_mod: {
+      virtus_type: Date,
+      es_mapping: {},
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    newest_file_mod: {
+      virtus_type: Date,
+      es_mapping: {},
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    byte_size: {
+      virtus_type: Integer,
+      es_mapping: {},
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    human_size: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    file_count: {
+      virtus_type: Integer,
+      es_mapping: {},
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    surface_bounds: {
+      virtus_type: Hash,
+      es_mapping: es_o,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    activity_score: {
+      virtus_type: Integer,
+      es_mapping: {},
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    }
+  }
 
-  attribute :project_server,  String, mapping: { index: 'not_analyzed' }
-  attribute :project_home,    String, mapping: { index: 'not_analyzed' }
-  attribute :project_path,    String, mapping: { analyzer: 'path_analyzer' }
-  attribute :project_name,    String, mapping: { index: 'not_analyzed' }
-  attribute :schema_version,  String, mapping: { index: 'not_analyzed' }
-  attribute :db_coordsys,     String, mapping: { index: 'not_analyzed' }
-  attribute :map_coordsys,    String, mapping: { index: 'not_analyzed' }
-  attribute :esri_coordsys,   String, mapping: { index: 'not_analyzed' }
-  attribute :unit_system,     String, mapping: { index: 'not_analyzed' }
 
-  attribute :interpreters,    Array,  mapping: { type: 'string' }
+  FIELDS.each_pair do |column, v|
+    attribute column, v[:virtus_type], v[:es_mapping].dup #gotta dup!
+  end
 
-  attribute :num_layers_maps, Integer
-  attribute :num_sv_interps,  Integer
-  attribute :num_wells,       Integer
-  attribute :num_vectors,     Integer
-  attribute :num_rasters,     Integer
-  attribute :num_formations,  Integer
-  attribute :num_zone_attr,   Integer
-  attribute :num_dir_surveys, Integer
 
-  attribute :oldest_file_mod, Date
-  attribute :newest_file_mod, Date
 
-  attribute :byte_size,       Integer
-  attribute :human_size,      String, mapping: { index: 'not_analyzed' }
-  attribute :file_count,      Integer
-
-  attribute :surface_bounds,  Hash,   mapping: { type: 'object' }
-
-  attribute :activity_score,  Integer
+  validates :id, presence: true
+  validates :label, presence: true
+  validates :project, presence: true
 
   after_save { puts "callback sez::::: Successfully saved: #{self}" }
 
-  ##############################################################################
-
-  def self.extract(opts)
-    @project = opts[:project]
-    @label = opts[:label]
-    @gxdb = nil
-
-    begin
-      puts "meta --> #{@project}"
-
-      project_server = Discovery.parse_host(@project)
-      project_home = Discovery.parse_home(@project)
-      project_name = File.basename(@project)
-
-      germ = "#{@project} #{@label}" #ensure this matches clowder
-
-      doc = {
-        id: Utility.lc_id(germ),
-        project_server: project_server,
-        project_home: project_home,
-        project_path: @project,
-        project_name: project_name
-      }
-
-      @gxdb = Sybase.new(@project).db
-
-      doc.merge! interpreters
-      print "."
-      doc.merge! version_and_coordsys
-      print "."
-      doc.merge! file_stats
-      print "."
-      doc.merge! db_stats
-      print "."
-      doc[:surface_bounds] = surface_bounds
-      print "."
-      puts
-
-      # an average of non-null ages, both file and db
-      ages = doc.select{ |k,v| k.to_s.match /^age/ }.values.compact
-      doc = doc.reject{ |k,v| k.to_s.match /^age/ }
-      doc[:activity_score] = ages.inject(:+)/ages.size
-
-      [doc]
-
-    rescue Exception => e
-      puts e
-      raise e
-    ensure
-      @gxdb.disconnect if @gxdb
-      @gxdb = @project = @label = nil
-    end
-
+  def gxdb_view(col)
+    FIELDS[col.to_sym][:gxdb_view]
+  end
+  def gxdb_table(col)
+    FIELDS[col.to_sym][:gxdb_table]
+  end
+  def ppdm38(col)
+    FIELDS[col.to_sym][:ppdm38]
+  end
+  def ppdm39(col)
+    FIELDS[col.to_sym][:ppdm39]
   end
 
-
-
-  private
-
-  #----------
-  def self.interpreters
-    uf = File.join(@project, "User Files")
-    return {interpreters: nil} unless File.exists?(uf)
-    #intrps = Dir.glob(File.join(uf,"*")).map{ |f| File.basename(f) }.join(", ")
-    intrps = Dir.glob(File.join(uf,"*")).map{ |f| File.basename(f) }
-    { interpreters: intrps }
+  def self.native_columns
+    model = self.new
+    exclude = [:created_at, :updated_at, :id, :label]
+    cols = model.attributes.except!(*exclude).keys.sort
+    model = nil
+    cols
   end
-
-  #----------
-  def self.version_and_coordsys
-    pxml = File.join(@project, "Project.ggx.xml")
-    return unless File.exists?(pxml)
-
-    f = File.open(pxml)
-    doc = Nokogiri::XML(f)
-    f.close
-
-    schema_vers = doc.xpath("ggx/Project/ProjectVersion").inner_text
-    db_sys = doc.xpath("ggx/Project/StorageCoordinateSystem/GGXC1").inner_text
-    map_sys = doc.xpath("ggx/Project/DisplayCoordinateSystem/GGXC1").inner_text
-    esri_sys = doc.xpath("ggx/Project/DisplayCoordinateSystem/ESRI").inner_text
-    unit_sys = doc.xpath("ggx/Project/UnitSystem").inner_text
-
-    {
-      schema_version: schema_vers.squeeze,
-      db_coordsys: db_sys.squeeze,
-      map_coordsys: map_sys.squeeze,
-      esri_coordsys: "ESRI::"+esri_sys.squeeze,
-      unit_system: unit_sys.squeeze
-    }
-  end
-
-  #----------
-  def self.file_stats
-    dir = File.join(@project, "**/*")
-
-    map_num, sei_num, file_count, byte_size = 0, 0, 0, 0 
-    sei_ago, map_ago, file_ago = [], [], []
-
-    oldest_file_mod = Time.now
-    newest_file_mod = Time.at(0)
-
-    Dir.glob(dir, File::FNM_DOTMATCH).each do |f| 
-      next unless File.exists?(f)
-      stat = File.stat(f)
-      days_ago = ((Time.now.to_i - stat.mtime.to_i) / 86400).to_i
-      byte_size += stat.size
-      file_count += 1 if File.file?(f)
-      oldest_file_mod = stat.mtime if stat.mtime < oldest_file_mod
-      newest_file_mod = stat.mtime if stat.mtime > newest_file_mod
-
-      file_ago << days_ago unless f.match /gxdb.*\.(db|log)$/i
-
-      if f.match /\interp\.svx$/i
-        sei_num += 1
-        sei_ago << days_ago
-      end
-
-      if f.match /\.(gmp|shp)$/i
-        map_num += 1
-        map_ago << days_ago
-      end
-
-    end
-
-    age_layers_maps = (map_ago.inject(:+).to_f / map_ago.size).round rescue nil
-    age_sv_interps = (sei_ago.inject(:+).to_f / sei_ago.size).round rescue nil
-    age_file_mod = (file_ago.inject(:+).to_f / file_ago.size).round rescue nil
-
-    {
-      num_layers_maps: map_num,
-      num_sv_interps: sei_num,
-      oldest_file_mod: oldest_file_mod.utc.iso8601,
-      newest_file_mod: newest_file_mod.utc.iso8601,
-      byte_size: byte_size,
-      human_size: Filesize.from("#{byte_size} B").pretty.gsub('i',''),
-      file_count: file_count,
-      age_layers_maps: age_layers_maps,
-      age_sv_interps: age_sv_interps,
-      age_file_mod: age_file_mod
-    }
-
-  end
-
-  #----------
-  def self.db_stats
-    stats = {}
-
-    sql = "select WC, WD, DC, DD, RC, RD, FC, FD, ZC, ZD, YC, YD "\
-      "from (select count(*) as WC from well) wc "\
-      "cross join "\
-      "(select cast(avg(getdate()-row_changed_date) as integer) "\
-      "as WD from well) wd "\
-      "cross join "\
-      "(select count(*) as DC from gx_well_curve) dc "\
-      "cross join "\
-      "(select cast(avg(getdate()-date_modified) as integer) "\
-      "as DD from gx_well_curve) dd "\
-      "cross join "\
-      "(select count(*) as RC from log_image_reg_log_section) rc "\
-      "cross join "\
-      "(select cast(avg(getdate()-update_date) as integer) "\
-      "as RD from log_image_reg_log_section) rd "\
-      "cross join "\
-      "(select count(distinct(source+formation)) as FC from formations) fc "\
-      "cross join "\
-      "(select cast(avg(getdate()-f.[Row Changed Date]) "\
-      "as integer) as FD from formations f) fd "\
-      "cross join "\
-      "(select count(distinct z.[Attribute Name]) "\
-      "as ZC from wellzoneintrvvaluewithdepthsouterjoin z) zc "\
-      "cross join "\
-      "(select cast(avg(getdate()-z.[Data Date]) as integer) "\
-      "as ZD from wellzoneintrvvaluewithdepthsouterjoin z) zd "\
-      "cross join "\
-      "(select count(distinct y.[Survey ID]) as YC from wellsurveys y) yc "\
-      "cross join "\
-      "(select cast(avg(getdate()-y.[Row Changed Date]) as integer) "\
-      "as YD from wellsurveydir y) yd"
-
-    @gxdb[sql].all.each do |x|
-      stats[:num_wells]       = x[:wc]
-      stats[:age_wells]       = x[:wd]
-      stats[:num_vectors]     = x[:dc]
-      stats[:age_vectors]     = x[:dd]
-      stats[:num_rasters]     = x[:rc]
-      stats[:age_rasters]     = x[:rd]
-      stats[:num_formations]  = x[:fc]
-      stats[:age_formations]  = x[:fd]
-      stats[:num_zone_attr]   = x[:zc]
-      stats[:age_zone_attr]   = x[:zd]
-      stats[:num_dir_surveys] = x[:yc]
-      stats[:age_dir_surveys] = x[:yd]
-    end
-
-    stats
-
-  end
-
-  #----------
-  def self.surface_bounds
-
-    sql = "select "\
-      "min(surface_longitude) as min_longitude, "\
-      "min(surface_latitude) as min_latitude, "\
-      "max(surface_longitude) as max_longitude, "\
-      "max(surface_latitude) as max_latitude "\
-      "from well where "\
-      "surface_longitude between -180 and 180 and "\
-      "surface_latitude between -90 and 90 and "\
-      "surface_longitude is not null and "\
-      "surface_latitude is not null"
-
-    corners = @gxdb[sql].all[0]
-
-    {
-      name: 'surface_bounds',
-      location: {
-        type: 'polygon',
-        coordinates: [[
-          [corners[:min_longitude], corners[:min_latitude]], #LL
-          [corners[:min_longitude], corners[:max_latitude]], #UL
-          [corners[:max_longitude], corners[:max_latitude]], #UR
-          [corners[:max_longitude], corners[:min_latitude]], #LR
-          [corners[:min_longitude], corners[:min_latitude]]  #LL
-        ]]
-      }
-    }
-  end
-
 
 end

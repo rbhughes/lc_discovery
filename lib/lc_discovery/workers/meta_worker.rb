@@ -1,9 +1,7 @@
 require "sidekiq"
-require_relative '../extractors/meta_extractor'
 require_relative '../redis_queue'
-
-require "awesome_print"
-
+require_relative '../models/meta'
+require_relative '../extractors/meta_extractor'
 
 class MetaWorker
   include Sidekiq::Worker
@@ -15,13 +13,9 @@ class MetaWorker
       logger.info msg
       rq.publish('lc_relay', msg)
 
-      extractor = MetaExtractor.new(project: path, label: label)
-
-      #....................
-      # HEY! write to ES here
-      #
-      ap extractor.extract
-      #....................
+      MetaExtractor.new(project: path, label: label).extract.each do |x|
+        Meta.create(x) 
+      end
 
       rq.publish('lc_relay', '...')
 
@@ -30,7 +24,6 @@ class MetaWorker
       logger.error e.backtrace
       rq.publish('lc_relay', e.message)
     end
-
   end
 
 end
