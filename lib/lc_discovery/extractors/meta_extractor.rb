@@ -18,6 +18,9 @@ class MetaExtractor
     @gxdb = nil
   end
 
+  #def count
+  #end
+
   def extract
 
     begin
@@ -57,7 +60,7 @@ class MetaExtractor
       doc = doc.reject{ |k,v| k.to_s.match /^age/ }
       doc[:activity_score] = ages.inject(:+)/ages.size
 
-      [doc]
+      doc
 
     rescue Exception => e
       puts e.message

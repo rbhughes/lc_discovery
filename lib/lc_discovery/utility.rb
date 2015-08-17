@@ -25,6 +25,9 @@ module Utility
     str.to_s.split('_').map {|w| w.capitalize}.join.constantize
   end
 
+  def lowercase_symbol_keys(h)
+    Hash[h.map {|k, v| [k.to_s.downcase.gsub(/\s/,'_').to_sym, v] }]
+  end
 
   def init_index(type)
     type = type.to_s

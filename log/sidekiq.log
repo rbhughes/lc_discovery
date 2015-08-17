@@ -1,56 +1,35 @@
-2015-08-10T20:47:52.624Z 1112 TID-9iku8 INFO: Shutting down
-2015-08-10T20:47:54.062Z 1112 TID-b7pfc INFO: Terminating 10 quiet workers
-2015-08-11T00:41:33.139Z 8872 TID-1imf4 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-08-11T00:41:34.001Z 8872 TID-1imf4 INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-08-11T00:41:34.002Z 8872 TID-1imf4 INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-08-11T00:41:34.002Z 8872 TID-1imf4 INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-08-11T00:41:34.008Z 8872 TID-1imf4 INFO: Starting processing, hit Ctrl-C to stop
-2015-08-11T00:52:34.631Z 8872 TID-1eebk ProjectListWorker JID-6274dc52c6b93412551336bf INFO: start
-2015-08-11T00:52:34.632Z 8872 TID-1eebk ProjectListWorker JID-6274dc52c6b93412551336bf INFO: processing qid: lc_discovery_projectlistworker_6274dc52c6b93412551336bf
-2015-08-11T00:52:34.680Z 8872 TID-1eebk ProjectListWorker JID-6274dc52c6b93412551336bf INFO: done: 0.049 sec
-2015-08-11T00:52:37.623Z 8872 TID-1eebk MetaWorker JID-c1e7b1c3c824c722cb2663d2 INFO: start
-2015-08-11T00:52:37.623Z 8872 TID-1eebk MetaWorker JID-c1e7b1c3c824c722cb2663d2 INFO: lc_discovery MetaWorker: c:/programdata/geographix/projects/KS_HARPER -- home_1
-2015-08-11T00:52:37.638Z 8872 TID-1eebk MetaWorker JID-c1e7b1c3c824c722cb2663d2 ERROR: undefined method `extract' for #<Meta:0x00000004a80648>
-2015-08-11T00:52:37.638Z 8872 TID-1eebk MetaWorker JID-c1e7b1c3c824c722cb2663d2 ERROR: ["C:/dev/lc_discovery/lib/lc_discovery/workers/meta_worker.rb:23:in `perform'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:75:in `execute_job'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:52:in `block (2 levels) in process'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:127:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/server/retry_jobs.rb:74:in `call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:129:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/server/logging.rb:15:in `block in call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/logging.rb:30:in `with_context'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/server/logging.rb:11:in `call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:129:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:132:in `call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:132:in `invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:51:in `block in process'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:98:in `stats'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:50:in `process'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:26:in `public_send'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:26:in `dispatch'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:122:in `dispatch'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/cell.rb:60:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/cell.rb:71:in `block in task'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/actor.rb:357:in `block in task'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/tasks.rb:57:in `block in initialize'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/tasks/task_fiber.rb:15:in `block in create'"]
-2015-08-11T00:52:37.639Z 8872 TID-1eebk MetaWorker JID-c1e7b1c3c824c722cb2663d2 INFO: done: 0.016 sec
-2015-08-11T00:52:37.657Z 8872 TID-1eebk MetaWorker JID-863233416b092d4c4b47b633 INFO: start
-2015-08-11T00:52:37.658Z 8872 TID-1eebk MetaWorker JID-863233416b092d4c4b47b633 INFO: lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton -- home_1
-2015-08-11T00:52:37.660Z 8872 TID-1eebk MetaWorker JID-863233416b092d4c4b47b633 ERROR: undefined method `extract' for #<Meta:0x00000004b232f8>
-2015-08-11T00:52:37.660Z 8872 TID-1eebk MetaWorker JID-863233416b092d4c4b47b633 ERROR: ["C:/dev/lc_discovery/lib/lc_discovery/workers/meta_worker.rb:23:in `perform'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:75:in `execute_job'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:52:in `block (2 levels) in process'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:127:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/server/retry_jobs.rb:74:in `call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:129:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/server/logging.rb:15:in `block in call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/logging.rb:30:in `with_context'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/server/logging.rb:11:in `call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:129:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:132:in `call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:132:in `invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:51:in `block in process'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:98:in `stats'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:50:in `process'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:26:in `public_send'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:26:in `dispatch'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:122:in `dispatch'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/cell.rb:60:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/cell.rb:71:in `block in task'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/actor.rb:357:in `block in task'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/tasks.rb:57:in `block in initialize'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/tasks/task_fiber.rb:15:in `block in create'"]
-2015-08-11T00:52:37.673Z 8872 TID-1eebk MetaWorker JID-863233416b092d4c4b47b633 INFO: done: 0.016 sec
-2015-08-11T00:53:03.109Z 8872 TID-1imf4 INFO: Shutting down
-2015-08-11T00:53:05.083Z 8872 TID-yteps INFO: Terminating 10 quiet workers
-2015-08-11T00:59:27.245Z 8320 TID-9m39c INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-08-11T00:59:28.009Z 8320 TID-9m39c INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-08-11T00:59:28.010Z 8320 TID-9m39c INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-08-11T00:59:28.010Z 8320 TID-9m39c INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-08-11T00:59:28.015Z 8320 TID-9m39c INFO: Starting processing, hit Ctrl-C to stop
-2015-08-11T00:59:29.831Z 8320 TID-yoauw ProjectListWorker JID-6f88fc59e94c6f8f51c16608 INFO: start
-2015-08-11T00:59:29.831Z 8320 TID-yoauw ProjectListWorker JID-6f88fc59e94c6f8f51c16608 INFO: processing qid: lc_discovery_projectlistworker_6f88fc59e94c6f8f51c16608
-2015-08-11T00:59:29.871Z 8320 TID-yoauw ProjectListWorker JID-6f88fc59e94c6f8f51c16608 INFO: done: 0.04 sec
-2015-08-11T00:59:32.490Z 8320 TID-yoauw MetaWorker JID-7ab2f88301085573bc043264 INFO: start
-2015-08-11T00:59:32.490Z 8320 TID-yoauw MetaWorker JID-7ab2f88301085573bc043264 INFO: lc_discovery MetaWorker: c:/programdata/geographix/projects/KS_HARPER -- home_1
-2015-08-11T00:59:32.536Z 8320 TID-ykdgw MetaWorker JID-20700787ec122dd56e6ad371 INFO: start
-2015-08-11T00:59:32.536Z 8320 TID-ykdgw MetaWorker JID-20700787ec122dd56e6ad371 INFO: lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton -- home_1
-2015-08-11T00:59:34.585Z 8320 TID-ykdgw MetaWorker JID-20700787ec122dd56e6ad371 INFO: done: 2.049 sec
-2015-08-11T00:59:34.585Z 8320 TID-yoauw MetaWorker JID-7ab2f88301085573bc043264 INFO: done: 2.095 sec
-2015-08-11T01:32:01.910Z 8320 TID-ykdgw MetaWorker JID-8064a8b03367150668232e26 INFO: start
-2015-08-11T01:32:01.910Z 8320 TID-ykdgw MetaWorker JID-8064a8b03367150668232e26 INFO: lc_discovery MetaWorker: c:/programdata/geographix/projects/KS_HARPER -- home_1
-2015-08-11T01:32:02.312Z 8320 TID-yoauw MetaWorker JID-bd604cc659527e0a2062e0f5 INFO: start
-2015-08-11T01:32:02.328Z 8320 TID-yoauw MetaWorker JID-bd604cc659527e0a2062e0f5 INFO: lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton -- home_1
-2015-08-11T01:32:03.605Z 8320 TID-ykdgw MetaWorker JID-8064a8b03367150668232e26 INFO: done: 1.695 sec
-2015-08-11T01:32:03.777Z 8320 TID-yoauw MetaWorker JID-bd604cc659527e0a2062e0f5 INFO: done: 1.465 sec
-2015-08-11T01:32:12.326Z 8320 TID-yoauw MetaWorker JID-dbc7fc31135336629b141529 INFO: start
-2015-08-11T01:32:12.326Z 8320 TID-yoauw MetaWorker JID-dbc7fc31135336629b141529 INFO: lc_discovery MetaWorker: c:/programdata/geographix/projects/KS_HARPER -- home_1
-2015-08-11T01:32:12.725Z 8320 TID-ykdgw MetaWorker JID-c58ef5bb5078daabe4997588 INFO: start
-2015-08-11T01:32:12.741Z 8320 TID-ykdgw MetaWorker JID-c58ef5bb5078daabe4997588 INFO: lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton -- home_1
-2015-08-11T01:32:14.031Z 8320 TID-yoauw MetaWorker JID-dbc7fc31135336629b141529 INFO: done: 1.705 sec
-2015-08-11T01:32:14.203Z 8320 TID-ykdgw MetaWorker JID-c58ef5bb5078daabe4997588 INFO: done: 1.478 sec
-2015-08-11T01:33:05.289Z 8320 TID-ykdgw MetaWorker JID-a1e4e6eb09bb8d04e89a74c4 INFO: start
-2015-08-11T01:33:05.289Z 8320 TID-ykdgw MetaWorker JID-a1e4e6eb09bb8d04e89a74c4 INFO: lc_discovery MetaWorker: c:/programdata/geographix/projects/KS_HARPER -- home_1
-2015-08-11T01:33:05.711Z 8320 TID-yoauw MetaWorker JID-9a10984b2a251435212ae00a INFO: start
-2015-08-11T01:33:05.711Z 8320 TID-yoauw MetaWorker JID-9a10984b2a251435212ae00a INFO: lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton -- home_1
-2015-08-11T01:33:07.019Z 8320 TID-ykdgw MetaWorker JID-a1e4e6eb09bb8d04e89a74c4 INFO: done: 1.73 sec
-2015-08-11T01:33:07.228Z 8320 TID-yoauw MetaWorker JID-9a10984b2a251435212ae00a INFO: done: 1.518 sec
-2015-08-11T03:33:36.556Z 8320 TID-9m39c INFO: Shutting down
-2015-08-11T03:33:37.104Z 8320 TID-xvvv4 INFO: Terminating 10 quiet workers
+2015-08-16T03:56:20.657Z 16532 TID-as8ao INFO: Shutting down
+2015-08-16T03:56:21.079Z 16532 TID-xx1to INFO: Terminating 10 quiet workers
+2015-08-16T04:02:33.158Z 14932 TID-aqtq4 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-08-16T04:02:33.861Z 14932 TID-aqtq4 INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
+2015-08-16T04:02:33.861Z 14932 TID-aqtq4 INFO: See LICENSE and the LGPL-3.0 for licensing details.
+2015-08-16T04:02:33.861Z 14932 TID-aqtq4 INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
+2015-08-16T04:02:33.861Z 14932 TID-aqtq4 INFO: Starting processing, hit Ctrl-C to stop
+2015-08-16T04:02:55.713Z 14932 TID-xsx6k ExtractDispatchWorker JID-061dce9a0764b9deec257420 INFO: start
+2015-08-16T04:02:55.713Z 14932 TID-xsx6k ExtractDispatchWorker JID-061dce9a0764b9deec257420 INFO: lc_discovery well: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
+2015-08-16T04:02:56.579Z 14932 TID-xsx6k ExtractDispatchWorker JID-061dce9a0764b9deec257420 INFO: done: 0.866 sec
+2015-08-16T04:02:56.580Z 14932 TID-xmvy0 WellWorker JID-1ec1a58c874ef8864d7c7568 INFO: start
+2015-08-16T04:02:56.580Z 14932 TID-xmvy0 WellWorker JID-1ec1a58c874ef8864d7c7568 INFO: lc_discovery WellWorker: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch |       500 | 1
+2015-08-16T04:03:00.352Z 14932 TID-xmvy0 WellWorker JID-1ec1a58c874ef8864d7c7568 INFO: done: 3.772 sec
+2015-08-16T04:03:50.432Z 14932 TID-aqtq4 INFO: Shutting down
+2015-08-16T04:03:52.031Z 14932 TID-wzsws INFO: Terminating 10 quiet workers
+2015-08-16T04:04:01.886Z 13604 TID-9plog INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-08-16T04:04:02.558Z 13604 TID-9plog INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
+2015-08-16T04:04:02.558Z 13604 TID-9plog INFO: See LICENSE and the LGPL-3.0 for licensing details.
+2015-08-16T04:04:02.558Z 13604 TID-9plog INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
+2015-08-16T04:04:02.558Z 13604 TID-9plog INFO: Starting processing, hit Ctrl-C to stop
+2015-08-16T04:04:32.324Z 13604 TID-9l6a4 ExtractDispatchWorker JID-31b42ee2897a9c96e22fc9ee INFO: start
+2015-08-16T04:04:32.324Z 13604 TID-9l6a4 ExtractDispatchWorker JID-31b42ee2897a9c96e22fc9ee INFO: lc_discovery well: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
+2015-08-16T04:04:33.151Z 13604 TID-9l6a4 ExtractDispatchWorker JID-31b42ee2897a9c96e22fc9ee INFO: done: 0.827 sec
+2015-08-16T04:04:33.174Z 13604 TID-9l6a4 WellWorker JID-7f974a6140b1a1ed56be5585 INFO: start
+2015-08-16T04:04:33.174Z 13604 TID-9l6a4 WellWorker JID-7f974a6140b1a1ed56be5585 INFO: lc_discovery WellWorker: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch |       500 | 1
+2015-08-16T04:08:39.811Z 17304 TID-auc58 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-08-16T04:08:40.499Z 17304 TID-auc58 INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
+2015-08-16T04:08:40.499Z 17304 TID-auc58 INFO: See LICENSE and the LGPL-3.0 for licensing details.
+2015-08-16T04:08:40.499Z 17304 TID-auc58 INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
+2015-08-16T04:08:40.499Z 17304 TID-auc58 INFO: Starting processing, hit Ctrl-C to stop
+2015-08-16T04:09:02.454Z 17304 TID-ap35c ExtractDispatchWorker JID-f0eaa2d8271ae9da14c2222b INFO: start
+2015-08-16T04:09:02.454Z 17304 TID-ap35c ExtractDispatchWorker JID-f0eaa2d8271ae9da14c2222b INFO: lc_discovery well: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
+2015-08-16T04:09:03.269Z 17304 TID-ap35c ExtractDispatchWorker JID-f0eaa2d8271ae9da14c2222b INFO: done: 0.815 sec
+2015-08-16T04:09:03.271Z 17304 TID-yjr8w WellWorker JID-b8c2a49559539aeb2a865e82 INFO: start
+2015-08-16T04:09:03.271Z 17304 TID-yjr8w WellWorker JID-b8c2a49559539aeb2a865e82 INFO: lc_discovery WellWorker: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch |       500 | 1
