@@ -46,7 +46,7 @@ module Extracts
   def data_types_for_cli
     types = []
     constants.each_with_index do |type, i|
-      types << format('%4s -- %-20s', i, type)
+      types << format("%4s -- %-20s", i, type)
     end
     types
   end

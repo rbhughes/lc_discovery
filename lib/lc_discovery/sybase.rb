@@ -1,15 +1,15 @@
-require 'sequel'
-require 'socket'
-require_relative 'discovery'
+require "sequel"
+require "socket"
+require_relative "discovery"
 
-ENV['PATH'] = "#{ENV['PATH']};c:/dev/sqla64/bin64"
+ENV["PATH"] = "#{ENV["PATH"]};c:/dev/sqla64/bin64"
 
 # Use Sequel's wrapper around native Sybase SQLAnywhere drivers to connect to
 # GeoGraphix Discovery project databases.
 #
 # TODO: set this path to lib for depoyment
-# sqla64 = File.expand_path('../sqla64/bin64', __FILE__)
-# ENV['PATH'] = "#{ENV['PATH']};#{sqla64}"
+# sqla64 = File.expand_path("../sqla64/bin64", __FILE__)
+# ENV["PATH"] = "#{ENV["PATH"]};#{sqla64}"
 class Sybase
   attr_reader :db
 

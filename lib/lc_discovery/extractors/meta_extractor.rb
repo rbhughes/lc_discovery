@@ -1,12 +1,12 @@
-require 'filesize'
-require 'nokogiri'
-require 'date'
+require "filesize"
+require "nokogiri"
+require "date"
 
-require_relative '../sybase'
-require_relative '../discovery'
-require_relative '../utility'
+require_relative "../sybase"
+require_relative "../discovery"
+require_relative "../utility"
 
-require_relative '../models/meta'
+require_relative "../models/meta"
 
 class MetaExtractor
 
@@ -153,7 +153,7 @@ class MetaExtractor
       oldest_file_mod: oldest_file_mod.utc.iso8601,
       newest_file_mod: newest_file_mod.utc.iso8601,
       byte_size: byte_size,
-      human_size: Filesize.from("#{byte_size} B").pretty.gsub('i',''),
+      human_size: Filesize.from("#{byte_size} B").pretty.gsub("i",""),
       file_count: file_count,
       age_layers_maps: age_layers_maps,
       age_sv_interps: age_sv_interps,
@@ -234,9 +234,9 @@ class MetaExtractor
     corners = @gxdb[sql].all[0]
 
     {
-      name: 'surface_bounds',
+      name: "surface_bounds",
       location: {
-        type: 'polygon',
+        type: "polygon",
         coordinates: [[
           [corners[:min_longitude], corners[:min_latitude]], #LL
           [corners[:min_longitude], corners[:max_latitude]], #UL

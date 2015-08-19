@@ -1,11 +1,11 @@
-require 'elasticsearch/persistence/model'
+require "elasticsearch/persistence/model"
 
 #TODO: move index init, mappings (es_na, etc) elsewhere, like Utility?
 
 class Meta
   include Elasticsearch::Persistence::Model
 
-  index_name 'metas'
+  index_name "discovery_metas"
 
   settings index: { 
     number_of_shards: 1,
@@ -14,22 +14,22 @@ class Meta
     analysis: {
       analyzer: {
         path_analyzer: {
-          tokenizer: 'path_tokens'
+          tokenizer: "path_tokens"
         }
       },
       tokenizer: {
         path_tokens: {
-          type: 'path_hierarchy',
-          delimiter: '/'
+          type: "path_hierarchy",
+          delimiter: "/"
         }
       }
     }
   }
 
-  es_na = { mapping: { index: 'not_analyzed' }}
-  es_pa = { mapping: { analyzer: 'path_analyzer' }}
-  es_s  = { mapping: { type: 'string' }}
-  es_o  = { mapping: { type: 'object' }}
+  es_na = { mapping: { index: "not_analyzed" }}
+  es_pa = { mapping: { analyzer: "path_analyzer" }}
+  es_s  = { mapping: { type: "string" }}
+  es_o  = { mapping: { type: "object" }}
 
   FIELDS = {
     id: {
