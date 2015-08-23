@@ -1,7 +1,4 @@
 require "filesize"
-#require "nokogiri"
-#require "date"
-
 require_relative "../sybase"
 require_relative "../discovery"
 require_relative "../utility"
@@ -65,6 +62,18 @@ class WellExtractor
         #germ = "#{@project} #{@label} #{row[:"well id"]}"
         germ = "#{@project} #{@label} #{row[:well_id]}"
 
+        #TODO: ensure this is correct format and queryable
+        surface_point = {
+          name: "surface_bounds",
+          location: {
+            type: "geo_point",
+            location: {
+              lat: row[:latitude], 
+              lon: row[:longitude]
+            }
+          }
+        }
+
         doc = {
           id: Utility.lc_id(germ),
           project_id: proj_id,
@@ -72,7 +81,8 @@ class WellExtractor
           project: @project,
           project_server: project_server,
           project_home: project_home,
-          project_name: project_name
+          project_name: project_name,
+          surface_point: surface_point
         }
 
         docs << doc.merge(row)
@@ -81,7 +91,6 @@ class WellExtractor
       end
 
       return docs
-
 
     rescue Exception => e
       puts e.message

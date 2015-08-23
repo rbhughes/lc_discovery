@@ -447,7 +447,15 @@ class Well
       ppdm38: nil,
       ppdm39: nil
     },
-    wsn: {
+    surface_point: {
+      virtus_type: Hash,
+      es_mapping: es_o,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    proposed: {
       virtus_type: Boolean,
       es_mapping: es_na,
       gxdb_view: "WellHeader.[Proposed]",

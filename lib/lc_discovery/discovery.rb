@@ -1,13 +1,13 @@
 # Helper methods for connecting to Sybase SQLAnywhere databases in the context
 # of GeoGraphix Discovery
 module Discovery
-  def self.process_project(proj)
-    puts "-" * 30
-    puts "DO PROCESS THIS PROJECT:  #{proj}"
-    puts proj
-    puts Extracts.assigned(proj["extract_code"])
-    puts "-" * 30
-  end
+  #def self.process_project(proj)
+  #  puts "-" * 30
+  #  puts "DO PROCESS THIS PROJECT:  #{proj}"
+  #  puts proj
+  #  puts Extracts.assigned(proj["extract_code"])
+  #  puts "-" * 30
+  #end
 
   # Given a root directory (generally a Project Home) return a list of all
   # directories that qualify as Discovery projects. Only directories

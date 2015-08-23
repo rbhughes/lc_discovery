@@ -1,7 +1,7 @@
 require "sidekiq"
+require_relative "../extractors/well_extractor"
 require_relative "../redis_queue"
 require_relative "../publisher"
-require_relative "../extractors/well_extractor"
 
 class WellWorker
   include Sidekiq::Worker
@@ -17,7 +17,8 @@ class WellWorker
 
       docs = WellExtractor.new(project: path, label: label).extract(bulk, mark)
 
-      Publisher.write("well", docs, "elasticsearch")
+      #Publisher.write("well", docs, "elasticsearch")
+      Publisher.write("well", docs, store)
 
       RedisQueue.redis.publish("lc_relay", "...")
 

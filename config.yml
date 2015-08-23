@@ -12,16 +12,16 @@ homes:
   - path: c:/programdata/geographix/projects/California
     label: red
     active: false
-    extract_code: 7
+    extract_code: 3
     scan_date: 
   - path: c:/programdata/geographix/projects/eiq_test
     label: red
-    active: true
+    active: false
     extract_code: 1
     scan_date: 
   - path: c:/programdata/geographix/projects/KS_BOURBON
     label: red
-    active: true
+    active: false
     extract_code: 1
     scan_date: 
   - path: c:/programdata/geographix/projects/KS_HARPER
@@ -32,7 +32,7 @@ homes:
   - path: c:/programdata/geographix/projects/Stratton
     label: red
     active: true
-    extract_code: 1044
+    extract_code: 3
     scan_date: 
 - path: c:/fake_ggx_home
   active: true
@@ -42,6 +42,6 @@ homes:
   projects:
   - path: c:/fake_ggx_home/KS_HARPER
     label: zzz
-    active: true
-    extract_code: 1
+    active: false
+    extract_code: 8198
     scan_date: 

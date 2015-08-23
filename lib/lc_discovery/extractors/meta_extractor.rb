@@ -60,6 +60,8 @@ class MetaExtractor
       doc = doc.reject{ |k,v| k.to_s.match /^age/ }
       doc[:activity_score] = ages.inject(:+)/ages.size
 
+      require 'awesome_print'
+      ap doc
       doc
 
     rescue Exception => e

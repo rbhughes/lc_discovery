@@ -4,6 +4,7 @@ require "awesome_print"
 require "yaml"
 require "gli"
 require_relative "../lib/lc_discovery/extracts"
+require_relative "../lib/lc_discovery/utility"
 require_relative "../lib/lc_discovery/discovery"
 
 include GLI::App
@@ -69,7 +70,7 @@ desc "Toggle the active state for selected homes."
 long_desc "long description"
 command :home_activate do |c|
   c.action do # |global_options, options, args|
-    help_now! "No homes! Run "add_home" first" if no_homes?
+    help_now! "No homes! Run 'add_home' first" if no_homes?
 
     system("cls")
     puts "\nEnter home number(s) to toggle active status...\n\n"
@@ -106,8 +107,8 @@ desc "Toggle the active state for selected projects."
 long_desc "long description for proj_toggle"
 command :proj_activate do |c|
   c.action do # |global_options,options,args|
-    help_now! "No homes! Run "add_home" first" if no_homes?
-    help_now! "No projects! Run "list_projects" first" if no_projects?
+    help_now! "No homes! Run 'add_home' first" if no_homes?
+    help_now! "No projects! Run 'list_projects' first" if no_projects?
 
     system("cls")
     puts "\nEnter home number(s) containing your projects...\n\n"
@@ -129,7 +130,7 @@ command :proj_activate do |c|
       if @config["homes"][i]["projects"].empty?
         system("cls")
         puts "No projects in: #{@config["homes"][i]["path"]}"
-        puts "Try running "list_projects" first..."
+        puts "Try running 'list_projects' first..."
         sleep 2
         system("cls")
         next
@@ -171,8 +172,8 @@ desc "Choose which data types to extract from projects."
 long_desc "long description for extracts"
 command :set_extracts do |c|
   c.action do # |global_options,options,args|
-    help_now! "No homes! Run "add_home" first" if no_homes?
-    help_now! "No projects! Run "list_projects" first" if no_projects?
+    help_now! "No homes! Run 'add_home' first" if no_homes?
+    help_now! "No projects! Run 'list_projects' first" if no_projects?
 
     system("cls")
     puts "\nEnter home number(s) containing your projects...\n\n"
@@ -193,7 +194,7 @@ command :set_extracts do |c|
       if @config["homes"][i]["projects"].empty?
         system("cls")
         puts "No projects in: #{@config["homes"][i]["path"]}"
-        puts "Try running "list_projects" first..."
+        puts "Try running 'list_projects' first..."
         sleep 2
         system("cls")
         next
@@ -244,16 +245,21 @@ desc "Scan all selected projects and extract data types"
 long_desc "long scsan"
 command :run_extracts do |c|
   c.action do # |global_options,options,args|
-    help_now! "No homes! Run "add_home" first" if no_homes?
-    help_now! "No projects! Run "list_projects" first" if no_projects?
-
-    # this needs to dispatch projects to a queue
+    help_now! "No homes! Run 'add_home' first" if no_homes?
+    help_now! "No projects! Run 'list_projects' first" if no_projects?
 
     @config["homes"].select { |h| h["active"] }.each do |home|
       home["projects"].select { |p| p["active"] }.each do |proj|
-        Discovery.process_project(proj)
+
+        store = "stdout" #TODO: add option for csv, elasticsearch, etc?
+
+        Extracts.assigned(proj["extract_code"]).each do |extract|
+          Utility.cli_extract(extract.to_s, proj["path"], proj["label"], store)
+        end
+
       end
     end
+
   end
 end
 

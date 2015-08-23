@@ -7,6 +7,7 @@ class ExtractDispatchWorker
   include Sidekiq::Worker
   sidekiq_options :queue => :lc_discovery, :retry => false, :backtrace => true
 
+  #TODO: change arg from "extract" to "model"
   def perform(extract, path, label, store)
     begin
       rq = RedisQueue.redis
@@ -15,11 +16,11 @@ class ExtractDispatchWorker
 
       rq.publish("lc_relay", msg)
 
-      if extract == "meta"
+      if extract == "META"
 
         MetaWorker.perform_async(path, label, store)
 
-      elsif extract == "well"
+      elsif extract == "WELL"
 
         WellExtractor.parcels(path).each do |job|
           WellWorker.perform_async(path, label, store, job[:bulk], job[:mark])

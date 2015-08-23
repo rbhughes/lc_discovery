@@ -1,3 +1,5 @@
+#this should match clowder/config/initializers/extracts_discovery.rb
+
 types = %w(
   META
   WELL
@@ -19,6 +21,7 @@ types = %w(
 # This Extracts module holds convenience methods for encoding/decoding extracts
 # via bitwise comparison so that combinations can be serialized as an integer.
 module Extracts
+
   module_function
 
   # accepts an array of number indexes for selected types,
@@ -60,7 +63,12 @@ module Extracts
     end
     types
   end
+
+
+
 end
+
+  
 
 # constants are defined here
 types.each_with_index do |type, i|
