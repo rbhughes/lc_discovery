@@ -21,8 +21,14 @@ module Publisher
       end
 
     rescue Exception => e
-      RedisQueue.redis.publish(e.message)
+      puts "*"*40
+      puts e.message
+      puts "*"*40
+      #RedisQueue.redis.publish(e.message)
+      puts "-"*50
+      puts e.class
       puts e.backtrace.inspect
+      puts "-"*50
     end
   end
 

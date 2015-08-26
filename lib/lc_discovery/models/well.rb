@@ -3,6 +3,8 @@ require "elasticsearch/persistence/model"
 class Well
   include Elasticsearch::Persistence::Model
 
+  self.gateway.client = Elasticsearch::Client.new url: 'localhost:9200'
+
   index_name "discovery_wells"
 
   settings index: { 

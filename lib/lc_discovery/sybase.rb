@@ -1,21 +1,33 @@
 require "sequel"
 require "socket"
+require "yaml"
 require_relative "discovery"
 
-ENV["PATH"] = "#{ENV["PATH"]};c:/dev/sqla64/bin64"
+require "yaml"
+require "sequel"
 
-# Use Sequel's wrapper around native Sybase SQLAnywhere drivers to connect to
-# GeoGraphix Discovery project databases.
-#
-# TODO: set this path to lib for depoyment
-# sqla64 = File.expand_path("../sqla64/bin64", __FILE__)
-# ENV["PATH"] = "#{ENV["PATH"]};#{sqla64}"
 class Sybase
+  GGX_SYBASE = "C:/Program Files (x86)/GeoGraphix/SQL Anywhere 12/BIN64"
+
   attr_reader :db
 
+  # The GGX path will usually be present. If not, append to PATH from config.yml
   def initialize(proj)
-    @db = Sequel.sqlanywhere(conn_string: Discovery.connect_string(proj))
+    begin
+      @db = Sequel.sqlanywhere(conn_string: Discovery.connect_string(proj))
+    rescue LoadError
+      puts "Cannot find SQLAnywhere exes in PATH. Trying from config.yml..."
+      config_path = File.join(
+        File.expand_path("../../", File.dirname(__FILE__)), "config.yml")
+      config = YAML.load_file(config_path)
+      sybase_path = config["sybase"]["path"] ||= GGX_SYBASE
+      ENV["PATH"] = "#{ENV["PATH"]};#{sybase_path}"
+      retry
+    rescue Exception => e
+      raise e
+    end
   end
 
   at_exit { @db.disconnect if @db }
+
 end

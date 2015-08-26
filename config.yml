@@ -1,7 +1,12 @@
 ---
+redis:
+  host: 127.0.0.1
+  port: 6379
 elasticsearch:
   host: localhost
   port: 9200
+sybase:
+  path: c:/dev/sqla64/bin64
 homes:
 - path: c:/programdata/geographix/projects
   active: true
