@@ -2,6 +2,7 @@ require "sequel"
 require "socket"
 require "yaml"
 require_relative "discovery"
+require_relative "lc_env"
 
 require "yaml"
 require "sequel"
@@ -17,11 +18,7 @@ class Sybase
       @db = Sequel.sqlanywhere(conn_string: Discovery.connect_string(proj))
     rescue LoadError
       puts "Cannot find SQLAnywhere exes in PATH. Trying from config.yml..."
-      config_path = File.join(
-        File.expand_path("../../", File.dirname(__FILE__)), "config.yml")
-      config = YAML.load_file(config_path)
-      sybase_path = config["sybase"]["path"] ||= GGX_SYBASE
-      ENV["PATH"] = "#{ENV["PATH"]};#{sybase_path}"
+      ENV["PATH"] = "#{ENV["PATH"]};#{LcEnv.sybase_path}"
       retry
     rescue Exception => e
       raise e

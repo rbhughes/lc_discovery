@@ -1,9 +1,10 @@
 require "elasticsearch/persistence/model"
-
-#TODO: move index init, mappings (es_na, etc) elsewhere, like Utility?
+require_relative "../lc_env"
 
 class Meta
   include Elasticsearch::Persistence::Model
+
+  self.gateway.client = Elasticsearch::Client.new url: LcEnv.elasticsearch_url
 
   index_name "discovery_metas"
 

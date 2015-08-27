@@ -1,47 +1,20 @@
-2015-08-26T04:44:26.932Z 12844 TID-achx8 ExtractDispatchWorker JID-4304176bb763494572512c8e INFO: start
-2015-08-26T04:44:26.932Z 12844 TID-achx8 ExtractDispatchWorker JID-4304176bb763494572512c8e INFO: lc_discovery WELL: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-08-26T04:44:27.815Z 12844 TID-achx8 ExtractDispatchWorker JID-4304176bb763494572512c8e INFO: done: 0.882 sec
-2015-08-26T04:44:27.819Z 12844 TID-yld5w WellWorker JID-5de652008200c41699d16d13 INFO: start
-2015-08-26T04:44:27.819Z 12844 TID-yld5w WellWorker JID-5de652008200c41699d16d13 INFO: Extracting lc_discovery WellWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-08-26T04:44:29.691Z 12844 TID-yld5w WellWorker JID-5de652008200c41699d16d13 INFO: done: 1.873 sec
-2015-08-26T04:45:40.913Z 12844 TID-aiebw INFO: Shutting down
-2015-08-26T04:45:41.078Z 12844 TID-xtpt4 INFO: Terminating 10 quiet workers
-2015-08-26T04:45:54.845Z 7488 TID-1imf4 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-08-26T04:46:21.696Z 13064 TID-av1fs INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-08-26T04:46:22.516Z 13064 TID-av1fs INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-08-26T04:46:22.516Z 13064 TID-av1fs INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-08-26T04:46:22.516Z 13064 TID-av1fs INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-08-26T04:46:22.516Z 13064 TID-av1fs INFO: Starting processing, hit Ctrl-C to stop
-2015-08-26T04:46:22.563Z 13064 TID-aos7g ExtractDispatchWorker JID-cc07742cec5de510610279ed INFO: start
-2015-08-26T04:46:22.563Z 13064 TID-yrv58 ExtractDispatchWorker JID-de501ea99eae6643e9aa2509 INFO: start
-2015-08-26T04:46:22.563Z 13064 TID-aos7g ExtractDispatchWorker JID-cc07742cec5de510610279ed INFO: lc_discovery WELL: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-08-26T04:46:22.563Z 13064 TID-yrv58 ExtractDispatchWorker JID-de501ea99eae6643e9aa2509 INFO: lc_discovery WELL: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-08-26T04:46:23.380Z 13064 TID-yrv58 ExtractDispatchWorker JID-de501ea99eae6643e9aa2509 INFO: done: 0.817 sec
-2015-08-26T04:46:23.380Z 13064 TID-aos7g ExtractDispatchWorker JID-cc07742cec5de510610279ed INFO: done: 0.817 sec
-2015-08-26T04:46:23.408Z 13064 TID-aos7g WellWorker JID-a4eb3487fc739e4b871392a5 INFO: start
-2015-08-26T04:46:23.408Z 13064 TID-aos7g WellWorker JID-a4eb3487fc739e4b871392a5 INFO: Extracting lc_discovery WellWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-08-26T04:46:23.409Z 13064 TID-yrv58 WellWorker JID-24394fd9e5f2ac988a630091 INFO: start
-2015-08-26T04:46:23.410Z 13064 TID-yrv58 WellWorker JID-24394fd9e5f2ac988a630091 INFO: Extracting lc_discovery WellWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-08-26T04:46:25.143Z 13064 TID-yltwo ExtractDispatchWorker JID-549517a0508dda2f09162fea INFO: start
-2015-08-26T04:46:25.143Z 13064 TID-yltwo ExtractDispatchWorker JID-549517a0508dda2f09162fea INFO: lc_discovery WELL: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-08-26T04:46:25.921Z 13064 TID-yltwo ExtractDispatchWorker JID-549517a0508dda2f09162fea INFO: done: 0.778 sec
-2015-08-26T04:46:25.923Z 13064 TID-yh78o WellWorker JID-a474b43199104fdeb77da33e INFO: start
-2015-08-26T04:46:25.923Z 13064 TID-yh78o WellWorker JID-a474b43199104fdeb77da33e INFO: Extracting lc_discovery WellWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-08-26T04:46:28.864Z 13064 TID-yrv58 WellWorker JID-24394fd9e5f2ac988a630091 INFO: done: 5.455 sec
-2015-08-26T04:46:28.864Z 13064 TID-aos7g WellWorker JID-a4eb3487fc739e4b871392a5 INFO: done: 5.456 sec
-2015-08-26T04:46:29.487Z 13064 TID-yh78o WellWorker JID-a474b43199104fdeb77da33e INFO: done: 3.563 sec
-2015-08-26T04:53:56.425Z 13064 TID-av1fs INFO: Shutting down
-2015-08-26T04:53:57.065Z 13064 TID-y01g4 INFO: Terminating 10 quiet workers
-2015-08-26T04:54:04.503Z 11448 TID-anbb0 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-08-26T04:54:05.193Z 11448 TID-anbb0 INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-08-26T04:54:05.193Z 11448 TID-anbb0 INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-08-26T04:54:05.193Z 11448 TID-anbb0 INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-08-26T04:54:05.208Z 11448 TID-anbb0 INFO: Starting processing, hit Ctrl-C to stop
-2015-08-26T04:54:20.302Z 11448 TID-ah3b4 ExtractDispatchWorker JID-0957df941f8fd09eb87abd78 INFO: start
-2015-08-26T04:54:20.302Z 11448 TID-ah3b4 ExtractDispatchWorker JID-0957df941f8fd09eb87abd78 INFO: lc_discovery WELL: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-08-26T04:54:21.187Z 11448 TID-ah3b4 ExtractDispatchWorker JID-0957df941f8fd09eb87abd78 INFO: done: 0.885 sec
-2015-08-26T04:54:21.190Z 11448 TID-yqgg8 WellWorker JID-a72ce1280e9b471483220076 INFO: start
-2015-08-26T04:54:21.191Z 11448 TID-yqgg8 WellWorker JID-a72ce1280e9b471483220076 INFO: Extracting lc_discovery WellWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-08-26T04:54:34.888Z 11448 TID-yqgg8 WellWorker JID-a72ce1280e9b471483220076 INFO: done: 13.697 sec
-2015-08-26T04:55:54.194Z 11448 TID-anbb0 INFO: Shutting down
-2015-08-26T04:55:55.074Z 11448 TID-xxr5c INFO: Terminating 10 quiet workers
+2015-08-27T04:02:21.288Z 9300 TID-9nhtw INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-08-27T04:02:22.006Z 9300 TID-9nhtw INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
+2015-08-27T04:02:22.006Z 9300 TID-9nhtw INFO: See LICENSE and the LGPL-3.0 for licensing details.
+2015-08-27T04:02:22.006Z 9300 TID-9nhtw INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
+2015-08-27T04:02:22.006Z 9300 TID-9nhtw INFO: Starting processing, hit Ctrl-C to stop
+2015-08-27T04:03:15.357Z 9300 TID-9nhtw INFO: Shutting down
+2015-08-27T04:03:16.093Z 9300 TID-xv4fc INFO: Terminating 10 quiet workers
+2015-08-27T04:03:22.288Z 7832 TID-alwr0 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-08-27T04:03:22.976Z 7832 TID-alwr0 INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
+2015-08-27T04:03:22.976Z 7832 TID-alwr0 INFO: See LICENSE and the LGPL-3.0 for licensing details.
+2015-08-27T04:03:22.976Z 7832 TID-alwr0 INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
+2015-08-27T04:03:22.976Z 7832 TID-alwr0 INFO: Starting processing, hit Ctrl-C to stop
+2015-08-27T04:03:34.265Z 7832 TID-afmgc ExtractDispatchWorker JID-f809f6d49096343206a6bdb4 INFO: start
+2015-08-27T04:03:34.265Z 7832 TID-afmgc ExtractDispatchWorker JID-f809f6d49096343206a6bdb4 INFO: lc_discovery WELL: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
+2015-08-27T04:03:35.082Z 7832 TID-afmgc ExtractDispatchWorker JID-f809f6d49096343206a6bdb4 INFO: done: 0.817 sec
+2015-08-27T04:03:35.087Z 7832 TID-ynzgw WellWorker JID-f50ae4bf4da222f68ffa9331 INFO: start
+2015-08-27T04:03:35.088Z 7832 TID-ynzgw WellWorker JID-f50ae4bf4da222f68ffa9331 INFO: Extracting lc_discovery WellWorker: c:/programdata/geographix/projects/Stratton | home_1
+2015-08-27T04:03:36.619Z 7832 TID-ynzgw WellWorker JID-f50ae4bf4da222f68ffa9331 INFO: done: 1.531 sec
+2015-08-27T06:21:38.828Z 7832 TID-alwr0 INFO: Shutting down
+2015-08-27T06:21:39.049Z 7832 TID-xxe1o INFO: Terminating 10 quiet workers

@@ -22,7 +22,7 @@ module Publisher
 
     rescue Exception => e
       puts "*"*40
-      puts e.message
+      puts e.message.to_s
       puts "*"*40
       #RedisQueue.redis.publish(e.message)
       puts "-"*50

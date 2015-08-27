@@ -1,6 +1,8 @@
 require "sidekiq"
+require "awesome_print"
 
 Sidekiq.configure_client do |config|
+  ap config
   config.redis = { :namespace => "logicalcat", :size => 1 }
 end
 

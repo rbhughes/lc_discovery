@@ -1,9 +1,10 @@
 require "elasticsearch/persistence/model"
+require_relative "../lc_env"
 
 class Well
   include Elasticsearch::Persistence::Model
 
-  self.gateway.client = Elasticsearch::Client.new url: 'localhost:9200'
+  self.gateway.client = Elasticsearch::Client.new url: LcEnv.elasticsearch_url
 
   index_name "discovery_wells"
 
@@ -478,7 +479,8 @@ class Well
   validates :label, presence: true
   validates :project, presence: true
 
-  after_save { puts "callback sez::::: Successfully saved: #{self}" }
+  #after_save { puts "callback sez::::: Successfully saved: #{self}" }
+  after_save { puts "callback sez::::: Successfully saved: #{self.id}" }
 
   def gxdb_view(col)
     FIELDS[col.to_sym][:gxdb_view]
