@@ -38,5 +38,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "yard"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "mocha"
+  spec.add_development_dependency "test_construct"
+
+  #spec.add_development_dependency "minitest-filesystem"
+  #spec.add_development_dependency "minitest-rg"
 
 end

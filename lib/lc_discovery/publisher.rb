@@ -1,4 +1,5 @@
 require_relative "./redis_queue"
+require "awesome_print"
 
 # may include writing to SQL files, CSVs or actual insert jobs (?)
 module Publisher
@@ -12,19 +13,17 @@ module Publisher
 
     begin
 
-      docs.each do |doc|
-        if store == "elasticsearch"
-          model.create(doc)
-        else
-          puts "Need to PUBLISH #{docs.size} to #{store}"
-        end
+      if store == "elasticsearch"
+        docs.each { |doc| model.create(doc) }
+      else #assume stdout for now
+        ap docs
       end
 
     rescue Exception => e
       puts "*"*40
       puts e.message.to_s
       puts "*"*40
-      #RedisQueue.redis.publish(e.message)
+      RedisQueue.redis.publish(e.message)
       puts "-"*50
       puts e.class
       puts e.backtrace.inspect

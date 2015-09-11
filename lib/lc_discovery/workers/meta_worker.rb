@@ -17,7 +17,6 @@ class MetaWorker
 
       doc = MetaExtractor.new(project: path, label: label).extract
 
-      #Publisher.write("meta", [doc], "elasticsearch")
       Publisher.write("meta", [doc], store)
 
       RedisQueue.redis.publish("lc_relay", "...")

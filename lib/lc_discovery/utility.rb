@@ -1,9 +1,5 @@
 require "digest/sha1"
-
-# require all the elasticsearch models
-#model_path = File.join(File.dirname(__FILE__),"models/*.rb")
-#Dir[model_path].each { |file| require file }
-
+require_relative "publisher"
 
 
 module Utility
@@ -58,13 +54,8 @@ module Utility
 
   # Mirrors the enqueue behavior of Clowder's Utility.enqueue_extracts(home)
   def cli_extract(extract, path, label, store)
-    #def perform(extract, path, label, store)
-    #end
 
     begin
-
-    #worker_name = "#{extract.capitalize}Worker"
-    #worker_path = File.join(File.dirname(__FILE__), "worker", worker_name)
 
       require File.join(File.dirname(__FILE__),
                       "workers/#{extract.downcase}_worker.rb")
@@ -76,46 +67,27 @@ module Utility
       worker = "#{extract.capitalize}Worker".constantize
       bulk = extractor::BULK
 
-      require "awesome_print"
-      if extract == "WELL"
-        puts "got to WELL"
+
+      puts "*"*40
+      puts "extract=#{extract}  path=#{path}   label=#{label}   store=#{store}"
+      puts "*"*40
+
+
+      if extractor.respond_to?(:parcels)
 
         extractor.parcels(path).each do |job|
           docs = extractor.new(
             project: path,
             label: label
           ).extract(job[:bulk], job[:mark])
+          Publisher.write(extract.downcase, docs, store)
 
-          ap docs
-          #WellWorker.perform_async(path, label, store, job[:bulk], job[:mark])
         end
 
+      else
+        docs = extractor.new(project: path, label: label).extract
+        Publisher.write(extract.downcase, docs, store)
       end
-
-      #worker.perform(path, label, store)
-
-      #WellExtractor.parcels(path).each do |job|
-      #  WellWorker.perform_async(path, label, store, job[:bulk], job[:mark])
-      #end
-
-    #puts worker_path
-
-    #worker = worker_name.constantize
-
-    #begin
-    #  if extract == "META"
-    #    puts "THE EXTRACT WAS META"
-    #    #worker.perform_later(path, label, store)
-#
-#        #MetaWorker.perform_async(path, label, store)
-#      elsif extract == "WELL"
-#        puts "THE EXTRACT WAS WELL"
-#
-#        #WellExtractor.parcels(path).each do |job|
-#        #  WellWorker.perform_async(path, label, store, job[:bulk], job[:mark])
-#        #end
-#
-#      end
 
     rescue Exception => e
       puts e

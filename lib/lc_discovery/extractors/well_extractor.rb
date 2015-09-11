@@ -87,7 +87,6 @@ class WellExtractor
 
         docs << doc.merge(row)
 
-
       end
 
       return docs

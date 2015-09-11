@@ -9,8 +9,10 @@ require_relative "../utility"
 require_relative "../models/meta"
 
 class MetaExtractor
+  include Discovery
 
   attr_accessor :project, :label
+  BULK = 10
 
   def initialize(opts)
     @project = opts[:project]
@@ -18,28 +20,13 @@ class MetaExtractor
     @gxdb = nil
   end
 
-  #def count
-  #end
 
+  #----------
   def extract
-
     begin
       puts "meta --> #{@project}"
 
-      project_server = Discovery.parse_host(@project)
-      project_home = Discovery.parse_home(@project)
-      project_name = File.basename(@project)
-
-      germ = "#{@project} #{@label}" #ensure this matches clowder
-
-      doc = {
-        id: Utility.lc_id(germ),
-        label: @label,
-        project: @project,
-        project_server: project_server,
-        project_home: project_home,
-        project_name: project_name
-      }
+      doc = base_doc
 
       @gxdb = Sybase.new(@project).db
 
@@ -47,7 +34,7 @@ class MetaExtractor
       print "."
       doc.merge! version_and_coordsys
       print "."
-      doc.merge! file_stats
+      doc.merge! proj_file_stats
       print "."
       doc.merge! db_stats
       print "."
@@ -55,14 +42,9 @@ class MetaExtractor
       print "."
       puts
 
-      # an average of non-null ages, both file and db
-      ages = doc.select{ |k,v| k.to_s.match /^age/ }.values.compact
-      doc = doc.reject{ |k,v| k.to_s.match /^age/ }
-      doc[:activity_score] = ages.inject(:+)/ages.size
+      doc[:activity_score] = activity_score(doc)
 
-      require 'awesome_print'
-      ap doc
-      doc
+      [doc] #return array to be consistent with other extractors
 
     rescue Exception => e
       puts e.message
@@ -77,7 +59,45 @@ class MetaExtractor
 
 
 
-  private
+
+
+  def project_server
+    Discovery.parse_host(@project)
+  end
+
+  def project_name
+    File.basename(@project)
+  end
+  
+  def lc_id
+    germ = "#{@project} #{@label}" #ensure this matches clowder
+    Utility.lc_id(germ)
+  end
+
+  def project_home
+    Discovery.parse_home(@project)
+  end
+
+  def base_doc
+    doc = {
+      id: lc_id,
+      label: @label,
+      project: @project,
+      project_server: project_server,
+      project_home: project_home,
+      project_name: project_name
+    }
+  end
+
+  #-----------------
+  #TODO test with dummy object
+  def activity_score(doc)
+    ages = doc.select{ |k,v| k.to_s.match /^age/ }.values.compact
+    doc = doc.reject{ |k,v| k.to_s.match /^age/ }
+    ages.inject(:+)/ages.size
+  end
+  #-----------------
+
 
   #----------
   def interpreters
@@ -90,30 +110,31 @@ class MetaExtractor
 
   #----------
   def version_and_coordsys
+    geo = {
+      schema_version: "ggx/Project/ProjectVersion",
+      db_coordsys:    "ggx/Project/StorageCoordinateSystem/GGXC1",
+      map_coordsys:   "ggx/Project/DisplayCoordinateSystem/GGXC1",
+      esri_coordsys:  "ggx/Project/DisplayCoordinateSystem/ESRI",
+      unit_system:    "ggx/Project/UnitSystem"
+    }
+
     pxml = File.join(@project, "Project.ggx.xml")
-    return unless File.exists?(pxml)
+
+    return geo.update(geo){ |k,v| v = nil } unless File.exists?(pxml)
 
     f = File.open(pxml)
     doc = Nokogiri::XML(f)
     f.close
 
-    schema_vers = doc.xpath("ggx/Project/ProjectVersion").inner_text
-    db_sys = doc.xpath("ggx/Project/StorageCoordinateSystem/GGXC1").inner_text
-    map_sys = doc.xpath("ggx/Project/DisplayCoordinateSystem/GGXC1").inner_text
-    esri_sys = doc.xpath("ggx/Project/DisplayCoordinateSystem/ESRI").inner_text
-    unit_sys = doc.xpath("ggx/Project/UnitSystem").inner_text
-
-    {
-      schema_version: schema_vers.squeeze,
-      db_coordsys: db_sys.squeeze,
-      map_coordsys: map_sys.squeeze,
-      esri_coordsys: "ESRI::"+esri_sys.squeeze,
-      unit_system: unit_sys.squeeze
-    }
+    geo.update(geo){ |k,v| doc.xpath(v).inner_text.squeeze(" ") }
   end
 
   #----------
-  def file_stats
+  #def file_stats(dir = "**/*")
+
+
+  # TODO test with construct gem
+  def proj_file_stats
     dir = File.join(@project, "**/*")
 
     map_num, sei_num, file_count, byte_size = 0, 0, 0, 0 
@@ -125,6 +146,7 @@ class MetaExtractor
     Dir.glob(dir, File::FNM_DOTMATCH).each do |f| 
       next unless File.exists?(f)
       stat = File.stat(f)
+      # make a method! --> days_ago = ((Time.now.to_i - stat.mtime.to_i) / 86400).to_i
       days_ago = ((Time.now.to_i - stat.mtime.to_i) / 86400).to_i
       byte_size += stat.size
       file_count += 1 if File.file?(f)
@@ -165,6 +187,7 @@ class MetaExtractor
   end
 
   #----------
+  # TODO test with minimal gxdb.db
   def db_stats
     stats = {}
 
@@ -220,6 +243,7 @@ class MetaExtractor
   end
 
   #----------
+  # TODO test with minimal gxdb.db
   def surface_bounds
 
     sql = "select "\
