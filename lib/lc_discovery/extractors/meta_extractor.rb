@@ -90,7 +90,6 @@ class MetaExtractor
   end
 
   #-----------------
-  #TODO test with dummy object
   def activity_score(doc)
     ages = doc.select{ |k,v| k.to_s.match /^age/ }.values.compact
     doc = doc.reject{ |k,v| k.to_s.match /^age/ }
@@ -129,13 +128,16 @@ class MetaExtractor
     geo.update(geo){ |k,v| doc.xpath(v).inner_text.squeeze(" ") }
   end
 
-  #----------
-  #def file_stats(dir = "**/*")
 
 
-  # TODO test with construct gem
+  def days_since(mtime)
+    ((Time.now.to_i - mtime.to_i) / 86400).to_i
+  end
+
+
+
+  # ugly, but glob seems like best peformance. Maybe do native powershell?
   def proj_file_stats
-    dir = File.join(@project, "**/*")
 
     map_num, sei_num, file_count, byte_size = 0, 0, 0, 0 
     sei_ago, map_ago, file_ago = [], [], []
@@ -143,11 +145,12 @@ class MetaExtractor
     oldest_file_mod = Time.now
     newest_file_mod = Time.at(0)
 
-    Dir.glob(dir, File::FNM_DOTMATCH).each do |f| 
+    Dir.glob(File.join(@project, "**/*"), File::FNM_DOTMATCH).each do |f| 
       next unless File.exists?(f)
       stat = File.stat(f)
-      # make a method! --> days_ago = ((Time.now.to_i - stat.mtime.to_i) / 86400).to_i
-      days_ago = ((Time.now.to_i - stat.mtime.to_i) / 86400).to_i
+
+      days_ago = days_since(stat.mtime)
+
       byte_size += stat.size
       file_count += 1 if File.file?(f)
       oldest_file_mod = stat.mtime if stat.mtime < oldest_file_mod

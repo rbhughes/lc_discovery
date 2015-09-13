@@ -53,7 +53,6 @@ describe MetaExtractor do
     it "#activity_score must return an average of non-nil age scores" do
       ages = {age_a: 100, age_b: 200, age_c: nil, age_d: 250}
       @meta_x.activity_score(ages).must_equal 183
-
     end
 
   end
@@ -117,58 +116,48 @@ describe MetaExtractor do
       within_construct do |construct|
         @opts[:project] = construct
         @meta_x = MetaExtractor.new(@opts)
-        big_s = "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn"
-        lil_s = "."
 
-        construct.file("a_interp.svx", lil_s)
-        construct.file("b_interp.svx", lil_s)
-        construct.file("bigmap.gmp", big_s)
-        construct.file("lilmap.gmp", lil_s)
-        construct.file("down/under/map2.gmp", lil_s)
-        construct.file("esri.shp", lil_s)
-        construct.file("gxdb.db", big_s)
-        construct.file("gxdb.dbR", lil_s)
-        puts "1========"
-        puts File.stat("gxdb.dbR").size
-        puts "1========"
+        construct.file("a_interp.svx")
+        construct.file("b_interp.svx")
+        construct.file("bigmap.gmp")
+        construct.file("lilmap.gmp")
+        construct.file("down/under/map2.gmp")
+        construct.file("esri.shp")
+        construct.file("gxdb.db")
+        construct.file("gxdb.dbR")
+        construct.file("gxdb.log")
 
-        #File::Stat.stubs(:mtime).returns(11111)
+        ancient = Time.new("1999-12-31")
+        File.utime(ancient, ancient, "gxdb.log")
 
-
-        class OldAndBigStat
-          def self.mtime
-            Time.new("2000-01-01")
-          end
-          def self.size
-            100000
-          end
-        end
-        
-        File.stubs(:stat).returns(OldAndBigStat)
-        construct.file("gxdb.log", big_s)
-        
-        puts "2========"
-        puts File.stat("gxdb.log").size
-        puts "2========"
-
-        big_bytes = File.size("bigmap.gmp")
-        lil_bytes = File.size("lilmap.gmp")
+        # this is how we would mock stat if that worked here
+        #mystat = mock("file::stat")
+        #mystat.stubs(size: 111, mtime: Time.new("2000-10-10"))
+        #File.stubs(:stat).returns(mystat) 
 
         pfs = @meta_x.proj_file_stats
         pfs.must_be_instance_of Hash
-        puts "..................."
-        puts pfs.inspect
-        puts "..................."
 
         pfs[:num_layers_maps].must_equal 4
         pfs[:num_sv_interps].must_equal 2
         pfs[:file_count].must_equal 9
         pfs[:human_size].must_be_instance_of String
-        pfs[:byte_size].must_equal (big_bytes*3) + (lil_bytes*6)
+        pfs[:byte_size].must_equal 0
+
+        # gxdb.db, gxdb_production.log and gxdb.log mtime are skipped and not
+        # part of age_file_mod or subsequent activity_score...
+        pfs[:age_file_mod].must_equal 0
+        # ...but oldest_file_mod catches the ancient date
+        Time.new(pfs[:oldest_file_mod]).must_equal ancient 
+
         Date.parse(pfs[:oldest_file_mod]).must_be_instance_of Date
         Date.parse(pfs[:newest_file_mod]).must_be_instance_of Date
-
       end
+    end
+
+    it "#days_since must return number of days since a past date" do
+      fortnight = (Date.today - 14).to_time
+      @meta_x.days_since(fortnight).must_equal(14)
     end
 
 
@@ -181,90 +170,5 @@ describe MetaExtractor do
 
 end
 
-=begin
-describe MetaExtractor do
-
-  before do
-    @opts = {
-      project: "c:/programdata/geographix/projects/stratton",
-      label: "test"
-    }
-    @meta_extractor = MetaExtractor.new(@opts)
-  end
-
-  describe "when initialized with options" do
-
-    it "must be a MetaExtractor object" do
-      @meta_extractor.must_be_kind_of MetaExtractor
-    end
-
-    it "#project_server must parse the server name" do
-      hostname = Socket.gethostname
-      @meta_extractor.project_server.must_equal hostname
-    end
-
-    it "#project_home must parse the project's home" do
-      @meta_extractor.project_home.must_equal "Projects"
-    end
-
-    it "#project_name must parse the project's name" do
-      @meta_extractor.project_name.must_equal "stratton"
-    end 
-
-    it "#lc_id must return hash for this doc's id" do
-      id = "c62c5952546ae1761eda490dca9df0ca413d5ad3"
-      @meta_extractor.lc_id.must_equal id 
-    end 
-
-    it "#base_doc must create a valid base doc" do
-      skip
-      #doc = @meta_extractor.base_doc
-      #doc[:id].must_equal
-      #doc[:label].must_equal
-      #doc[:project_server].must_equal
-      #doc[:project_home].must_equal
-      #doc[:project_name].must_equal
-    end
-
-    it "dummy test" do
 
 
-      #filesystem {
-      #  file "file_1"
-      #  dir "subdir_1" do
-      #    file "subfile_1"
-      #  end
-      #  dir "subdir_2"
-      #  dir "subdir_3" do
-      #    link "link_1"
-      #  end
-      #}.must_exist_within "root_dir"
-      #
-
-      # YOU GONNA STUB or MOCK the whole Discovery object!
-      
-      
-
-      File.stub :stat, "sss" do
-        x = File.stat("asfd")
-        x.must_equal "sss"
-      end
-
-
-
-      @meta_extractor.stub :project_name, "zerg" do
-        #me = MetaExtractor.new(@opts)
-        @meta_extractor.project_name.must_equal "zerg"
-        @meta_extractor.project_home.must_equal "Projects"
-      end
-
-    end
-
-  end
-
-
-end
-
-
-
-=end
