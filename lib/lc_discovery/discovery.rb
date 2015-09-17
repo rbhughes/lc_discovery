@@ -65,8 +65,12 @@ module Discovery
   # Project Home otherwise
   def self.parse_home(proj)
     ini = File.join(File.dirname(proj), "home.ini")
-    m = File.read(ini).match(/Name=(.*)/)
-    m[1] ? m[1] : File.basename(File.dirname(proj))
+    if File.exists?(ini)
+      m = File.read(ini).match(/Name=(.*)/)
+      return m[1]
+      #m[1] ? m[1] : File.basename(File.dirname(proj))
+    end
+    File.basename(File.dirname(proj))
   end
 
   #  def total_bytes(path)

@@ -11,13 +11,14 @@ require_relative "../models/meta"
 class MetaExtractor
   include Discovery
 
-  attr_accessor :project, :label
+  attr_accessor :project, :label, :gxdb
   BULK = 10
 
   def initialize(opts)
     @project = opts[:project]
     @label = opts[:label]
-    @gxdb = nil
+    ###@gxdb = nil
+    @gxdb = Sybase.new(@project).db
   end
 
 
@@ -28,7 +29,7 @@ class MetaExtractor
 
       doc = base_doc
 
-      @gxdb = Sybase.new(@project).db
+      ###@gxdb = Sybase.new(@project).db
 
       doc.merge! interpreters
       print "."
@@ -52,7 +53,7 @@ class MetaExtractor
       raise e
     ensure
       @gxdb.disconnect if @gxdb
-      @gxdb = @project = @label = nil
+      #@gxdb = @project = @label = nil
     end
 
   end
@@ -116,27 +117,24 @@ class MetaExtractor
       esri_coordsys:  "ggx/Project/DisplayCoordinateSystem/ESRI",
       unit_system:    "ggx/Project/UnitSystem"
     }
-
     pxml = File.join(@project, "Project.ggx.xml")
-
     return geo.update(geo){ |k,v| v = nil } unless File.exists?(pxml)
-
     f = File.open(pxml)
     doc = Nokogiri::XML(f)
     f.close
-
     geo.update(geo){ |k,v| doc.xpath(v).inner_text.squeeze(" ") }
   end
 
 
 
+  #----------
   def days_since(mtime)
     ((Time.now.to_i - mtime.to_i) / 86400).to_i
   end
 
 
 
-  # ugly, but glob seems like best peformance. Maybe do native powershell?
+  # ugly, but glob seems to offer best peformance. Maybe do native powershell?
   def proj_file_stats
 
     map_num, sei_num, file_count, byte_size = 0, 0, 0, 0 
@@ -190,41 +188,45 @@ class MetaExtractor
   end
 
   #----------
-  # TODO test with minimal gxdb.db
   def db_stats
     stats = {}
 
-    sql = "select WC, WD, DC, DD, RC, RD, FC, FD, ZC, ZD, YC, YD "\
-      "from (select count(*) as WC from well) wc "\
+    sql = "select WC, WD, DC, DD, RC, RD, FC, FD, ZC, ZD, YC, YD from "\
+      "(select count(*) as WC "\
+      "from well) a "\
       "cross join "\
-      "(select cast(avg(getdate()-row_changed_date) as integer) "\
-      "as WD from well) wd "\
+      "(select cast(avg(getdate()-row_changed_date) as integer) as WD "\
+      "from well) b "\
       "cross join "\
-      "(select count(*) as DC from gx_well_curve) dc "\
+      "(select count(*) as DC "\
+      "from gx_well_curve) c "\
       "cross join "\
-      "(select cast(avg(getdate()-date_modified) as integer) "\
-      "as DD from gx_well_curve) dd "\
+      "(select cast(avg(getdate()-date_modified) as integer) as DD "\
+      "from gx_well_curve) d "\
       "cross join "\
-      "(select count(*) as RC from log_image_reg_log_section) rc "\
+      "(select count(*) as RC "\
+      "from log_image_reg_log_section) e "\
       "cross join "\
-      "(select cast(avg(getdate()-update_date) as integer) "\
-      "as RD from log_image_reg_log_section) rd "\
+      "(select cast(avg(getdate()-update_date) as integer) as RD "\
+      "from log_image_reg_log_section) f "\
       "cross join "\
-      "(select count(distinct(source+formation)) as FC from formations) fc "\
+      "(select count(distinct(source+form_id)) as FC "\
+      "from well_formation) g "\
       "cross join "\
-      "(select cast(avg(getdate()-f.[Row Changed Date]) "\
-      "as integer) as FD from formations f) fd "\
+      "(select cast(avg(getdate()-row_changed_date) as integer) as FD "\
+      "from well_formation) h "\
       "cross join "\
-      "(select count(distinct z.[Attribute Name]) "\
-      "as ZC from wellzoneintrvvaluewithdepthsouterjoin z) zc "\
+      "(select count(distinct(zone_name+zattribute_name)) as ZC "\
+      "from well_zone_intrvl_value) i "\
       "cross join "\
-      "(select cast(avg(getdate()-z.[Data Date]) as integer) "\
-      "as ZD from wellzoneintrvvaluewithdepthsouterjoin z) zd "\
+      "(select cast(avg(getdate()-row_changed_date) as integer) as ZD "\
+      "from well_zone_intrvl_value) j "\
       "cross join "\
-      "(select count(distinct y.[Survey ID]) as YC from wellsurveys y) yc "\
+      "(select count(distinct(source+survey_id)) as YC "\
+      "from well_dir_srvy_station) k "\
       "cross join "\
-      "(select cast(avg(getdate()-y.[Row Changed Date]) as integer) "\
-      "as YD from wellsurveydir y) yd"
+      "(select cast(avg(getdate()-row_changed_date) as integer) as YD "\
+      "from well_dir_srvy_station) l "
 
     @gxdb[sql].all.each do |x|
       stats[:num_wells]       = x[:wc]
@@ -246,7 +248,7 @@ class MetaExtractor
   end
 
   #----------
-  # TODO test with minimal gxdb.db
+  # NOTE: this still permits zeros, which are valid but likely goofs
   def surface_bounds
 
     sql = "select "\
@@ -259,6 +261,8 @@ class MetaExtractor
       "surface_latitude between -90 and 90 and "\
       "surface_longitude is not null and "\
       "surface_latitude is not null"
+
+    #@gxdb = Sybase.new(@project).db
 
     corners = @gxdb[sql].all[0]
 
