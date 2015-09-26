@@ -20,37 +20,16 @@ describe MetaExtractor do
 
   describe "when initialized with options" do
 
+    #it "tries hard" do
+    #  x = MetaExtractor.test_extract(@opts)
+    #  puts "x"*20
+    #  puts x.inspect
+    #  puts "x"*20
+    #end
+
+
     it "creates a MetaExtractor object" do
       @xtract.must_be_instance_of(MetaExtractor)
-    end
-
-    it "#project_server with UNC project must parse the server name" do
-      @opts[:project] = "\\\\fake_server\\fake_home\\fake_unc_proj" 
-      @xtract = MetaExtractor.new(@opts)
-      @xtract.project_server.must_equal("fake_server")
-    end
-
-    it "#project_server with drive letter project must use localhost" do
-      hostname = Socket.gethostname
-      @xtract.project_server.must_equal(hostname)
-    end
-
-    it "#project_name must parse the project's name" do
-      @xtract.project_name.must_equal("fake_project")
-    end 
-
-    it "#lc_id must generate a predictable hash" do
-      @xtract.lc_id.must_equal("aa49d2a43d59a8a79da2a858cf50fa7c9dc5849f")
-    end
-
-    it "#project_home must parse the project's home from home.ini" do
-      Discovery.stubs(:parse_home).returns("home_from_ini") 
-      @xtract.project_home.must_equal("home_from_ini")
-    end
-
-    it "#base_doc must create a hash for later additions" do
-      Discovery.stubs(:parse_home).returns("home_from_ini") 
-      @xtract.base_doc.must_be_instance_of(Hash)
     end
 
     it "#activity_score must return an average of non-nil age scores" do
@@ -58,9 +37,53 @@ describe MetaExtractor do
       @xtract.activity_score(ages).must_equal(183)
     end
 
+    it "#initialize must not create instance variables with bad project path" do
+      @xtract.gxdb.must_be_nil
+      @xtract.project.must_be_nil
+      @xtract.label.must_be_nil
+    end
+
+    it "#extract must handle invalid project path by returning empty array" do
+      docs = @xtract.extract
+      docs.must_be_instance_of(Array)
+      docs.must_be_empty
+    end
+
+
+    #-----------------------------
+    #recycle these for Discovery spec
+    #it "#project_server with UNC project must parse the server name" do
+    #  @opts[:project] = "\\\\fake_server\\fake_home\\fake_unc_proj" 
+    #  @xtract = MetaExtractor.new(@opts)
+    #  @xtract.project_server.must_equal("fake_server")
+    #end
+
+    #it "#project_server with drive letter project must use localhost" do
+    #  hostname = Socket.gethostname
+    #  @xtract.project_server.must_equal(hostname)
+    #end
+
+    #it "#project_name must parse the project's name" do
+    #  @xtract.project_name.must_equal("fake_project")
+    #end 
+
+    #it "#lc_id must generate a predictable hash" do
+    #  @xtract.lc_id.must_equal("aa49d2a43d59a8a79da2a858cf50fa7c9dc5849f")
+    #end
+
+    #it "#project_home must parse the project's home from home.ini" do
+    #  Discovery.stubs(:parse_home).returns("home_from_ini") 
+    #  @xtract.project_home.must_equal("home_from_ini")
+    #end
+    #-----------------------------
+
+
+
+
   end
 
-  describe "when collecting stats from the filesystem" do
+
+  describe "when collecting filesystem stats" do
     include TestConstruct::Helpers
 
     it "#interpreters must collect a list of subfolders from User Files" do
@@ -155,9 +178,9 @@ describe MetaExtractor do
 
         Date.parse(pfs[:oldest_file_mod]).must_be_instance_of(Date)
         Date.parse(pfs[:newest_file_mod]).must_be_instance_of(Date)
+
       end
     end
-
 
     it "#days_since must return number of days since a past date" do
       fortnight = (Date.today - 14).to_time
@@ -165,15 +188,8 @@ describe MetaExtractor do
     end
 
   end
-
-
-#CREATE DATABASE 'C:\dev\lc_discovery\spec\support\gxdb_test.db' LOG ON 'gxdb_test.log' PAGE SIZE 2048 COLLATION '1252LATIN1' NCHAR COLLATION 'UCA' JCONNECT OFF;
-
-  describe "when collecting metadata from the gxdb" do
-
-    #well uwi row_changed_date
-    #gx_well_curve ??? date_modified
-    #log_image_reg_log_section ???,  update_date
+ 
+  describe "when collecting database stats" do
 
     before do
       fake = {
@@ -237,25 +253,27 @@ describe MetaExtractor do
           {uwi: "333", survey_id: "srv_c", station_md: 150}
         ]
 
-        
       }
       
       @opts[:project] = File.expand_path("../../support/sample", __FILE__)
       @xtract = MetaExtractor.new(@opts)
 
-      @xtract.gxdb.transaction do
-        #@xtract.gxdb.run('Set OPTION wait_for_commit = On;')
-        @xtract.gxdb[:well].multi_insert(fake[:well])
-        @xtract.gxdb[:gx_well_curveset].multi_insert(fake[:dig1])
-        @xtract.gxdb[:gx_well_curve].multi_insert(fake[:dig2])
-        @xtract.gxdb[:log_image_reg_log_section].multi_insert(fake[:ras])
-        @xtract.gxdb[:r_source].multi_insert(fake[:src])
-        @xtract.gxdb[:well_formation].multi_insert(fake[:frm])
-        @xtract.gxdb[:gx_zone].multi_insert(fake[:zon1])
-        @xtract.gxdb[:gx_zattribute].multi_insert(fake[:zon2])
-        @xtract.gxdb[:well_zone_intrvl_value].multi_insert(fake[:zon3])
-        @xtract.gxdb[:well_dir_srvy_station].multi_insert(fake[:svy])
-      end
+      #These inserts are in proper order. If they were not we would have to use
+      #both sequel transaction and the wait_for_commit to avoid FK problems:
+      #@xtract.gxdb.transaction do
+      #  @xtract.gxdb.run('Set OPTION wait_for_commit = On;')
+      @xtract.gxdb[:well].multi_insert(fake[:well])
+      @xtract.gxdb[:gx_well_curveset].multi_insert(fake[:dig1])
+      @xtract.gxdb[:gx_well_curve].multi_insert(fake[:dig2])
+      @xtract.gxdb[:log_image_reg_log_section].multi_insert(fake[:ras])
+      @xtract.gxdb[:r_source].multi_insert(fake[:src])
+      @xtract.gxdb[:well_formation].multi_insert(fake[:frm])
+      @xtract.gxdb[:gx_zone].multi_insert(fake[:zon1])
+      @xtract.gxdb[:gx_zattribute].multi_insert(fake[:zon2])
+      @xtract.gxdb[:well_zone_intrvl_value].multi_insert(fake[:zon3])
+      @xtract.gxdb[:well_dir_srvy_station].multi_insert(fake[:svy])
+      #  @xtract.gxdb.run('commit;')
+      #end
       
     end
 
@@ -286,8 +304,8 @@ describe MetaExtractor do
     end
 
 
-    it "#db_stats must collect counts and ages for various data types" do
-      stats = @xtract.db_stats
+    it "#proj_db_stats must collect counts and ages for various data types" do
+      stats = @xtract.proj_db_stats
       stats[:num_wells].must_equal(5)
       stats[:age_wells].must_equal(0)
       stats[:num_vectors].must_equal(3)
@@ -302,10 +320,21 @@ describe MetaExtractor do
       stats[:age_dir_surveys].must_equal(0)
     end
 
+    # since we have a real-looking project here...
+
+    it "#extract must return a hash of base and gxdb stats" do
+      docs = @xtract.extract
+      docs[0].must_be_instance_of(Hash)
+      docs[0].size.must_equal(36)
+    end
+
+    it "creates instance variables" do
+      @xtract.gxdb.must_be_instance_of(Sequel::SqlAnywhere::Database)
+      @xtract.project.must_equal(@opts[:project])
+      @xtract.label.must_equal(@opts[:label])
+    end
 
   end
 
+
 end
-
-
-

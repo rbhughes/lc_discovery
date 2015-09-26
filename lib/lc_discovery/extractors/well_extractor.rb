@@ -1,23 +1,23 @@
 require "filesize"
-require_relative "../sybase"
 require_relative "../discovery"
 require_relative "../utility"
-
 require_relative "../models/well"
 
 class WellExtractor
+  include Discovery
 
-  attr_accessor :project, :label
+  attr_accessor :project, :label, :gxdb
   BULK = 500
 
   def initialize(opts)
+    return unless File.exists?(opts[:project])
+    super
     @project = opts[:project]
     @label = opts[:label]
-    @gxdb = nil
   end
 
-  # divide the job into sub-tasks based on size.
-  # This should get called once by dispatcher
+  #----------
+  # divide the job into sub-tasks based on size. Called once by dispatcher
   def self.parcels(project, bulk=BULK)
     begin
       gxdb = Sybase.new(project).db
@@ -31,39 +31,32 @@ class WellExtractor
       raise e
     ensure
       gxdb.disconnect if gxdb
-      gxdb = nil
+      ###gxdb = nil
     end
   end
-
 
 
   #----------
   def extract(bulk, mark)
 
     begin
-      puts "well --> #{@project} [bulk=#{bulk} mark=#{mark}]"
+      #puts "well --> #{@project} [bulk=#{bulk} mark=#{mark}]"
 
-      project_server = Discovery.parse_host(@project)
-      project_home = Discovery.parse_home(@project)
-      project_name = File.basename(@project)
-      proj_id = Utility.lc_id("#{@project} #{@label}") #should match clowder
-
-      @gxdb = Sybase.new(@project).db
+      docs = []
+      doc = Utility.base_doc(@project, @label)
 
       sql = "select top #{bulk} start at #{mark} * from WellHeader \
       order by WellHeader.[Well ID]"
-      
-      docs = []
-      @gxdb[sql].each do |row|
 
-        #transform symbols to use underscores, no quotes, lowercase
+      @gxdb[sql].each do |row|
+        doc = doc.dup
         row = Utility.lowercase_symbol_keys(row)
 
-        #germ = "#{@project} #{@label} #{row[:"well id"]}"
         germ = "#{@project} #{@label} #{row[:well_id]}"
+        doc[:id] = Utility.lc_id(germ)
 
         #TODO: ensure this is correct format and queryable
-        surface_point = {
+        doc[:surface_point] = {
           name: "surface_bounds",
           location: {
             type: "geo_point",
@@ -74,18 +67,7 @@ class WellExtractor
           }
         }
 
-        doc = {
-          id: Utility.lc_id(germ),
-          project_id: proj_id,
-          label: @label,
-          project: @project,
-          project_server: project_server,
-          project_home: project_home,
-          project_name: project_name,
-          surface_point: surface_point
-        }
-
-        docs << doc.merge(row)
+        docs << doc.merge!(row)
 
       end
 
@@ -101,8 +83,6 @@ class WellExtractor
     end
 
   end
-
-
 
 
 end

@@ -5,6 +5,8 @@ require "awesome_print"
 module Publisher
 
   def self.write(type, docs, store)
+    return if docs.empty? #TODO check this behavior
+
     require_relative "./models/#{type}"
     model = type.capitalize.constantize
 

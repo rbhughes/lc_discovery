@@ -1,20 +1,44 @@
-# Helper methods for connecting to Sybase SQLAnywhere databases in the context
-# of GeoGraphix Discovery
-module Discovery
-  #def self.process_project(proj)
-  #  puts "-" * 30
-  #  puts "DO PROCESS THIS PROJECT:  #{proj}"
-  #  puts proj
-  #  puts Extracts.assigned(proj["extract_code"])
-  #  puts "-" * 30
-  #end
+require "sequel"
+require "socket"
+require "yaml"
+#require_relative "discovery"
+require_relative "lc_env"
 
-  # Given a root directory (generally a Project Home) return a list of all
-  # directories that qualify as Discovery projects. Only directories
-  # directly in the root are checked. Optionally, use *deep_scan=true* to
-  # recurse through all subdirectories (potentially slow)
+
+
+module Discovery
+
+  class Sybase
+    GGX_SYBASE = "C:/Program Files (x86)/GeoGraphix/SQL Anywhere 12/BIN64"
+
+    attr_reader :db
+
+    # The GGX path will usually be present. If not, append to PATH from config.yml
+    def initialize(proj)
+      begin
+        @db = Sequel.sqlanywhere(conn_string: Discovery.connect_string(proj))
+      rescue LoadError
+        puts "Cannot find SQLAnywhere exes in PATH. Trying from config.yml..."
+        ENV["PATH"] = "#{ENV["PATH"]};#{LcEnv.sybase_path}"
+        retry
+      rescue Exception => e
+        raise e
+      end
+    end
+
+    at_exit { @db.disconnect if @db }
+  end
+
+  #----------
+  def initialize(opts)
+    @gxdb ||= Sybase.new(opts[:project]).db
+  end
+
+
+  #############################
+   #---------- 
   def self.project_list(root, deep_scan)
-    root = root.gsub("\\", "/")
+    root = root.gsub("\\","/")
     projects = []
     recurse = deep_scan ? "**" : "*"
     Dir.glob(File.join(root, recurse, "*.ggx")).each do |ggx|
@@ -23,6 +47,9 @@ module Discovery
     end
     projects
   end
+
+  #############################
+
 
   # Build a connect string for Sybase that mimics Discovery
   # UID=dba;PWD=sql;DBF="\\OKC1GGX0006\e$\Oklahoma\NW Oklahoma/gxdb.db";
@@ -44,7 +71,7 @@ module Discovery
     conn.join(";")
   end
 
-  private
+
 
   # Simple check for database and Global AOI dir
   def self.ggx_project?(path)
@@ -84,4 +111,5 @@ module Discovery
   #      end
   #    end.inject(:+)
   #  end
+
 end

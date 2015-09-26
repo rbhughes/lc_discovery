@@ -1,11 +1,8 @@
 require "filesize"
 require "nokogiri"
 require "date"
-
-require_relative "../sybase"
 require_relative "../discovery"
 require_relative "../utility"
-
 require_relative "../models/meta"
 
 class MetaExtractor
@@ -14,38 +11,49 @@ class MetaExtractor
   attr_accessor :project, :label, :gxdb
   BULK = 10
 
+  #----------
   def initialize(opts)
+    return unless File.exists?(opts[:project])
+    super # inits a gxdb ref from Discovery
     @project = opts[:project]
     @label = opts[:label]
-    ###@gxdb = nil
-    @gxdb = Sybase.new(@project).db
   end
+
+
+  #def self.test_extract(opts)
+  #  @project = opts[:project]
+  #  @label = opts[:label]
+  #  @gxdb = Discovery.gxdb(opts[:project])
+  #  
+  #  puts "___________________________"
+  #  puts @gxdb
+  #  puts "___________________________"
+  #  #extract
+  #end
+
 
 
   #----------
   def extract
     begin
-      puts "meta --> #{@project}"
+      return [] unless (@project && @gxdb)
 
-      doc = base_doc
+      #puts "meta --> #{@project}"
 
-      ###@gxdb = Sybase.new(@project).db
+      doc = Utility.base_doc(@project, @label)
 
-      doc.merge! interpreters
-      print "."
-      doc.merge! version_and_coordsys
-      print "."
-      doc.merge! proj_file_stats
-      print "."
-      doc.merge! db_stats
-      print "."
+      germ = "#{@project} #{@label}" # must match clowder
+      doc[:id] = Utility.lc_id(germ)
+
+      doc.merge!(interpreters)
+      doc.merge!(version_and_coordsys)
+      doc.merge!(proj_file_stats)
+      doc.merge!(proj_db_stats)
+
       doc[:surface_bounds] = surface_bounds
-      print "."
-      puts
-
       doc[:activity_score] = activity_score(doc)
 
-      [doc] #return array to be consistent with other extractors
+      [doc] # array to be consistent with other extractors
 
     rescue Exception => e
       puts e.message
@@ -53,50 +61,18 @@ class MetaExtractor
       raise e
     ensure
       @gxdb.disconnect if @gxdb
-      #@gxdb = @project = @label = nil
     end
 
   end
 
 
 
-
-
-  def project_server
-    Discovery.parse_host(@project)
-  end
-
-  def project_name
-    File.basename(@project)
-  end
-  
-  def lc_id
-    germ = "#{@project} #{@label}" #ensure this matches clowder
-    Utility.lc_id(germ)
-  end
-
-  def project_home
-    Discovery.parse_home(@project)
-  end
-
-  def base_doc
-    doc = {
-      id: lc_id,
-      label: @label,
-      project: @project,
-      project_server: project_server,
-      project_home: project_home,
-      project_name: project_name
-    }
-  end
-
-  #-----------------
+  #----------
   def activity_score(doc)
     ages = doc.select{ |k,v| k.to_s.match /^age/ }.values.compact
     doc = doc.reject{ |k,v| k.to_s.match /^age/ }
-    ages.inject(:+)/ages.size
+    ages.inject(:+)/ages.size rescue nil
   end
-  #-----------------
 
 
   #----------
@@ -126,12 +102,10 @@ class MetaExtractor
   end
 
 
-
   #----------
   def days_since(mtime)
     ((Time.now.to_i - mtime.to_i) / 86400).to_i
   end
-
 
 
   # ugly, but glob seems to offer best peformance. Maybe do native powershell?
@@ -187,8 +161,9 @@ class MetaExtractor
 
   end
 
+
   #----------
-  def db_stats
+  def proj_db_stats
     stats = {}
 
     sql = "select WC, WD, DC, DD, RC, RD, FC, FD, ZC, ZD, YC, YD from "\
@@ -261,8 +236,6 @@ class MetaExtractor
       "surface_latitude between -90 and 90 and "\
       "surface_longitude is not null and "\
       "surface_latitude is not null"
-
-    #@gxdb = Sybase.new(@project).db
 
     corners = @gxdb[sql].all[0]
 

@@ -15,9 +15,11 @@ class WellWorker
       logger.info msg
       RedisQueue.redis.publish("lc_relay", msg)
 
-      docs = WellExtractor.new(project: path, label: label).extract(bulk, mark)
+      #docs = WellExtractor.new(project: path, label: label).extract(bulk, mark)
 
-      #Publisher.write("well", docs, "elasticsearch")
+      extractor = WellExtractor.new(project: path, label: label)
+      docs = extractor.extract(bulk, mark)
+
       Publisher.write("well", docs, store)
 
       RedisQueue.redis.publish("lc_relay", "...")

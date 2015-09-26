@@ -1,26 +1,41 @@
 require "digest/sha1"
 require_relative "publisher"
+require_relative "discovery"
 
 
 module Utility
 
   module_function
 
+  #----------
+  def base_doc(proj, label)
+    {
+      project_id: lc_id("#{proj} #{label}"),
+      project_path: proj,
+      project_name: File.basename(proj),
+      project_home: Discovery.parse_home(proj),
+      project_host: Discovery.parse_host(proj)
+    }
+  end
+
+  #----------
   # Because backslashes are...irritating
   def fwd_slasher(s)
     s.strip.gsub("\\", "/") rescue nil
   end
 
+  #----------
   # Make a sort of guid, which in some cases is a natural key
   def lc_id(s)
     Digest::SHA1.hexdigest(fwd_slasher(s.downcase))
   end
 
-
+  #----------
   def camelized_class(str)
     str.to_s.split("_").map {|w| w.capitalize}.join.constantize
   end
 
+  #----------
   def lowercase_symbol_keys(h)
     Hash[h.map {|k, v| [k.to_s.downcase.gsub(/\s/,"_").to_sym, v] }]
   end
