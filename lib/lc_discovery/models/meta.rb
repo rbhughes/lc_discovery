@@ -49,22 +49,7 @@ class Meta
       ppdm38: nil,
       ppdm39: nil
     },
-    project: {
-      virtus_type: String,
-      es_mapping: es_pa,
-      gxdb_view: nil,
-      gxdb_table: nil,
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    project_server: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: nil,
-      gxdb_table: nil,
-      ppdm38: nil,
-      ppdm39: nil
-    },
+    ##### base_doc #####
     project_home: {
       virtus_type: String,
       es_mapping: es_na,
@@ -73,6 +58,39 @@ class Meta
       ppdm38: nil,
       ppdm39: nil
     },
+    project_host: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    project_id: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    project_name: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    project_path: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    ####################
     schema_version: {
       virtus_type: String,
       es_mapping: es_na,

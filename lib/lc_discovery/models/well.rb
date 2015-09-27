@@ -49,7 +49,8 @@ class Well
       ppdm38: nil,
       ppdm39: nil
     },
-    project: {
+    ##### base_doc #####
+    project_home: {
       virtus_type: String,
       es_mapping: es_na,
       gxdb_view: nil,
@@ -57,6 +58,39 @@ class Well
       ppdm38: nil,
       ppdm39: nil
     },
+    project_host: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    project_id: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    project_name: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    project_path: {
+      virtus_type: String,
+      es_mapping: es_na,
+      gxdb_view: nil,
+      gxdb_table: nil,
+      ppdm38: nil,
+      ppdm39: nil
+    },
+    ####################
     well_id: {
       virtus_type: String,
       es_mapping: es_na,

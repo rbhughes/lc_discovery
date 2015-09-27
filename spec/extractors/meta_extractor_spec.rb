@@ -328,6 +328,14 @@ describe MetaExtractor do
       docs[0].size.must_equal(36)
     end
 
+    it "#extract doc must be a hash with all expected keys" do
+      a_doc = @xtract.extract[0]
+      a_doc.must_be_instance_of(Hash)
+      base_keys = Utility.base_doc(@opts[:project], @opts[:label]).keys
+      model_keys = Meta.native_columns | [:id] # :id is added after base_doc
+      a_doc.keys.sort.must_equal( (base_keys | model_keys).sort )
+    end
+
     it "creates instance variables" do
       @xtract.gxdb.must_be_instance_of(Sequel::SqlAnywhere::Database)
       @xtract.project.must_equal(@opts[:project])

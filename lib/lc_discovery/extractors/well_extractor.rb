@@ -79,7 +79,6 @@ class WellExtractor
       raise e
     ensure
       @gxdb.disconnect if @gxdb
-      @gxdb = @project = @label = nil
     end
 
   end
