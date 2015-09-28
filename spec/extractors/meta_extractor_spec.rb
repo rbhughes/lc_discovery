@@ -5,9 +5,6 @@ require "test_construct"
 require 'mocha/mini_test'
 require_relative "../../lib/lc_discovery/extractors/meta_extractor"
 
-#TODO: investigate using let to do some obj setup
-# http://chriskottom.com/blog/2014/10/4-fantastic-ways-to-set-up-state-in-minitest/
-
 describe MetaExtractor do
 
   before do
@@ -20,14 +17,6 @@ describe MetaExtractor do
 
   describe "when initialized with options" do
 
-    #it "tries hard" do
-    #  x = MetaExtractor.test_extract(@opts)
-    #  puts "x"*20
-    #  puts x.inspect
-    #  puts "x"*20
-    #end
-
-
     it "creates a MetaExtractor object" do
       @xtract.must_be_instance_of(MetaExtractor)
     end
@@ -35,6 +24,12 @@ describe MetaExtractor do
     it "#activity_score must return an average of non-nil age scores" do
       ages = {age_a: 100, age_b: 200, age_c: nil, age_d: 250}
       @xtract.activity_score(ages).must_equal(183)
+    end
+
+    it "#purge_ages must remove hash keys starting with 'age'" do
+      mixed_doc = {age_a: 100, age_b: 200, foo_c: nil, foo_d: 250}
+      noage_doc = @xtract.purge_ages(mixed_doc)
+      noage_doc.must_equal({foo_c: nil, foo_d: 250})
     end
 
     it "#initialize must not create instance variables with bad project path" do
@@ -76,9 +71,6 @@ describe MetaExtractor do
     #  @xtract.project_home.must_equal("home_from_ini")
     #end
     #-----------------------------
-
-
-
 
   end
 
@@ -305,6 +297,7 @@ describe MetaExtractor do
 
 
     it "#proj_db_stats must collect counts and ages for various data types" do
+      # note: the ages get stripped from the final doc
       stats = @xtract.proj_db_stats
       stats[:num_wells].must_equal(5)
       stats[:age_wells].must_equal(0)
@@ -322,24 +315,18 @@ describe MetaExtractor do
 
     # since we have a real-looking project here...
 
-    it "#extract must return a hash of base and gxdb stats" do
-      docs = @xtract.extract
-      docs[0].must_be_instance_of(Hash)
-      docs[0].size.must_equal(36)
-    end
-
-    it "#extract doc must be a hash with all expected keys" do
-      a_doc = @xtract.extract[0]
-      a_doc.must_be_instance_of(Hash)
-      base_keys = Utility.base_doc(@opts[:project], @opts[:label]).keys
-      model_keys = Meta.native_columns | [:id] # :id is added after base_doc
-      a_doc.keys.sort.must_equal( (base_keys | model_keys).sort )
-    end
-
     it "creates instance variables" do
       @xtract.gxdb.must_be_instance_of(Sequel::SqlAnywhere::Database)
       @xtract.project.must_equal(@opts[:project])
       @xtract.label.must_equal(@opts[:label])
+    end
+
+    it "#extract doc must be a hash with all expected keys" do
+      # :created_at, :updated_at are ignored here
+      a_doc = @xtract.extract[0]
+      a_doc.must_be_instance_of(Hash)
+      model_keys = Meta.native_columns 
+      a_doc.keys.sort.must_equal( model_keys.sort )
     end
 
   end

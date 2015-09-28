@@ -10,6 +10,7 @@ module Utility
   #----------
   def base_doc(proj, label)
     {
+      label: label,
       project_id: lc_id("#{proj} #{label}"),
       project_path: proj,
       project_name: File.basename(proj),
@@ -40,6 +41,12 @@ module Utility
     Hash[h.map {|k, v| [k.to_s.downcase.gsub(/\s/,"_").to_sym, v] }]
   end
 
+
+  #----------
+  # usage
+  # irb -r "./lib/lc_discovery/utility.rb"
+  # Utility.init_index("well")
+  #
   def init_index(type)
     type = type.to_s
     begin

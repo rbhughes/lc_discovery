@@ -15,9 +15,10 @@ class MetaWorker
       logger.info msg
       RedisQueue.redis.publish("lc_relay", msg)
 
-      doc = MetaExtractor.new(project: path, label: label).extract
+      extractor = MetaExtractor.new(project: path, label: label)
+      docs = extractor.extract
 
-      Publisher.write("meta", [doc], store)
+      Publisher.write("meta", docs, store)
 
       RedisQueue.redis.publish("lc_relay", "...")
 

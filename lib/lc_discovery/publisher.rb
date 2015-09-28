@@ -25,7 +25,7 @@ module Publisher
       puts "*"*40
       puts e.message.to_s
       puts "*"*40
-      RedisQueue.redis.publish(e.message)
+      RedisQueue.redis.publish("lc_relay", e.message)
       puts "-"*50
       puts e.class
       puts e.backtrace.inspect

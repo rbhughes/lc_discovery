@@ -270,9 +270,17 @@ class Meta
 
   validates :id, presence: true
   validates :label, presence: true
-  validates :project, presence: true
 
-  after_save { puts "callback sez::::: Successfully saved: #{self}" }
+
+  after_create do
+    puts self.errors.inspect if self.errors
+  end
+
+
+  after_save do
+    puts "after_save callback sez::::: Successfully saved: #{self}"
+  end
+
 
   def gxdb_view(col)
     FIELDS[col.to_sym][:gxdb_view]
@@ -287,12 +295,10 @@ class Meta
     FIELDS[col.to_sym][:ppdm39]
   end
 
+  
   def self.native_columns
-    model = self.new
-    exclude = [:created_at, :updated_at, :id, :label]
-    cols = model.attributes.except!(*exclude).keys.sort
-    model = nil
-    cols
+    exclude = [:created_at, :updated_at]
+    self.new.attributes.except!(*exclude).keys.sort
   end
 
 end

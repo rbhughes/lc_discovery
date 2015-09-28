@@ -63,12 +63,12 @@ describe WellExtractor do
     end
 
     it "#extract doc must be a hash with all expected keys" do
+      # :created_at, :updated_at are ignored here
       a_job = WellExtractor.parcels(@opts[:project])[0]
       a_doc = WellExtractor.new(@opts).extract(a_job[:bulk], a_job[:mark])[0]
       a_doc.must_be_instance_of(Hash)
-      base_keys = Utility.base_doc(@opts[:project], @opts[:label]).keys
-      model_keys = Well.native_columns | [:id] # :id is added after base_doc
-      a_doc.keys.sort.must_equal( (base_keys | model_keys).sort )
+      model_keys = Well.native_columns 
+      a_doc.keys.sort.must_equal( model_keys.sort )
     end
 
   end

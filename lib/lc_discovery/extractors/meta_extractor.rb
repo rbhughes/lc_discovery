@@ -20,19 +20,6 @@ class MetaExtractor
   end
 
 
-  #def self.test_extract(opts)
-  #  @project = opts[:project]
-  #  @label = opts[:label]
-  #  @gxdb = Discovery.gxdb(opts[:project])
-  #  
-  #  puts "___________________________"
-  #  puts @gxdb
-  #  puts "___________________________"
-  #  #extract
-  #end
-
-
-
   #----------
   def extract
     begin
@@ -53,6 +40,8 @@ class MetaExtractor
       doc[:surface_bounds] = surface_bounds
       doc[:activity_score] = activity_score(doc)
 
+      doc = purge_ages(doc)
+
       [doc] # array to be consistent with other extractors
 
     rescue Exception => e
@@ -66,11 +55,15 @@ class MetaExtractor
   end
 
 
+  #----------
+  def purge_ages(doc)
+    doc.reject{ |k,v| k.to_s.match /^age/ }
+  end
+
 
   #----------
   def activity_score(doc)
     ages = doc.select{ |k,v| k.to_s.match /^age/ }.values.compact
-    doc = doc.reject{ |k,v| k.to_s.match /^age/ }
     ages.inject(:+)/ages.size rescue nil
   end
 

@@ -20,6 +20,7 @@ class WellWorker
       extractor = WellExtractor.new(project: path, label: label)
       docs = extractor.extract(bulk, mark)
 
+
       Publisher.write("well", docs, store)
 
       RedisQueue.redis.publish("lc_relay", "...")
