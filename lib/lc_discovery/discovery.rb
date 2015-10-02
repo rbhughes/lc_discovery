@@ -4,8 +4,6 @@ require "yaml"
 #require_relative "discovery"
 require_relative "lc_env"
 
-
-
 module Discovery
 
   class Sybase
@@ -13,17 +11,21 @@ module Discovery
 
     attr_reader :db
 
-    # The GGX path will usually be present. If not, append to PATH from config.yml
+    # We expect SqlAnywhere to be in the PATH from the Discovery installation 
+    # If it isn't use the path from LcEnv
     def initialize(proj)
-      begin
-        @db = Sequel.sqlanywhere(conn_string: Discovery.connect_string(proj))
-      rescue LoadError
-        puts "Cannot find SQLAnywhere exes in PATH. Trying from config.yml..."
-        ENV["PATH"] = "#{ENV["PATH"]};#{LcEnv.sybase_path}"
-        retry
-      rescue Exception => e
-        raise e
-      end
+      tries ||= 3
+      @db = Sequel.sqlanywhere(conn_string: Discovery.connect_string(proj))
+    rescue LoadError
+      puts "Cannot find SQLAnywhere exes in PATH. Trying from config.yml..."
+      set_lcenv_sybase_path
+      retry unless (tries -= 1).zero?
+    rescue Exception => e
+      raise e
+    end
+
+    def set_lcenv_sybase_path
+      ENV["PATH"] = "#{ENV["PATH"]};#{LcEnv.sybase_path}"
     end
 
     at_exit { @db.disconnect if @db }
@@ -35,20 +37,18 @@ module Discovery
   end
 
 
-  #############################
-   #---------- 
+  #---------- 
   def self.project_list(root, deep_scan)
     root = root.gsub("\\","/")
     projects = []
     recurse = deep_scan ? "**" : "*"
     Dir.glob(File.join(root, recurse, "*.ggx")).each do |ggx|
       proj = File.dirname(ggx)
-      projects << proj  if ggx_project?(proj)
+      projects << proj if ggx_project?(proj)
     end
     projects
   end
 
-  #############################
 
 
   # Build a connect string for Sybase that mimics Discovery
@@ -60,14 +60,13 @@ module Discovery
   def self.connect_string(proj)
     host =  parse_host(proj)
     dbn = "#{File.basename(proj)}-#{parse_home(proj)}".gsub(" ", "_")
-
     conn = []
     conn << "UID=dba"
     conn << "PWD=sql"
     conn << "DBF='#{File.join(proj, 'gxdb.db')}'"
     conn << "DBN=#{dbn}"
     conn << "HOST=#{host}"
-    conn << "Server=GGX_#{host}"
+    conn << "SERVER=GGX_#{host}"
     conn.join(";")
   end
 
@@ -76,8 +75,9 @@ module Discovery
   # Simple check for database and Global AOI dir
   def self.ggx_project?(path)
     a = File.join(path, "gxdb.db")
-    b = File.join(path, "Global")
-    (File.exist?(a) && File.exist?(b)) ? true : false
+    b = File.join(path, "global")
+    c = File.join(path, "project.ggx")
+    (File.exists?(a) && Dir.exists?(b) && File.exists?(c)) ? true : false
   end
 
   # Pluck the hostname from either the UNC path or localhost.

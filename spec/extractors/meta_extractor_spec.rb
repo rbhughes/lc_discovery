@@ -45,32 +45,6 @@ describe MetaExtractor do
     end
 
 
-    #-----------------------------
-    #recycle these for Discovery spec
-    #it "#project_server with UNC project must parse the server name" do
-    #  @opts[:project] = "\\\\fake_server\\fake_home\\fake_unc_proj" 
-    #  @xtract = MetaExtractor.new(@opts)
-    #  @xtract.project_server.must_equal("fake_server")
-    #end
-
-    #it "#project_server with drive letter project must use localhost" do
-    #  hostname = Socket.gethostname
-    #  @xtract.project_server.must_equal(hostname)
-    #end
-
-    #it "#project_name must parse the project's name" do
-    #  @xtract.project_name.must_equal("fake_project")
-    #end 
-
-    #it "#lc_id must generate a predictable hash" do
-    #  @xtract.lc_id.must_equal("aa49d2a43d59a8a79da2a858cf50fa7c9dc5849f")
-    #end
-
-    #it "#project_home must parse the project's home from home.ini" do
-    #  Discovery.stubs(:parse_home).returns("home_from_ini") 
-    #  @xtract.project_home.must_equal("home_from_ini")
-    #end
-    #-----------------------------
 
   end
 
