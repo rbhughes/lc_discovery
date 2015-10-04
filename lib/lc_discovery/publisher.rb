@@ -1,4 +1,5 @@
 require_relative "./redis_queue"
+require_relative "./utility"
 require "awesome_print"
 
 # may include writing to SQL files, CSVs or actual insert jobs (?)
@@ -7,10 +8,9 @@ module Publisher
   def self.write(type, docs, store)
     return if docs.empty? #TODO check this behavior
 
-    require_relative "./models/#{type}"
-    model = type.capitalize.constantize
+    model = Utility.invoke_lc_model(type)
 
-    msg = "Writing #{docs.size} #{type.capitalize} docs to #{store}."
+    msg = "Writing #{docs.size} #{model} docs to #{store}."
     RedisQueue.redis.publish("lc_relay", msg)
 
     begin

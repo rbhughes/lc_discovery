@@ -1,6 +1,7 @@
 require "digest/sha1"
 require_relative "publisher"
 require_relative "discovery"
+require "net/http"
 
 
 module Utility
@@ -41,36 +42,66 @@ module Utility
     Hash[h.map {|k, v| [k.to_s.downcase.gsub(/\s/,"_").to_sym, v] }]
   end
 
+  #----------
+  # TODO: add a rescue for unknown model?
+  def invoke_lc_model(type)
+    model_path = File.join(File.dirname(__FILE__),"models/#{type}.rb")
+    require model_path
+    model = type.to_s.split("_").collect(&:capitalize).join.constantize
+  end
 
   #----------
   # usage
   # irb -r "./lib/lc_discovery/utility.rb"
-  # Utility.init_index("well")
+  # Utility.init_elasticsearch_index(:well)
+  # (it will try to find a model in lib/models)
   #
-  def init_index(type)
-    type = type.to_s
+  #TODO: define where logger needs to happen
+  #client.transport.logger.formatter = proc { |s, d, p, m| "\e[2m# #{m}\n\e[0m" }
+  def init_elasticsearch_index(type)
     begin
-      model_path = File.join(File.dirname(__FILE__),"models/#{type}.rb")
-      require model_path
-      model = type.capitalize.constantize
-      client = model.gateway.client
-      index_name = model.index_name
 
-      #TODO: define where logger needs to happen
-      #client.transport.logger.formatter = proc { |s, d, p, m| "\e[2m# #{m}\n\e[0m" }
+      model = invoke_lc_model(type)
 
-      client.indices.delete index: index_name rescue nil
-      client.indices.create index: index_name, body: {
+      model.gateway.client.indices.delete index: model.index_name rescue nil
+      model.gateway.client.indices.create index: model.index_name, body: {
         settings: model.settings.to_hash, 
         mappings: model.mappings.to_hash
       }
 
-      puts "Initialized #{index_name} index"
+      puts "Initialized #{model.index_name} index"
+      true
     #rescue Elasticsearch::Transport::Transport::Errors::NotFound
     rescue Exception => e
       puts e.message
       puts e.backtrace
+      return false
     end
+  end
+
+
+  #----------
+  def drop_elasticsearch_index(type)
+    begin
+      model = invoke_lc_model(type)
+      model.gateway.client.indices.delete index: model.index_name #rescue nil
+      true
+    rescue Elasticsearch::Transport::Transport::Errors::NotFound => nf
+      puts "No index found to delete."
+      false
+    rescue Exception => e
+      puts e.class
+      puts e.message
+      puts e.backtrace
+      return false
+    end
+  end
+
+  #----------
+  def elasticsearch_index_present?(type)
+    uri = URI("#{LcEnv.elasticsearch_url}/_cat/indices")
+    all = Net::HTTP.get(uri).split("\n").map{|x| x.split[2]}
+    all.any?{ |s| s.casecmp(type.to_s)==0 } ? true : false
   end
 
 

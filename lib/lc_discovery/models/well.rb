@@ -84,7 +84,7 @@ class Well
     },
     project_path: {
       virtus_type: String,
-      es_mapping: es_na,
+      es_mapping: es_pa,
       gxdb_view: nil,
       gxdb_table: nil,
       ppdm38: nil,
