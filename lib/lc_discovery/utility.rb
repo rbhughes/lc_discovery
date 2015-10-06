@@ -2,9 +2,16 @@ require "digest/sha1"
 require_relative "publisher"
 require_relative "discovery"
 require "net/http"
+require "redis"
 
 
 module Utility
+
+  #----------
+  def redis
+    @redis ||= Redis.new url: LcEnv.redis_url
+  end
+
 
   module_function
 

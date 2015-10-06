@@ -15,6 +15,7 @@ module LcEnv
       "http://#{host}:#{port}"
     end
 
+
     def self.redis_url
       host = config["redis"]["host"] ||= "localhost"
       port = config["redis"]["port"] ||= 6379
@@ -42,6 +43,7 @@ module LcEnv
   def self.elasticsearch_url
     Lookup.elasticsearch_url
   end
+
 
   def self.redis_url
     Lookup.redis_url

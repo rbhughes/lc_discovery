@@ -5,7 +5,6 @@ require 'mocha/mini_test'
 require_relative "../lib/lc_discovery/publisher"
 require_relative "../lib/lc_discovery/utility"
 
-require_relative "../lib/lc_discovery/redis_queue"
 
 describe Publisher do
 
@@ -30,7 +29,6 @@ describe Publisher do
 
     before do
       self.class.setup_index.must_equal(true)
-
       @doc = {
         id: "test_id",
         label: "test_label",
@@ -39,11 +37,15 @@ describe Publisher do
         project_path: "c:\\test project\\path",
         test_thing: "test_thing_field"
       }
+      @publisher = Publisher.new
     end
 
 
     it "must write to elasticsearch if specified by store" do
-      Publisher.write(:test_doc, [@doc], "elasticsearch")
+      @publisher.redis.expects(:publish).with(
+        "lc_relay", "Writing 1 TestDoc docs to elasticsearch.")
+
+      @publisher.write(:test_doc, [@doc], "elasticsearch")
 
       model = Utility.invoke_lc_model(:test_doc)
       model.to_s.must_equal("TestDoc")
@@ -51,22 +53,20 @@ describe Publisher do
       doc.must_be_instance_of(model)
       doc.errors.messages.must_be_empty
       doc.attributes.size.must_equal(@doc.size + 2) # created_at + updated_at
-
-
-      puts "."*30
-      puts Publisher::RedisQueue
-      puts "."*30
-
-
-      #clean up to be polite
-      dead = model.find(@doc[:id]).destroy
-      puts dead["found"].must_equal(true)
+      dead = model.find(@doc[:id]).destroy # clean up to be polite
+      dead["found"].must_equal(true)
     end
+
 
     it "must write to stdout as default if store is nil" do
       proc {
-        Publisher.write(:test_doc, [@doc], nil)
+        @publisher.write(:test_doc, [@doc], nil)
       }.must_output(/test_project_id/)
+    end
+
+
+    it "must return nil if there are no docs to write" do
+      @publisher.write(:test_doc, [], nil).must_be_nil
     end
 
   end
