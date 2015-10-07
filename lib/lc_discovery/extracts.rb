@@ -56,10 +56,10 @@ module Extracts
 
   # Decode the extract number (integer) and return array of matching
   # data type as constant strings
-  def assigned(extracts)
+  def assigned(code)
     types = []
     constants.each do |type|
-      types << type if extracts & const_get(type) > 0
+      types << type if code & const_get(type) > 0
     end
     types
   end

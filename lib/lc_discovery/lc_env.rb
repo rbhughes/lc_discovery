@@ -44,7 +44,6 @@ module LcEnv
     Lookup.elasticsearch_url
   end
 
-
   def self.redis_url
     Lookup.redis_url
   end

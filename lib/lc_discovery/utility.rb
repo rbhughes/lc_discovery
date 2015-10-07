@@ -1,13 +1,14 @@
+require_relative "./lc_env.rb"
 require "digest/sha1"
-require_relative "publisher"
-require_relative "discovery"
 require "net/http"
 require "redis"
 
 
+
 module Utility
 
-  #----------
+  #---------- 
+  # (instance method gets picked up Publisher's include)
   def redis
     @redis ||= Redis.new url: LcEnv.redis_url
   end
@@ -140,13 +141,14 @@ module Utility
             project: path,
             label: label
           ).extract(job[:bulk], job[:mark])
-          Publisher.write(extract.downcase, docs, store)
+          #Publisher.write(extract.downcase, docs, store)
+
 
         end
 
       else
         docs = extractor.new(project: path, label: label).extract
-        Publisher.write(extract.downcase, docs, store)
+        #Publisher.write(extract.downcase, docs, store)
       end
 
     rescue Exception => e

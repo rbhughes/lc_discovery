@@ -1,5 +1,6 @@
-require_relative "./utility"
 require "awesome_print"
+require_relative "./utility.rb"
+
 
 # may include writing to SQL files, CSVs or actual insert jobs (?)
 class Publisher

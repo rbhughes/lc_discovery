@@ -3,14 +3,9 @@ require "minitest/autorun"
 require "minitest/pride"
 require 'mocha/mini_test'
 require_relative "../lib/lc_discovery/publisher"
-require_relative "../lib/lc_discovery/utility"
 
 
 describe Publisher do
-
-  #def self.setup_test_doc_index
-  #  @setup_test_doc_index ||= Utility.init_elasticsearch_index(:test_doc)
-  #end
 
 
   # There's a holy war against "before(:all) and after(:all) behavior, so just
@@ -58,7 +53,7 @@ describe Publisher do
     end
 
 
-    it "must write to stdout as default if store is nil" do
+    it "must write to stdout by default if store is nil" do
       proc {
         @publisher.write(:test_doc, [@doc], nil)
       }.must_output(/test_project_id/)
