@@ -227,6 +227,7 @@ command :set_extracts do |c|
         puts "\nEnter extract number(s) for specifc data types."
 
         extract_choices = validate_numeric_stdin(Extracts.data_types_for_cli)
+        extract_choices << 0 if extract_choices.empty? #abhor empty selection
         x = Extracts.decode(extract_choices)
         @config["homes"][i]["projects"][j]["extract_code"] = x[:code]
         puts "\n\nSelected Extracts:\n\n"

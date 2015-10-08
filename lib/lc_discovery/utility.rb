@@ -1,4 +1,5 @@
 require_relative "./lc_env.rb"
+require_relative "./discovery.rb"
 require "digest/sha1"
 require "net/http"
 require "redis"
@@ -41,9 +42,9 @@ module Utility
   end
 
   #----------
-  def camelized_class(str)
-    str.to_s.split("_").map {|w| w.capitalize}.join.constantize
-  end
+  #def camelized_class(str)
+  #  str.to_s.split("_").map{|w| w.capitalize}.join.constantize
+  #end
 
   #----------
   def lowercase_symbol_keys(h)
@@ -55,7 +56,7 @@ module Utility
   def invoke_lc_model(type)
     model_path = File.join(File.dirname(__FILE__),"models/#{type}.rb")
     require model_path
-    model = type.to_s.split("_").collect(&:capitalize).join.constantize
+    type.to_s.split("_").collect(&:capitalize).join.constantize
   end
 
   #----------
@@ -76,10 +77,7 @@ module Utility
         settings: model.settings.to_hash, 
         mappings: model.mappings.to_hash
       }
-
-      puts "Initialized #{model.index_name} index"
       true
-    #rescue Elasticsearch::Transport::Transport::Errors::NotFound
     rescue Exception => e
       puts e.message
       puts e.backtrace
@@ -95,8 +93,8 @@ module Utility
       model.gateway.client.indices.delete index: model.index_name #rescue nil
       true
     rescue Elasticsearch::Transport::Transport::Errors::NotFound => nf
-      puts "No index found to delete."
-      false
+      #puts "No index found to delete."
+      true
     rescue Exception => e
       puts e.class
       puts e.message
@@ -127,12 +125,7 @@ module Utility
       extractor = "#{extract.capitalize}Extractor".constantize
       worker = "#{extract.capitalize}Worker".constantize
       bulk = extractor::BULK
-
-
-      puts "*"*40
-      puts "extract=#{extract}  path=#{path}   label=#{label}   store=#{store}"
-      puts "*"*40
-
+      publisher = Publisher.new
 
       if extractor.respond_to?(:parcels)
 
@@ -141,14 +134,12 @@ module Utility
             project: path,
             label: label
           ).extract(job[:bulk], job[:mark])
-          #Publisher.write(extract.downcase, docs, store)
-
-
+          publisher.write(extract.downcase, docs, store)
         end
 
       else
         docs = extractor.new(project: path, label: label).extract
-        #Publisher.write(extract.downcase, docs, store)
+        publisher.write(extract.downcase, docs, store)
       end
 
     rescue Exception => e

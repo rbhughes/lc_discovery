@@ -59,7 +59,7 @@ module Extracts
   def assigned(code)
     types = []
     constants.each do |type|
-      types << type if code & const_get(type) > 0
+      types << type if code & const_get(type) > 0 rescue 0
     end
     types
   end

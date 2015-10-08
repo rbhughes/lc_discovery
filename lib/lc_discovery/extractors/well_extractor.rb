@@ -10,7 +10,10 @@ class WellExtractor
   BULK = 500
 
   def initialize(opts)
-    return unless File.exists?(opts[:project])
+    unless File.exists?(opts[:project])
+      puts "Cannot access project: #{opts[:project]}"
+      return
+    end
     super
     @project = opts[:project]
     @label = opts[:label]

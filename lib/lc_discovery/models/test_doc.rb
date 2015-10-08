@@ -100,7 +100,7 @@ class TestDoc
 
 
   after_save do
-    puts "after_save callback sez::::: Successfully saved: #{self.id}"
+    #puts "after_save callback sez::::: Successfully saved: #{self.id}"
   end
 
   def gxdb_view(col)

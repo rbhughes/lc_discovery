@@ -13,7 +13,10 @@ class MetaExtractor
 
   #----------
   def initialize(opts)
-    return unless File.exists?(opts[:project])
+    unless File.exists?(opts[:project])
+      puts "Cannot access project: #{opts[:project]}"
+      return
+    end
     super # inits a gxdb ref from Discovery
     @project = opts[:project]
     @label = opts[:label]

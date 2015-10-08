@@ -518,7 +518,7 @@ class Well
 
 
   after_save do
-    puts "after_save callback sez::::: Successfully saved: #{self}"
+    #puts "after_save callback sez::::: Successfully saved: #{self}"
   end
 
   def gxdb_view(col)

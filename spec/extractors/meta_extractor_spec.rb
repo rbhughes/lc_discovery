@@ -12,7 +12,7 @@ describe MetaExtractor do
       project: "x:/fake_home/fake_project",
       label: "fakery"
     }
-    @xtract = MetaExtractor.new(@opts)
+    proc{ @xtract = MetaExtractor.new(@opts) }.must_output(/Cannot access/)
   end
 
   describe "when initialized with options" do
