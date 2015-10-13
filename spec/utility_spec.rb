@@ -30,8 +30,8 @@ describe Utility do
       end
     end
 
-
   end
+
 
   describe "when class methods are invoked" do
 
@@ -86,8 +86,8 @@ describe Utility do
       }
       new_h = Utility.lowercase_symbol_keys(h)
       new_h.keys.sort.must_equal([:aaa, :bb_b, :c_and_c, :ddd])
-
     end
+
 
     it "#invoke_lc_model should instantiate an lc_discovery model" do
       Utility.invoke_lc_model(:test_doc).name.must_equal("TestDoc")
@@ -95,6 +95,7 @@ describe Utility do
       Utility.invoke_lc_model("test_doc").name.must_equal("TestDoc")
       proc { Utility.invoke_lc_model(:nope) }.must_raise(LoadError)
     end
+
 
     # Assumes you have rights to drop/create the test index and that ES is up
     # maybe: settings = JSON.parse(Net::HTTP.get(settings_uri))
@@ -147,12 +148,11 @@ describe Utility do
       e.message.must_match(/^No connection could be made/)
     end
 
+
     # Extractors are fully tested elsewhere. This mainly tests instantiation.)
     it "#cli_extract initializes and runs an extractor" do
-      
       valid_path = File.expand_path("../support/sample", __FILE__)
       bogus_path = "c:/crudler"
-
       proc {
         Utility.cli_extract(:meta, valid_path, "a_label", "stdout")
       }.must_output(/interpreters/)
@@ -160,7 +160,6 @@ describe Utility do
       proc {
         Utility.cli_extract(:meta, bogus_path, "a_label", "stdout").class
       }.must_output(/Cannot access/)
-
     end
 
   end

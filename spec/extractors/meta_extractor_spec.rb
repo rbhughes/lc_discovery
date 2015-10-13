@@ -296,11 +296,9 @@ describe MetaExtractor do
     end
 
     it "#extract doc must be a hash with all expected keys" do
-      # :created_at, :updated_at are ignored here
       a_doc = @xtract.extract[0]
       a_doc.must_be_instance_of(Hash)
-      model_keys = Meta.native_columns 
-      a_doc.keys.sort.must_equal( model_keys.sort )
+      a_doc.keys.sort.must_equal(Meta::FIELDS.keys.sort)
     end
 
   end

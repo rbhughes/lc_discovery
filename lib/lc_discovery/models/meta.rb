@@ -282,23 +282,23 @@ class Meta
   end
 
 
-  def gxdb_view(col)
-    FIELDS[col.to_sym][:gxdb_view]
-  end
-  def gxdb_table(col)
-    FIELDS[col.to_sym][:gxdb_table]
-  end
-  def ppdm38(col)
-    FIELDS[col.to_sym][:ppdm38]
-  end
-  def ppdm39(col)
-    FIELDS[col.to_sym][:ppdm39]
-  end
+  #def gxdb_view(col)
+  #  FIELDS[col.to_sym][:gxdb_view]
+  #end
+  #def gxdb_table(col)
+  #  FIELDS[col.to_sym][:gxdb_table]
+  #end
+  #def ppdm38(col)
+  #  FIELDS[col.to_sym][:ppdm38]
+  #end
+  #def ppdm39(col)
+  #  FIELDS[col.to_sym][:ppdm39]
+  #end
 
   
-  def self.native_columns
-    exclude = [:created_at, :updated_at]
-    self.new.attributes.except!(*exclude).keys.sort
-  end
+  #def self.native_columns
+  #  exclude = [:created_at, :updated_at]
+  #  self.new.attributes.except!(*exclude).keys.sort
+  #end
 
 end
