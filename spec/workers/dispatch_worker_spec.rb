@@ -5,41 +5,42 @@ require 'mocha/mini_test'
 require 'sidekiq/testing'
 Sidekiq::Testing.fake!
 
-require_relative "../../lib/lc_discovery/workers/project_list_worker"
+require_relative "../../lib/lc_discovery/workers/dispatch_worker"
 
 
-describe ProjectListWorker do
+describe DispatchWorker do
   
   before do
-    @root = "c:/temp"
-    @deep_scan = false
+    @path = "c:/temp"
+    @label = "fake"
+    @store = "stdout"
+    @extract = "TEST"
   end
 
   describe "when sidekiq worker is enqueued" do
 
     it "the worker job is added for the correct extract type" do
-      ProjectListWorker.perform_async(@root, @deep_scan)
-      ProjectListWorker.jobs.size.must_equal(1)
-      ProjectListWorker.jobs[0]["args"][0].must_equal(@root)
+      DispatchWorker.perform_async(@extract, @path, @label, @store)
+      DispatchWorker.jobs.size.must_equal(1)
+      DispatchWorker.jobs[0]["args"][0].must_equal(@extract)
     end
 
 
     it "must fail if wrong number of args supplied" do
-      plworker = ProjectListWorker.new
+      dispatch = DispatchWorker.new
 
       proc{
-        plworker.perform(nil)
+        dispatch.perform(nil)
       }.must_raise(ArgumentError)
 
       proc{
-        plworker.perform(nil, nil, nil, nil, nil)
+        dispatch.perform(nil, nil, nil, nil, nil)
       }.must_raise(ArgumentError)
     end
 
 
     # could not declare TestWorker constants multiple times, so two tests here
     it "Sidekiq logger catches unknown extract type, redis.publish called" do
-      skip
       dispatch = DispatchWorker.new
       dispatch.redis.stubs(:publish).returns("pub")
 
@@ -63,4 +64,3 @@ describe ProjectListWorker do
   end
 
 end
-

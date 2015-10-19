@@ -1,220 +1,688 @@
-2015-09-28T00:24:56.427Z 7884 TID-9tte4 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T00:24:57.187Z 7884 TID-9tte4 INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T00:24:57.187Z 7884 TID-9tte4 INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T00:24:57.187Z 7884 TID-9tte4 INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T00:24:57.187Z 7884 TID-9tte4 INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T00:25:11.273Z 7884 TID-9tte4 INFO: Shutting down
-2015-09-28T00:25:13.104Z 7884 TID-zrkd0 INFO: Terminating 10 quiet workers
-2015-09-28T00:25:48.052Z 8476 TID-9setk INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T00:25:48.790Z 8476 TID-9setk INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T00:25:48.790Z 8476 TID-9setk INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T00:25:48.790Z 8476 TID-9setk INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T00:25:48.806Z 8476 TID-9setk INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T00:26:04.186Z 8476 TID-9njk4 ExtractDispatchWorker JID-a54d414077324ff73fb5a60a INFO: start
-2015-09-28T00:26:04.186Z 8476 TID-9njk4 ExtractDispatchWorker JID-a54d414077324ff73fb5a60a INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T00:26:04.214Z 8476 TID-9njk4 ExtractDispatchWorker JID-a54d414077324ff73fb5a60a INFO: done: 0.027 sec
-2015-09-28T00:26:04.216Z 8476 TID-10cxzo MetaWorker JID-4b27322e159e25836bee8205 INFO: start
-2015-09-28T00:26:04.217Z 8476 TID-10cxzo MetaWorker JID-4b27322e159e25836bee8205 INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T00:26:05.129Z 8476 TID-10cxzo MetaWorker JID-4b27322e159e25836bee8205 INFO: done: 0.913 sec
-2015-09-28T00:27:37.415Z 8476 TID-9setk INFO: Shutting down
-2015-09-28T00:27:38.066Z 8476 TID-zkf14 INFO: Terminating 10 quiet workers
-2015-09-28T00:27:45.528Z 11196 TID-b1czg INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T00:27:46.384Z 11196 TID-b1czg INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T00:27:46.384Z 11196 TID-b1czg INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T00:27:46.384Z 11196 TID-b1czg INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T00:27:46.395Z 11196 TID-b1czg INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T00:27:48.715Z 11196 TID-avqqc ExtractDispatchWorker JID-c72aa0b1933b23c8cfd7c3f5 INFO: start
-2015-09-28T00:27:48.715Z 11196 TID-avqqc ExtractDispatchWorker JID-c72aa0b1933b23c8cfd7c3f5 INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T00:27:48.737Z 11196 TID-10ddvc MetaWorker JID-b2be900f834245b5f805b844 INFO: start
-2015-09-28T00:27:48.737Z 11196 TID-10ddvc MetaWorker JID-b2be900f834245b5f805b844 INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T00:27:48.739Z 11196 TID-avqqc ExtractDispatchWorker JID-c72aa0b1933b23c8cfd7c3f5 INFO: done: 0.024 sec
-2015-09-28T00:27:50.015Z 11196 TID-10ddvc MetaWorker JID-b2be900f834245b5f805b844 INFO: done: 1.278 sec
-2015-09-28T00:29:15.206Z 11196 TID-b1czg INFO: Shutting down
-2015-09-28T00:29:16.047Z 11196 TID-zqatk INFO: Terminating 10 quiet workers
-2015-09-28T00:29:25.630Z 11336 TID-9plog INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T00:29:26.396Z 11336 TID-9plog INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T00:29:26.397Z 11336 TID-9plog INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T00:29:26.397Z 11336 TID-9plog INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T00:29:26.401Z 11336 TID-9plog INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T00:29:37.070Z 11336 TID-9kpn8 ExtractDispatchWorker JID-177028bdea1b1e5b55bfb205 INFO: start
-2015-09-28T00:29:37.070Z 11336 TID-9kpn8 ExtractDispatchWorker JID-177028bdea1b1e5b55bfb205 INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T00:29:37.098Z 11336 TID-9kpn8 ExtractDispatchWorker JID-177028bdea1b1e5b55bfb205 INFO: done: 0.028 sec
-2015-09-28T00:29:37.098Z 11336 TID-103hf4 MetaWorker JID-f4d6505c3570d686205413e2 INFO: start
-2015-09-28T00:29:37.098Z 11336 TID-103hf4 MetaWorker JID-f4d6505c3570d686205413e2 INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T00:29:38.055Z 11336 TID-103hf4 MetaWorker JID-f4d6505c3570d686205413e2 INFO: done: 0.956 sec
-2015-09-28T00:30:33.859Z 11336 TID-9plog INFO: Shutting down
-2015-09-28T00:30:35.022Z 11336 TID-za960 INFO: Terminating 10 quiet workers
-2015-09-28T00:30:43.115Z 1900 TID-awg0c INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T00:30:43.841Z 1900 TID-awg0c INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T00:30:43.858Z 1900 TID-awg0c INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T00:30:43.858Z 1900 TID-awg0c INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T00:30:43.863Z 1900 TID-awg0c INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T00:31:04.725Z 1900 TID-aqgwg ExtractDispatchWorker JID-a9481ac6695bfbab4f4b854d INFO: start
-2015-09-28T00:31:04.725Z 1900 TID-aqgwg ExtractDispatchWorker JID-a9481ac6695bfbab4f4b854d INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T00:31:04.754Z 1900 TID-aqgwg ExtractDispatchWorker JID-a9481ac6695bfbab4f4b854d INFO: done: 0.028 sec
-2015-09-28T00:31:04.755Z 1900 TID-109vj0 MetaWorker JID-76ee6c9d8720073644ded025 INFO: start
-2015-09-28T00:31:04.756Z 1900 TID-109vj0 MetaWorker JID-76ee6c9d8720073644ded025 INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T00:31:05.729Z 1900 TID-109vj0 MetaWorker JID-76ee6c9d8720073644ded025 INFO: done: 0.974 sec
-2015-09-28T00:31:54.014Z 1900 TID-awg0c INFO: Shutting down
-2015-09-28T00:31:54.029Z 1900 TID-zmsgo INFO: Terminating 10 quiet workers
-2015-09-28T00:32:01.258Z 12140 TID-1imf4 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T00:32:01.992Z 12140 TID-1imf4 INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T00:32:01.992Z 12140 TID-1imf4 INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T00:32:01.992Z 12140 TID-1imf4 INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T00:32:01.992Z 12140 TID-1imf4 INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T00:32:41.654Z 12140 TID-1epiw ExtractDispatchWorker JID-c7b40bb7bd1a943151d7ed13 INFO: start
-2015-09-28T00:32:41.654Z 12140 TID-1epiw ExtractDispatchWorker JID-c7b40bb7bd1a943151d7ed13 INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T00:32:41.681Z 12140 TID-zuwcg MetaWorker JID-bbaaf779a9390dea11353e91 INFO: start
-2015-09-28T00:32:41.681Z 12140 TID-zuwcg MetaWorker JID-bbaaf779a9390dea11353e91 INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T00:32:41.682Z 12140 TID-1epiw ExtractDispatchWorker JID-c7b40bb7bd1a943151d7ed13 INFO: done: 0.028 sec
-2015-09-28T00:32:42.790Z 12140 TID-zuwcg MetaWorker JID-bbaaf779a9390dea11353e91 INFO: done: 1.109 sec
-2015-09-28T00:33:26.056Z 12140 TID-1imf4 INFO: Shutting down
-2015-09-28T00:33:27.035Z 12140 TID-z7tao INFO: Terminating 10 quiet workers
-2015-09-28T00:33:35.450Z 6576 TID-ac2ro INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T00:33:36.191Z 6576 TID-ac2ro INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T00:33:36.191Z 6576 TID-ac2ro INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T00:33:36.191Z 6576 TID-ac2ro INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T00:33:36.206Z 6576 TID-ac2ro INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T00:33:39.440Z 6576 TID-a6wx4 ExtractDispatchWorker JID-0a4fe5855adc1acaf69ef524 INFO: start
-2015-09-28T00:33:39.440Z 6576 TID-a6wx4 ExtractDispatchWorker JID-0a4fe5855adc1acaf69ef524 INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T00:33:39.469Z 6576 TID-103aho MetaWorker JID-b365d645da00036905d9e9b2 INFO: start
-2015-09-28T00:33:39.469Z 6576 TID-103aho MetaWorker JID-b365d645da00036905d9e9b2 INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T00:33:39.469Z 6576 TID-a6wx4 ExtractDispatchWorker JID-0a4fe5855adc1acaf69ef524 INFO: done: 0.028 sec
-2015-09-28T00:33:40.498Z 6576 TID-103aho MetaWorker JID-b365d645da00036905d9e9b2 INFO: done: 1.029 sec
-2015-09-28T00:35:29.168Z 6576 TID-ac2ro INFO: Shutting down
-2015-09-28T00:35:31.014Z 6576 TID-za28k INFO: Terminating 10 quiet workers
-2015-09-28T00:35:37.888Z 11844 TID-as8ao INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T00:35:38.669Z 11844 TID-as8ao INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T00:35:38.669Z 11844 TID-as8ao INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T00:35:38.669Z 11844 TID-as8ao INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T00:35:38.685Z 11844 TID-as8ao INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T00:35:49.724Z 11844 TID-andf4 ExtractDispatchWorker JID-2d028a914c57755da928649c INFO: start
-2015-09-28T00:35:49.724Z 11844 TID-andf4 ExtractDispatchWorker JID-2d028a914c57755da928649c INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T00:35:49.752Z 11844 TID-andf4 ExtractDispatchWorker JID-2d028a914c57755da928649c INFO: done: 0.028 sec
-2015-09-28T00:35:49.752Z 11844 TID-1068og MetaWorker JID-85be1f7e1afe812f9ada5c3e INFO: start
-2015-09-28T00:35:49.753Z 11844 TID-1068og MetaWorker JID-85be1f7e1afe812f9ada5c3e INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T00:35:50.904Z 11844 TID-1068og MetaWorker JID-85be1f7e1afe812f9ada5c3e INFO: done: 1.152 sec
-2015-09-28T00:38:12.700Z 11844 TID-as8ao INFO: Shutting down
-2015-09-28T00:38:13.116Z 11844 TID-zfn8o INFO: Terminating 10 quiet workers
-2015-09-28T00:38:21.139Z 11980 TID-9y138 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T00:38:21.884Z 11980 TID-9y138 INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T00:38:21.884Z 11980 TID-9y138 INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T00:38:21.884Z 11980 TID-9y138 INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T00:38:21.884Z 11980 TID-9y138 INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T00:38:35.988Z 11980 TID-9ti0o ExtractDispatchWorker JID-e106593554d3d4042ecd6551 INFO: start
-2015-09-28T00:38:35.988Z 11980 TID-9ti0o ExtractDispatchWorker JID-e106593554d3d4042ecd6551 INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T00:38:36.016Z 11980 TID-9ti0o ExtractDispatchWorker JID-e106593554d3d4042ecd6551 INFO: done: 0.027 sec
-2015-09-28T00:38:36.019Z 11980 TID-1040xc MetaWorker JID-192f9be3484be307fd4e8576 INFO: start
-2015-09-28T00:38:36.019Z 11980 TID-1040xc MetaWorker JID-192f9be3484be307fd4e8576 INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T00:38:37.177Z 11980 TID-1040xc MetaWorker JID-192f9be3484be307fd4e8576 INFO: done: 1.159 sec
-2015-09-28T00:38:56.109Z 11980 TID-9y138 INFO: Shutting down
-2015-09-28T00:38:58.090Z 11980 TID-zfjb0 INFO: Terminating 10 quiet workers
-2015-09-28T00:39:15.865Z 8704 TID-ajsvw INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T00:39:16.629Z 8704 TID-ajsvw INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T00:39:16.629Z 8704 TID-ajsvw INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T00:39:16.629Z 8704 TID-ajsvw INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T00:39:16.629Z 8704 TID-ajsvw INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T00:39:27.275Z 8704 TID-aeb28 ExtractDispatchWorker JID-bf6fc178a4094e557dde20e2 INFO: start
-2015-09-28T00:39:27.275Z 8704 TID-aeb28 ExtractDispatchWorker JID-bf6fc178a4094e557dde20e2 INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T00:39:27.303Z 8704 TID-aeb28 ExtractDispatchWorker JID-bf6fc178a4094e557dde20e2 INFO: done: 0.028 sec
-2015-09-28T00:39:27.304Z 8704 TID-105dd8 MetaWorker JID-7639d23b8885f0aa52f6e7d4 INFO: start
-2015-09-28T00:39:27.304Z 8704 TID-105dd8 MetaWorker JID-7639d23b8885f0aa52f6e7d4 INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T00:39:28.411Z 8704 TID-105dd8 MetaWorker JID-7639d23b8885f0aa52f6e7d4 INFO: done: 1.108 sec
-2015-09-28T00:40:22.631Z 8704 TID-ajsvw INFO: Shutting down
-2015-09-28T00:40:23.087Z 8704 TID-zey98 INFO: Terminating 10 quiet workers
-2015-09-28T00:40:30.628Z 11824 TID-as8ao INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T00:40:31.423Z 11824 TID-as8ao INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T00:40:31.423Z 11824 TID-as8ao INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T00:40:31.423Z 11824 TID-as8ao INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T00:40:31.427Z 11824 TID-as8ao INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T00:40:40.796Z 11824 TID-alxl0 ExtractDispatchWorker JID-0056bd7a03f71a911b55ff42 INFO: start
-2015-09-28T00:40:40.796Z 11824 TID-alxl0 ExtractDispatchWorker JID-0056bd7a03f71a911b55ff42 INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T00:40:40.825Z 11824 TID-100kdg MetaWorker JID-4599e83892632f1bee71aa58 INFO: start
-2015-09-28T00:40:40.825Z 11824 TID-alxl0 ExtractDispatchWorker JID-0056bd7a03f71a911b55ff42 INFO: done: 0.029 sec
-2015-09-28T00:40:40.825Z 11824 TID-100kdg MetaWorker JID-4599e83892632f1bee71aa58 INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T00:40:41.775Z 11824 TID-100kdg MetaWorker JID-4599e83892632f1bee71aa58 INFO: done: 0.95 sec
-2015-09-28T00:42:13.847Z 11824 TID-100kdg ExtractDispatchWorker JID-9d5dc78b4a46a55a2ef56536 INFO: start
-2015-09-28T00:42:13.847Z 11824 TID-100kdg ExtractDispatchWorker JID-9d5dc78b4a46a55a2ef56536 INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T00:42:13.864Z 11824 TID-100kdg ExtractDispatchWorker JID-9d5dc78b4a46a55a2ef56536 INFO: done: 0.017 sec
-2015-09-28T00:42:13.875Z 11824 TID-100kdg MetaWorker JID-f723003c85fda740fba3340c INFO: start
-2015-09-28T00:42:13.875Z 11824 TID-100kdg MetaWorker JID-f723003c85fda740fba3340c INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T00:42:14.737Z 11824 TID-100kdg MetaWorker JID-f723003c85fda740fba3340c INFO: done: 0.862 sec
-2015-09-28T00:43:06.761Z 11824 TID-as8ao INFO: Shutting down
-2015-09-28T00:43:07.032Z 11824 TID-zd4o4 INFO: Terminating 10 quiet workers
-2015-09-28T00:44:21.726Z 10648 TID-b1czg INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T00:44:22.506Z 10648 TID-b1czg INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T00:44:22.506Z 10648 TID-b1czg INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T00:44:22.506Z 10648 TID-b1czg INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T00:44:22.510Z 10648 TID-b1czg INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T00:44:48.565Z 10648 TID-av298 ExtractDispatchWorker JID-2fc2f916acfcee37a8f0ef12 INFO: start
-2015-09-28T00:44:48.565Z 10648 TID-av298 ExtractDispatchWorker JID-2fc2f916acfcee37a8f0ef12 INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T00:44:48.582Z 10648 TID-av298 ExtractDispatchWorker JID-2fc2f916acfcee37a8f0ef12 INFO: done: 0.017 sec
-2015-09-28T00:44:48.593Z 10648 TID-av298 MetaWorker JID-c9445ddd003ad0ed872675bc INFO: start
-2015-09-28T00:44:48.594Z 10648 TID-av298 MetaWorker JID-c9445ddd003ad0ed872675bc INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T00:44:49.605Z 10648 TID-av298 MetaWorker JID-c9445ddd003ad0ed872675bc INFO: done: 1.013 sec
-2015-09-28T00:45:54.342Z 10648 TID-b1czg INFO: Shutting down
-2015-09-28T00:45:56.031Z 10648 TID-zk5kk INFO: Terminating 10 quiet workers
-2015-09-28T00:46:04.119Z 4244 TID-1imf4 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T00:46:04.846Z 4244 TID-1imf4 INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T00:46:04.846Z 4244 TID-1imf4 INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T00:46:04.846Z 4244 TID-1imf4 INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T00:46:04.861Z 4244 TID-1imf4 INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T00:46:19.136Z 4244 TID-1dgrs ExtractDispatchWorker JID-fed8b831070475d5ce6415fa INFO: start
-2015-09-28T00:46:19.136Z 4244 TID-1dgrs ExtractDispatchWorker JID-fed8b831070475d5ce6415fa INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T00:46:19.154Z 4244 TID-1dgrs ExtractDispatchWorker JID-fed8b831070475d5ce6415fa INFO: done: 0.017 sec
-2015-09-28T00:46:19.165Z 4244 TID-1dgrs MetaWorker JID-e7a9ed4e81f3b18e85b74a17 INFO: start
-2015-09-28T00:46:19.165Z 4244 TID-1dgrs MetaWorker JID-e7a9ed4e81f3b18e85b74a17 INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T00:46:20.410Z 4244 TID-1dgrs MetaWorker JID-e7a9ed4e81f3b18e85b74a17 INFO: done: 1.245 sec
-2015-09-28T00:47:46.221Z 4244 TID-1imf4 INFO: Shutting down
-2015-09-28T00:47:47.120Z 4244 TID-zl8zg INFO: Terminating 10 quiet workers
-2015-09-28T00:47:53.176Z 12208 TID-aj3lw INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T00:47:53.919Z 12208 TID-aj3lw INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T00:47:53.919Z 12208 TID-aj3lw INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T00:47:53.919Z 12208 TID-aj3lw INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T00:47:53.924Z 12208 TID-aj3lw INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T00:48:06.091Z 12208 TID-aenbw ExtractDispatchWorker JID-ddee968c8801288e73281ce3 INFO: start
-2015-09-28T00:48:06.091Z 12208 TID-aenbw ExtractDispatchWorker JID-ddee968c8801288e73281ce3 INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T00:48:06.119Z 12208 TID-100igk MetaWorker JID-a9e9b52b03ff67958342a463 INFO: start
-2015-09-28T00:48:06.119Z 12208 TID-100igk MetaWorker JID-a9e9b52b03ff67958342a463 INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T00:48:06.119Z 12208 TID-aenbw ExtractDispatchWorker JID-ddee968c8801288e73281ce3 INFO: done: 0.028 sec
-2015-09-28T00:48:07.135Z 12208 TID-100igk MetaWorker JID-a9e9b52b03ff67958342a463 INFO: done: 1.017 sec
-2015-09-28T01:31:15.715Z 12208 TID-aj3lw INFO: Shutting down
-2015-09-28T01:31:16.090Z 12208 TID-zdfes INFO: Terminating 10 quiet workers
-2015-09-28T01:33:15.960Z 4040 TID-958gc INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T01:33:16.679Z 4040 TID-958gc INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T01:33:16.679Z 4040 TID-958gc INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T01:33:16.679Z 4040 TID-958gc INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T01:33:16.695Z 4040 TID-958gc INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T01:33:23.260Z 4040 TID-8yzik ExtractDispatchWorker JID-e71b466dacf3abe16ea09280 INFO: start
-2015-09-28T01:33:23.260Z 4040 TID-8yzik ExtractDispatchWorker JID-e71b466dacf3abe16ea09280 INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T01:33:23.277Z 4040 TID-8yzik ExtractDispatchWorker JID-e71b466dacf3abe16ea09280 INFO: done: 0.017 sec
-2015-09-28T01:33:23.288Z 4040 TID-8yzik MetaWorker JID-df4c167fdb962e22c1f5668f INFO: start
-2015-09-28T01:33:23.288Z 4040 TID-8yzik MetaWorker JID-df4c167fdb962e22c1f5668f INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T01:33:24.295Z 4040 TID-8yzik MetaWorker JID-df4c167fdb962e22c1f5668f INFO: done: 1.006 sec
-2015-09-28T03:18:23.973Z 4040 TID-958gc INFO: Shutting down
-2015-09-28T03:18:25.051Z 4040 TID-z5tag INFO: Terminating 10 quiet workers
-2015-09-28T03:18:36.317Z 12832 TID-9f2f4 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
-2015-09-28T03:18:37.116Z 12832 TID-9f2f4 INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
-2015-09-28T03:18:37.116Z 12832 TID-9f2f4 INFO: See LICENSE and the LGPL-3.0 for licensing details.
-2015-09-28T03:18:37.116Z 12832 TID-9f2f4 INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
-2015-09-28T03:18:37.116Z 12832 TID-9f2f4 INFO: Starting processing, hit Ctrl-C to stop
-2015-09-28T03:18:53.847Z 12832 TID-99kso ExtractDispatchWorker JID-cf55e7103ba4ab26ce414f07 INFO: start
-2015-09-28T03:18:53.847Z 12832 TID-99kso ExtractDispatchWorker JID-cf55e7103ba4ab26ce414f07 INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T03:18:53.865Z 12832 TID-99kso ExtractDispatchWorker JID-cf55e7103ba4ab26ce414f07 INFO: done: 0.017 sec
-2015-09-28T03:18:53.876Z 12832 TID-99kso MetaWorker JID-7a11832061530003bad2bc56 INFO: start
-2015-09-28T03:18:53.876Z 12832 TID-99kso MetaWorker JID-7a11832061530003bad2bc56 INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T03:18:55.124Z 12832 TID-99kso MetaWorker JID-7a11832061530003bad2bc56 INFO: done: 1.249 sec
-2015-09-28T03:19:24.776Z 12832 TID-99kso ExtractDispatchWorker JID-12f2b734cd99a1efc34e5299 INFO: start
-2015-09-28T03:19:24.776Z 12832 TID-99kso ExtractDispatchWorker JID-12f2b734cd99a1efc34e5299 INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T03:19:24.776Z 12832 TID-99kso ExtractDispatchWorker JID-12f2b734cd99a1efc34e5299 INFO: done: 0.0 sec
-2015-09-28T03:19:24.793Z 12832 TID-99kso MetaWorker JID-486b94e265604bc53b7003d8 INFO: start
-2015-09-28T03:19:24.793Z 12832 TID-99kso MetaWorker JID-486b94e265604bc53b7003d8 INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T03:19:25.601Z 12832 TID-106j9k ExtractDispatchWorker JID-84cf3dd8d19b2d324ff43771 INFO: start
-2015-09-28T03:19:25.601Z 12832 TID-106j9k ExtractDispatchWorker JID-84cf3dd8d19b2d324ff43771 INFO: lc_discovery WELL: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
-2015-09-28T03:19:26.488Z 12832 TID-106j9k ExtractDispatchWorker JID-84cf3dd8d19b2d324ff43771 INFO: done: 0.887 sec
-2015-09-28T03:19:26.508Z 12832 TID-106j9k WellWorker JID-696d25bbbf8546aae39b1cab INFO: start
-2015-09-28T03:19:26.509Z 12832 TID-106j9k WellWorker JID-696d25bbbf8546aae39b1cab INFO: Extracting lc_discovery WellWorker: c:/programdata/geographix/projects/Stratton | home_1
-2015-09-28T03:19:27.704Z 12832 TID-99kso MetaWorker JID-486b94e265604bc53b7003d8 INFO: done: 2.911 sec
-2015-09-28T03:19:34.052Z 12832 TID-106j9k WellWorker JID-696d25bbbf8546aae39b1cab INFO: done: 7.544 sec
-2015-09-28T03:28:11.243Z 12832 TID-9f2f4 INFO: Shutting down
-2015-09-28T03:28:12.115Z 12832 TID-zjg8c INFO: Terminating 10 quiet workers
+2015-10-13T23:53:02.398Z 13332 TID-aopvk INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-10-13T23:53:03.242Z 13332 TID-aopvk INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
+2015-10-13T23:53:03.242Z 13332 TID-aopvk INFO: See LICENSE and the LGPL-3.0 for licensing details.
+2015-10-13T23:53:03.243Z 13332 TID-aopvk INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
+2015-10-13T23:53:03.247Z 13332 TID-aopvk INFO: Starting processing, hit Ctrl-C to stop
+2015-10-13T23:53:20.086Z 13332 TID-bdw8g ExtractDispatchWorker JID-9a921b357ee5f39653722e3a INFO: start
+2015-10-13T23:53:20.086Z 13332 TID-bdw8g ExtractDispatchWorker JID-9a921b357ee5f39653722e3a INFO: lc_discovery META: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
+2015-10-13T23:53:20.109Z 13332 TID-bcop8 MetaWorker JID-7a64f7ffa0b7e5865d38dc71 INFO: start
+2015-10-13T23:53:20.109Z 13332 TID-bcop8 MetaWorker JID-7a64f7ffa0b7e5865d38dc71 INFO: Extracting lc_discovery MetaWorker: c:/programdata/geographix/projects/Stratton | home_1
+2015-10-13T23:53:20.112Z 13332 TID-bdw8g ExtractDispatchWorker JID-9a921b357ee5f39653722e3a INFO: done: 0.026 sec
+2015-10-13T23:53:20.977Z 13332 TID-bcop8 MetaWorker JID-7a64f7ffa0b7e5865d38dc71 ERROR: undefined method `write' for Publisher:Class
+2015-10-13T23:53:20.979Z 13332 TID-bcop8 MetaWorker JID-7a64f7ffa0b7e5865d38dc71 ERROR: ["C:/dev/lc_discovery/lib/lc_discovery/workers/meta_worker.rb:23:in `perform'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:75:in `execute_job'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:52:in `block (2 levels) in process'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:127:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/server/retry_jobs.rb:74:in `call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:129:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/server/logging.rb:15:in `block in call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/logging.rb:30:in `with_context'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/server/logging.rb:11:in `call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:129:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:132:in `call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:132:in `invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:51:in `block in process'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:98:in `stats'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:50:in `process'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:26:in `public_send'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:26:in `dispatch'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:122:in `dispatch'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/cell.rb:60:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/cell.rb:71:in `block in task'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/actor.rb:357:in `block in task'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/tasks.rb:57:in `block in initialize'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/tasks/task_fiber.rb:15:in `block in create'"]
+2015-10-13T23:53:20.981Z 13332 TID-bcop8 MetaWorker JID-7a64f7ffa0b7e5865d38dc71 INFO: done: 0.872 sec
+2015-10-13T23:53:20.984Z 13332 TID-bdw8g ExtractDispatchWorker JID-279b92c32a2ebdb032e44b2b INFO: start
+2015-10-13T23:53:20.985Z 13332 TID-bdw8g ExtractDispatchWorker JID-279b92c32a2ebdb032e44b2b INFO: lc_discovery WELL: c:/programdata/geographix/projects/Stratton | home_1 | elasticsearch
+2015-10-13T23:53:21.870Z 13332 TID-bdw8g ExtractDispatchWorker JID-279b92c32a2ebdb032e44b2b INFO: done: 0.885 sec
+2015-10-13T23:53:21.871Z 13332 TID-bcop8 WellWorker JID-f52f9f24ecb24a1705f9123e INFO: start
+2015-10-13T23:53:21.872Z 13332 TID-bcop8 WellWorker JID-f52f9f24ecb24a1705f9123e INFO: Extracting lc_discovery WellWorker: c:/programdata/geographix/projects/Stratton | home_1
+2015-10-13T23:53:22.723Z 13332 TID-bcop8 WellWorker JID-f52f9f24ecb24a1705f9123e ERROR: undefined method `write' for Publisher:Class
+2015-10-13T23:53:22.724Z 13332 TID-bcop8 WellWorker JID-f52f9f24ecb24a1705f9123e ERROR: ["C:/dev/lc_discovery/lib/lc_discovery/workers/well_worker.rb:23:in `perform'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:75:in `execute_job'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:52:in `block (2 levels) in process'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:127:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/server/retry_jobs.rb:74:in `call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:129:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/server/logging.rb:15:in `block in call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/logging.rb:30:in `with_context'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/server/logging.rb:11:in `call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:129:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:132:in `call'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/middleware/chain.rb:132:in `invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:51:in `block in process'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:98:in `stats'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/processor.rb:50:in `process'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:26:in `public_send'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:26:in `dispatch'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/calls.rb:122:in `dispatch'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/cell.rb:60:in `block in invoke'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/cell.rb:71:in `block in task'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/actor.rb:357:in `block in task'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/tasks.rb:57:in `block in initialize'", "c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/tasks/task_fiber.rb:15:in `block in create'"]
+2015-10-13T23:53:22.736Z 13332 TID-bcop8 WellWorker JID-f52f9f24ecb24a1705f9123e INFO: done: 0.865 sec
+2015-10-14T14:33:53.567Z 13332 TID-cgt9o ERROR: Error fetching message: Connection timed out
+2015-10-14T14:33:53.567Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/connection/ruby.rb:55:in `rescue in _read_from_socket'
+2015-10-14T14:33:53.567Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/connection/ruby.rb:48:in `_read_from_socket'
+2015-10-14T14:33:53.567Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/connection/ruby.rb:41:in `gets'
+2015-10-14T14:33:53.568Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/connection/ruby.rb:273:in `read'
+2015-10-14T14:33:53.568Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:248:in `block in read'
+2015-10-14T14:33:53.568Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:236:in `io'
+2015-10-14T14:33:53.568Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:247:in `read'
+2015-10-14T14:33:53.569Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:112:in `block in call'
+2015-10-14T14:33:53.569Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:217:in `block (2 levels) in process'
+2015-10-14T14:33:53.569Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:353:in `ensure_connected'
+2015-10-14T14:33:53.569Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:207:in `block in process'
+2015-10-14T14:33:53.569Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:292:in `logging'
+2015-10-14T14:33:53.570Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:206:in `process'
+2015-10-14T14:33:53.570Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:112:in `call'
+2015-10-14T14:33:53.570Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:195:in `block in call_with_timeout'
+2015-10-14T14:33:53.570Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:266:in `with_socket_timeout'
+2015-10-14T14:33:53.570Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:194:in `call_with_timeout'
+2015-10-14T14:33:53.570Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis.rb:1064:in `block in _bpop'
+2015-10-14T14:33:53.570Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis.rb:37:in `block in synchronize'
+2015-10-14T14:33:53.570Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/2.1.0/monitor.rb:211:in `mon_synchronize'
+2015-10-14T14:33:53.571Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis.rb:37:in `synchronize'
+2015-10-14T14:33:53.571Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis.rb:1061:in `_bpop'
+2015-10-14T14:33:53.571Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis.rb:1106:in `brpop'
+2015-10-14T14:33:53.571Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-namespace-1.5.2/lib/redis/namespace.rb:393:in `call_with_namespace'
+2015-10-14T14:33:53.571Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-namespace-1.5.2/lib/redis/namespace.rb:290:in `method_missing'
+2015-10-14T14:33:53.571Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/fetch.rb:102:in `block in retrieve_work'
+2015-10-14T14:33:53.571Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/connection_pool-2.2.0/lib/connection_pool.rb:64:in `block (2 levels) in with'
+2015-10-14T14:33:53.571Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/connection_pool-2.2.0/lib/connection_pool.rb:63:in `handle_interrupt'
+2015-10-14T14:33:53.572Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/connection_pool-2.2.0/lib/connection_pool.rb:63:in `block in with'
+2015-10-14T14:33:53.572Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/connection_pool-2.2.0/lib/connection_pool.rb:60:in `handle_interrupt'
+2015-10-14T14:33:53.572Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/connection_pool-2.2.0/lib/connection_pool.rb:60:in `with'
+2015-10-14T14:33:53.572Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq.rb:81:in `redis'
+2015-10-14T14:33:53.572Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/fetch.rb:102:in `retrieve_work'
+2015-10-14T14:33:53.572Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/fetch.rb:37:in `block in fetch'
+2015-10-14T14:33:53.572Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/util.rb:16:in `watchdog'
+2015-10-14T14:33:53.573Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/fetch.rb:33:in `fetch'
+2015-10-14T14:33:53.573Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/sidekiq-3.4.2/lib/sidekiq/fetch.rb:44:in `block (2 levels) in fetch'
+2015-10-14T14:33:53.573Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/actor.rb:357:in `block in task'
+2015-10-14T14:33:53.573Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/tasks.rb:57:in `block in initialize'
+2015-10-14T14:33:53.573Z 13332 TID-cgt9o ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/celluloid-0.16.0/lib/celluloid/tasks/task_fiber.rb:15:in `block in create'
+2015-10-14T14:34:00.799Z 13332 TID-zkxxo ERROR: heartbeat: Connection timed out
+2015-10-14T14:34:02.033Z 13332 TID-cgjp8 ERROR: Connection timed out
+2015-10-14T14:34:02.033Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/connection/ruby.rb:55:in `rescue in _read_from_socket'
+2015-10-14T14:34:15.804Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:34:20.046Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:34:20.046Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:34:30.809Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:34:45.813Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:34:47.330Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:34:47.330Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:35:00.817Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:35:15.515Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:35:15.515Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:35:15.821Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:35:30.825Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:35:34.540Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:35:34.540Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:35:45.828Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:36:00.832Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:36:04.477Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:36:04.477Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:36:15.838Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:36:30.844Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:36:32.860Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:36:32.861Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:36:45.848Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:37:00.854Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:37:03.928Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:37:03.928Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:37:15.893Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:37:30.897Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:37:35.352Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:37:35.353Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:37:45.901Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:37:52.955Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:37:52.955Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:38:00.905Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:38:15.910Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:38:25.310Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:38:25.310Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:38:30.915Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:38:45.920Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:38:53.836Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:38:53.837Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:39:00.925Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:39:11.822Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:39:11.823Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:39:15.930Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:39:30.933Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:39:33.373Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:39:33.373Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:39:45.938Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:39:58.196Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:39:58.196Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:40:00.944Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:40:15.949Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:40:20.094Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:40:20.094Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:40:30.954Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:40:45.959Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:40:48.800Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:40:48.801Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:41:00.965Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:41:11.908Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:41:11.908Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:41:15.970Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:41:30.975Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:41:42.940Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:41:42.941Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:41:45.980Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:42:00.985Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:42:15.300Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:42:15.301Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:42:15.991Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:42:30.996Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:42:33.336Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:42:33.336Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:42:46.000Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:42:59.531Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:42:59.532Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:43:01.005Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:43:16.009Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:43:24.981Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:43:24.982Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:43:31.013Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:43:46.018Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:43:51.559Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:43:51.559Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:44:01.022Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:44:09.557Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:44:09.557Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:44:16.026Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:44:28.722Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:44:28.723Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:44:31.030Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:44:46.035Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:44:47.074Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:44:47.074Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:45:01.041Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:45:08.184Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:45:08.185Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:45:16.045Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:45:26.389Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:45:26.389Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:45:31.051Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:45:46.056Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:45:48.908Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:45:48.909Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:46:01.060Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:46:16.066Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:46:21.066Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:46:21.066Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:46:31.071Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:46:42.431Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:46:42.432Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:46:46.077Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:47:01.080Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:47:07.747Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:47:07.748Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:47:16.084Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:47:31.089Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:47:35.486Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:47:35.487Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:47:46.092Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:48:01.101Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:48:05.977Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:48:05.978Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:48:16.106Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:48:31.111Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:48:37.087Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:48:37.088Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:48:46.115Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:49:01.121Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:49:09.205Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:49:09.206Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:49:16.125Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:49:31.131Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:49:40.510Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:49:40.511Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:49:46.136Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:50:01.178Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:50:09.996Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:50:09.996Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:50:16.183Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:50:31.186Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:50:35.074Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:50:35.074Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:50:46.191Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:50:55.292Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:50:55.292Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:51:01.197Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:51:16.201Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:51:22.378Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:51:22.378Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:51:31.207Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:51:41.458Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:51:41.458Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:51:46.212Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:52:01.217Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:52:08.673Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:52:08.673Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:52:16.223Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:52:31.229Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:52:35.858Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:52:35.858Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:52:46.234Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:52:56.090Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:52:56.090Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:53:01.239Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:53:16.245Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:53:20.167Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:53:20.167Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:53:31.248Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:53:44.843Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:53:44.844Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:53:46.254Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:54:01.258Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:54:07.176Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:54:07.176Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:54:16.264Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:54:31.268Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:54:38.869Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:54:38.870Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:54:46.274Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:55:01.279Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:55:06.681Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:55:06.682Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:55:16.284Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:55:25.488Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:55:25.489Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:55:31.290Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:55:46.296Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:55:49.483Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:55:49.484Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:56:01.302Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:56:16.308Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:56:20.799Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:56:20.800Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:56:31.311Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:56:40.321Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:56:40.321Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:56:46.317Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:57:00.628Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:57:00.629Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:57:01.323Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:57:16.330Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:57:21.549Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:57:21.549Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:57:31.336Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:57:43.974Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:57:43.975Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:57:46.341Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:58:01.347Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:58:03.251Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:58:03.252Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:58:16.352Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:58:22.920Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:58:22.920Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:58:31.357Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:58:46.361Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:58:50.692Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:58:50.692Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:59:01.366Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:59:12.460Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:59:12.460Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:59:16.373Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:59:31.378Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:59:44.082Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T14:59:44.082Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T14:59:46.382Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:00:01.387Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:00:12.214Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:00:12.215Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:00:16.391Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:00:31.395Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:00:38.923Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:00:38.924Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:00:46.401Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:00:58.018Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:00:58.018Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:01:01.407Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:01:16.412Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:01:16.907Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:01:16.908Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:01:31.417Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:01:38.208Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:01:38.208Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:01:46.423Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:02:01.428Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:02:10.570Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:02:10.570Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:02:16.433Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:02:30.418Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:02:30.419Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:02:31.439Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:02:46.443Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:02:56.689Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:02:56.689Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:03:01.447Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:03:16.451Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:03:23.710Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:03:23.711Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:03:31.457Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:03:44.924Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:03:44.925Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:03:46.462Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:04:01.467Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:04:07.003Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:04:07.004Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:04:16.472Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:04:31.157Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:04:31.158Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:04:31.477Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:04:46.479Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:04:53.587Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:04:53.588Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:05:01.485Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:05:16.490Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:05:19.040Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:05:19.041Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:05:31.495Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:05:37.199Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:05:37.199Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:05:46.500Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:05:55.132Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:05:55.133Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:06:01.504Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:06:14.264Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:06:14.265Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:06:16.509Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:06:31.514Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:06:41.440Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:06:41.440Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:06:46.520Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:07:01.059Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:07:01.059Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:07:01.525Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:07:16.530Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:07:29.108Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:07:29.109Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:07:31.537Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:07:46.542Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:07:55.025Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:07:55.025Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:08:01.546Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:08:15.908Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:08:15.909Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:08:16.551Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:08:31.555Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:08:36.256Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:08:36.257Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:08:46.561Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:09:00.253Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:09:00.254Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:09:01.566Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:09:16.572Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:09:30.366Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:09:30.367Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:09:31.577Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:09:46.584Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:09:50.097Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:09:50.098Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:10:01.590Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:10:12.921Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:10:12.922Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:10:16.595Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:10:31.600Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:10:37.597Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:10:37.597Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:10:46.603Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:11:01.608Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:11:06.452Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:11:06.453Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:11:16.614Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:11:31.619Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:11:37.106Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:11:37.107Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:11:46.624Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:12:01.631Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:12:06.592Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:12:06.592Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:12:16.636Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:12:30.885Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:12:30.885Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:12:31.643Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:12:46.647Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:13:01.653Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:13:02.721Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:13:02.722Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:13:16.659Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:13:31.665Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:13:34.727Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:13:34.728Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:13:46.671Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:13:53.661Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:13:53.662Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:14:01.675Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:14:14.195Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:14:14.196Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:14:16.679Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:14:31.684Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:14:39.708Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:14:39.709Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:14:46.689Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:15:01.695Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:15:02.722Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:15:02.723Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:15:16.718Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:15:21.606Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:15:21.607Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:15:31.725Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:15:40.072Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:15:40.073Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:15:46.730Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:16:01.734Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:16:06.713Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:16:06.713Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:16:16.741Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:16:31.747Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:16:34.151Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:16:34.152Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:16:46.753Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:16:58.727Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:16:58.727Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:17:01.757Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:17:16.763Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:17:20.516Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:17:20.517Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:17:31.768Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:17:39.225Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:17:39.226Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:17:46.773Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:18:01.778Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:18:03.549Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:18:03.549Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:18:16.783Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:18:27.961Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:18:27.962Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:18:31.788Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:18:46.794Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:18:50.170Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:18:50.171Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:19:01.799Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:19:11.073Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:19:11.074Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:19:16.804Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:19:31.809Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:19:39.912Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:19:39.912Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:19:46.814Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:20:01.711Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:20:01.711Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:20:01.819Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:20:16.825Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:20:27.379Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:20:27.379Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:20:31.831Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:20:46.836Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:20:52.452Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:20:52.453Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:21:01.841Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:21:16.437Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:21:16.438Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:21:16.845Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:21:31.850Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:21:40.876Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:21:40.876Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:21:46.855Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:22:00.815Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:22:00.815Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:22:01.862Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:22:16.867Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:22:29.243Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:22:29.244Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:22:31.873Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:22:46.878Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:22:52.279Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:22:52.280Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:23:01.882Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:23:16.887Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:23:17.462Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:23:17.462Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:23:31.892Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:23:37.115Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:23:37.115Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:23:46.897Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:24:01.309Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:24:01.309Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:24:01.905Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:24:16.910Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:24:20.374Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:24:20.374Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:24:31.914Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:24:46.919Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:24:49.260Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:24:49.260Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:25:01.923Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:25:16.928Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:25:21.114Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:25:21.115Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:25:31.934Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:25:44.169Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:25:44.170Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:25:46.939Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:26:01.946Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:26:04.734Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:26:04.734Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:26:16.951Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:26:24.992Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:26:24.993Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:26:31.957Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:26:46.961Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:26:51.351Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:26:51.352Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:27:01.966Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:27:11.318Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:27:11.318Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:27:16.971Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:27:29.696Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:27:29.697Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:27:31.977Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:27:46.986Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:27:57.514Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:27:57.515Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:28:01.992Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:28:16.995Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:28:18.187Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:28:18.188Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:28:32.001Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:28:47.004Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:28:47.413Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:28:47.413Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:29:02.009Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:29:12.903Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:29:12.903Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:29:17.015Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:29:32.021Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:29:41.424Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:29:41.425Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:29:47.025Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:30:02.030Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:30:07.056Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:30:07.056Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:30:17.035Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:30:29.179Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:30:29.179Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:30:32.039Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:30:47.043Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:31:01.005Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:31:01.005Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:31:02.047Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:31:17.051Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:31:19.898Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:31:19.898Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:31:32.055Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:31:47.058Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:31:50.663Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:31:50.664Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:32:02.063Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:32:10.996Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:32:10.996Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:32:17.068Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:32:32.072Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:32:38.595Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:32:38.596Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:32:47.077Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:32:58.025Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:32:58.025Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:33:02.081Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:33:17.087Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:33:22.190Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:33:22.191Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:33:32.093Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:33:47.099Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:33:52.401Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:33:52.401Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:34:02.103Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:34:17.107Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:34:17.529Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:34:17.530Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:34:32.111Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:34:42.313Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:34:42.314Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:34:47.116Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:35:02.120Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:35:06.042Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:35:06.042Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:35:17.124Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:35:30.647Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:35:30.648Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:35:32.129Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:35:47.134Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:35:52.698Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:35:52.698Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:36:02.139Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:36:17.144Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:36:19.711Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:36:19.712Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:36:32.150Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:36:45.000Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:36:45.001Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:36:47.154Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:37:02.159Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:37:02.675Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:37:02.675Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:37:17.164Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:37:25.835Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:37:25.836Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:37:32.169Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:37:45.096Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:37:45.097Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:37:47.174Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:38:02.178Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:38:11.915Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:38:11.915Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:38:17.183Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:38:31.350Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:38:31.351Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:38:32.188Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:38:47.193Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:39:00.549Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:39:00.549Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:39:02.199Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:39:17.205Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:39:26.033Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:39:26.033Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:39:32.209Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:39:47.214Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:39:52.409Z 13332 TID-cgjp8 ERROR: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:39:52.410Z 13332 TID-cgjp8 ERROR: c:/dev/ruby/lib/ruby/gems/2.1.0/gems/redis-3.2.1/lib/redis/client.rb:331:in `rescue in establish_connection'
+2015-10-14T15:40:02.218Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:40:11.342Z 13332 TID-aopvk INFO: Shutting down
+2015-10-14T15:40:17.225Z 13332 TID-zkxxo ERROR: heartbeat: Error connecting to Redis on 127.0.0.1:6379 (Redis::TimeoutError)
+2015-10-14T15:40:17.227Z 13332 TID-zkxxo INFO: Terminating 10 quiet workers
+2015-10-15T04:00:48.364Z 7564 TID-aq4g4 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-10-15T04:00:51.305Z 7564 TID-aq4g4 INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
+2015-10-15T04:00:51.305Z 7564 TID-aq4g4 INFO: See LICENSE and the LGPL-3.0 for licensing details.
+2015-10-15T04:00:51.305Z 7564 TID-aq4g4 INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
+2015-10-15T04:00:51.319Z 7564 TID-aq4g4 INFO: Starting processing, hit Ctrl-C to stop
+2015-10-15T04:03:03.779Z 7564 TID-bfyxc ProjectListWorker JID-7f61fa27b867810a92ff5836 INFO: start
+2015-10-15T04:03:03.779Z 7564 TID-bfyxc ProjectListWorker JID-7f61fa27b867810a92ff5836 INFO: processing qid: lc_discovery_projectlistworker_7f61fa27b867810a92ff5836
+2015-10-15T04:03:03.820Z 7564 TID-bfyxc ProjectListWorker JID-7f61fa27b867810a92ff5836 INFO: done: 0.041 sec
+2015-10-15T04:13:23.791Z 7564 TID-aq4g4 INFO: Shutting down
+2015-10-15T04:13:25.056Z 7564 TID-zg6yo INFO: Terminating 10 quiet workers
+2015-10-15T04:13:32.260Z 6924 TID-9setk INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-10-15T04:13:32.994Z 6924 TID-9setk INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
+2015-10-15T04:13:32.994Z 6924 TID-9setk INFO: See LICENSE and the LGPL-3.0 for licensing details.
+2015-10-15T04:13:32.994Z 6924 TID-9setk INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
+2015-10-15T04:13:32.994Z 6924 TID-9setk INFO: Starting processing, hit Ctrl-C to stop
+2015-10-17T23:30:01.236Z 6924 TID-bodzw ProjectListWorker JID-64dca7c67e77af6773b72933 INFO: start
+2015-10-17T23:30:01.236Z 6924 TID-bodzw ProjectListWorker JID-64dca7c67e77af6773b72933 INFO: processing qid: lc_discovery_projectlistworker_64dca7c67e77af6773b72933
+2015-10-17T23:30:01.285Z 6924 TID-bodzw ProjectListWorker JID-64dca7c67e77af6773b72933 INFO: done: 0.049 sec
+2015-10-17T23:36:39.319Z 6924 TID-9setk INFO: Shutting down
+2015-10-17T23:36:41.022Z 6924 TID-zpjpg INFO: Terminating 10 quiet workers
+2015-10-17T23:38:30.219Z 9288 TID-asxl8 INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-10-17T23:39:41.698Z 12532 TID-agags INFO: Booting Sidekiq 3.4.2 with redis options {:namespace=>"logicalcat", :url=>nil}
+2015-10-17T23:39:42.885Z 12532 TID-agags INFO: Running in ruby 2.1.5p273 (2014-11-13 revision 48405) [x64-mingw32]
+2015-10-17T23:39:42.885Z 12532 TID-agags INFO: See LICENSE and the LGPL-3.0 for licensing details.
+2015-10-17T23:39:42.885Z 12532 TID-agags INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org/pro
+2015-10-17T23:39:42.901Z 12532 TID-agags INFO: Starting processing, hit Ctrl-C to stop
+2015-10-17T23:39:56.718Z 12532 TID-afl5o ProjectListWorker JID-34d2600785df3cc7d75ff9e2 INFO: start
+2015-10-17T23:39:56.718Z 12532 TID-afl5o ProjectListWorker JID-34d2600785df3cc7d75ff9e2 INFO: processing qid: lc_discovery_projectlistworker_34d2600785df3cc7d75ff9e2
+2015-10-17T23:39:56.718Z 12532 TID-afl5o ProjectListWorker JID-34d2600785df3cc7d75ff9e2 INFO: done: 0.0 sec
+2015-10-17T23:40:06.700Z 12532 TID-afl5o ProjectListWorker JID-45045aba0ea407bb41bcba6b INFO: start
+2015-10-17T23:40:06.700Z 12532 TID-afl5o ProjectListWorker JID-45045aba0ea407bb41bcba6b INFO: processing qid: lc_discovery_projectlistworker_45045aba0ea407bb41bcba6b
+2015-10-17T23:40:06.725Z 12532 TID-afl5o ProjectListWorker JID-45045aba0ea407bb41bcba6b INFO: done: 0.025 sec

@@ -3,8 +3,6 @@ require "minitest/autorun"
 require "minitest/pride"
 require 'mocha/mini_test'
 require_relative "../../lib/lc_discovery/models/meta"
-
-require "awesome_print"
 require_relative "../../lib/lc_discovery/utility"
 
 describe Meta do
