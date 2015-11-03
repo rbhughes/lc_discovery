@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "gli"
   spec.add_dependency "sidekiq"
   spec.add_dependency "redis"
+  spec.add_dependency "redis-objects"
 
   spec.add_dependency "activemodel" , "= 4.2.1"   #compatibility with clowder
   spec.add_dependency "activesupport" , "= 4.2.1" #compatibility with clowder

@@ -28,12 +28,10 @@ class MetaExtractor
     begin
       return [] unless (@project && @gxdb)
 
-      #puts "meta --> #{@project}"
-
       doc = Utility.base_doc(@project, @label)
 
-      germ = "#{@project} #{@label}" # must match clowder
-      doc[:id] = Utility.lc_id(germ)
+      #germ = "#{@project} #{@label}" # must match clowder
+      #doc[:id] = Utility.lc_id(germ)
 
       doc.merge!(interpreters)
       doc.merge!(version_and_coordsys)

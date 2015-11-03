@@ -15,7 +15,6 @@ describe MetaExtractor do
     proc{ @xtract = MetaExtractor.new(@opts) }.must_output(/Cannot access/)
   end
 
-
   describe "when initialized with options" do
 
     it "creates a MetaExtractor object" do
@@ -48,6 +47,7 @@ describe MetaExtractor do
 
 
   end
+
 
   describe "when collecting filesystem stats" do
     include TestConstruct::Helpers
@@ -295,10 +295,10 @@ describe MetaExtractor do
       @xtract.label.must_equal(@opts[:label])
     end
 
-    it "#extract must be a hash with all expected keys" do
+    it "#extract doc must be a hash with all expected keys" do
       a_doc = @xtract.extract[0]
       a_doc.must_be_instance_of(Hash)
-      a_doc.keys.sort.must_equal(Meta.key_names.sort)
+      a_doc.keys.sort.must_equal(Meta::FIELDS.keys.sort)
     end
 
   end

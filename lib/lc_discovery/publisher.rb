@@ -18,6 +18,12 @@ class Publisher
 
       if store == "elasticsearch"
         docs.each { |doc| model.create(doc) }
+
+      elsif store == "redis"
+        puts "FAKE REDIS"
+        ap "$"*80
+        ap docs
+
       else #assume stdout for now
         ap docs
       end
