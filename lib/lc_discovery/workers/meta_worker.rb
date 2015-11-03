@@ -20,7 +20,7 @@ class MetaWorker
       extractor = MetaExtractor.new(project: path, label: label)
       docs = extractor.extract
 
-      Publisher.write("meta", docs, store)
+      Publisher.new.write("meta", docs, store)
 
       redis.publish("lc_relay", "...")
 

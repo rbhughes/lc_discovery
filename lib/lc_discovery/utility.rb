@@ -2,26 +2,58 @@ require_relative "./lc_env.rb"
 require_relative "./discovery.rb"
 require "digest/sha1"
 require "net/http"
-require "redis"
+require "redis-objects"
+require 'connection_pool'
 
 
 
 module Utility
 
+  REDIS_EXPIRY = (5 * 60) # lifetime of objects
+
   #---------- 
   # (instance method gets picked up Publisher's include)
   def redis
+    #puts "UTILITY#redis got called"
     @redis ||= Redis.new url: LcEnv.redis_url
   end
 
 
+  
+
+
+
   module_function
 
+
+
   #----------
+  # When combined with redis-objects, the resultant key looks like:
+  # <model>:<label>:<host>:<proj>:<field>
+  # well:east texas:okc1ggx0001:c_programdata_geographix_projects_stratton:uwi
+  # * everything is downcased, spaces are allowed in label
+  def project_key(proj, label)
+    host = Discovery.parse_host(proj)
+    proj = proj.gsub(/\\|\/|:/, "_").chomp.strip.squeeze("_").gsub(/^_|_$/,"")
+    "#{label}:#{host}:#{proj}".downcase
+  end
+
+
+  def redis_pool
+    #puts "REDIS POOL CALLED #{LcEnv.redis_url}"
+    @redis_pool ||= 
+      Redis::Objects.redis = ConnectionPool.new(size: 5, timeout: 5) {
+      Redis.new url: LcEnv.redis_url
+    }
+  end
+
+  #----------
+  # Every doc gets this for provenance 
   def base_doc(proj, label)
     {
       label: label,
-      project_id: lc_id("#{proj} #{label}"),
+      #project_id: lc_id("#{proj} #{label}"),
+      project_id: self.project_key(proj,label),
       project_path: proj,
       project_name: File.basename(proj),
       project_home: Discovery.parse_home(proj),
@@ -37,9 +69,9 @@ module Utility
 
   #----------
   # Make a sort of guid, which in some cases is a natural key
-  def lc_id(s)
-    Digest::SHA1.hexdigest(fwd_slasher(s.downcase))
-  end
+  #def lc_id(s)
+  #  Digest::SHA1.hexdigest(fwd_slasher(s.downcase))
+  #end
 
   #----------
   #def camelized_class(str)

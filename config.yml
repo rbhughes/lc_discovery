@@ -17,7 +17,7 @@ homes:
   - path: c:/programdata/geographix/projects/California
     label: red
     active: false
-    extract_code: 3
+    extract_code: 1
     scan_date: 
   - path: c:/programdata/geographix/projects/eiq_test
     label: red
@@ -37,7 +37,7 @@ homes:
   - path: c:/programdata/geographix/projects/Stratton
     label: red
     active: true
-    extract_code: 1
+    extract_code: 3
     scan_date: 
 - path: c:/fake_ggx_home
   active: true
