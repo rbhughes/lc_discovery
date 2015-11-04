@@ -143,8 +143,10 @@ class MetaExtractor
     {
       num_layers_maps: map_num,
       num_sv_interps: sei_num,
-      oldest_file_mod: oldest_file_mod.utc.iso8601,
-      newest_file_mod: newest_file_mod.utc.iso8601,
+      #oldest_file_mod: oldest_file_mod.utc.iso8601,
+      #newest_file_mod: newest_file_mod.utc.iso8601,
+      oldest_file_mod: oldest_file_mod.to_i,
+      newest_file_mod: newest_file_mod.to_i,
       byte_size: byte_size,
       human_size: Filesize.from("#{byte_size} B").pretty.gsub("i",""),
       file_count: file_count,

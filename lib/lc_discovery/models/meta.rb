@@ -79,7 +79,7 @@ class Meta
 
 
   #----------
-  # messy but works
+  # messy, but works
   def to_hash
     h = {}
     self.redis_objects.each do |o|

@@ -29,16 +29,16 @@ Gem::Specification.new do |spec|
   spec.add_dependency "redis"
   spec.add_dependency "redis-objects"
 
-  spec.add_dependency "activemodel" , "= 4.2.1"   #compatibility with clowder
-  spec.add_dependency "activesupport" , "= 4.2.1" #compatibility with clowder
+  #spec.add_dependency "activemodel" , "= 4.2.1"   #compatibility with clowder
+  #spec.add_dependency "activesupport" , "= 4.2.1" #compatibility with clowder
 
   #gem "elasticsearch", git: "git://github.com/elasticsearch/elasticsearch-ruby.git"
   #gem "elasticsearch-model", git: "git://github.com/elasticsearch/elasticsearch-rails.git", require: "elasticsearch/model"
   #spec.add_dependency "elasticsearch-persistence"
 
   #not sure 2015-10-13...
-  spec.add_dependency "elasticsearch-model"
-  spec.add_dependency "elasticsearch-persistence"
+  #spec.add_dependency "elasticsearch-model"
+  #spec.add_dependency "elasticsearch-persistence"
 
 
 

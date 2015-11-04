@@ -119,7 +119,7 @@ describe MetaExtractor do
         construct.file("gxdb.dbR")
         construct.file("gxdb.log")
 
-        ancient = Time.new("1999-12-31")
+        ancient = Time.at(0)
         File.utime(ancient, ancient, "gxdb.log")
 
         # this is how we would mock File::Stat if that worked here
@@ -139,11 +139,9 @@ describe MetaExtractor do
         # gxdb.db, gxdb_production.log and gxdb.log mtime are skipped and not
         # part of age_file_mod or subsequent activity_score...
         pfs[:age_file_mod].must_equal(0)
-        # ...but oldest_file_mod should include the ancient date
-        Time.new(pfs[:oldest_file_mod]).must_equal(ancient)
 
-        Date.parse(pfs[:oldest_file_mod]).must_be_instance_of(Date)
-        Date.parse(pfs[:newest_file_mod]).must_be_instance_of(Date)
+        # ...but oldest_file_mod should include the ancient date
+        Time.at(pfs[:oldest_file_mod]).must_equal(ancient)
 
       end
     end
@@ -299,6 +297,7 @@ describe MetaExtractor do
       a_doc = @xtract.extract[0]
       a_doc.must_be_instance_of(Hash)
       a_doc.keys.sort.must_equal(Meta.key_names.sort)
+
     end
 
   end
