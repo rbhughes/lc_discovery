@@ -3,23 +3,23 @@ require "minitest/autorun"
 require "minitest/pride"
 require "test_construct"
 require 'mocha/mini_test'
-require_relative "../../lib/lc_discovery/extractors/meta_extractor"
+require_relative "../../lib/lc_discovery/extractors/project_extractor"
 
-describe MetaExtractor do
+describe ProjectExtractor do
 
   before do
     @opts = {
       project: "x:/fake_home/fake_project",
       label: "fakery"
     }
-    proc{ @xtract = MetaExtractor.new(@opts) }.must_output(/Cannot access/)
+    proc{ @xtract = ProjectExtractor.new(@opts) }.must_output(/Cannot access/)
   end
 
 
   describe "when initialized with options" do
 
-    it "creates a MetaExtractor object" do
-      @xtract.must_be_instance_of(MetaExtractor)
+    it "creates a ProjectExtractor object" do
+      @xtract.must_be_instance_of(ProjectExtractor)
     end
 
     it "#activity_score must return an average of non-nil age scores" do
@@ -56,7 +56,7 @@ describe MetaExtractor do
       within_construct do |construct|
         construct.directory('User Files') do |dir|
           @opts[:project] = construct.to_s
-          @xtract = MetaExtractor.new(@opts)
+          @xtract = ProjectExtractor.new(@opts)
 
           dir.directory("user_a")
           dir.directory("user_b")
@@ -71,7 +71,7 @@ describe MetaExtractor do
     it "#version_and_coordsys must parse geo info xml or return empty hash" do
       within_construct do |construct|
         @opts[:project] = construct.to_s
-        @xtract = MetaExtractor.new(@opts)
+        @xtract = ProjectExtractor.new(@opts)
         geo_info = @xtract.version_and_coordsys
 
         geo_info.must_be_instance_of(Hash)
@@ -107,7 +107,7 @@ describe MetaExtractor do
     it "#proj_file_stats must recurse a dir and collect file stats" do
       within_construct do |construct|
         @opts[:project] = construct.to_s
-        @xtract = MetaExtractor.new(@opts)
+        @xtract = ProjectExtractor.new(@opts)
 
         construct.file("a_interp.svx")
         construct.file("b_interp.svx")
@@ -222,7 +222,7 @@ describe MetaExtractor do
       }
       
       @opts[:project] = File.expand_path("../../support/sample", __FILE__)
-      @xtract = MetaExtractor.new(@opts)
+      @xtract = ProjectExtractor.new(@opts)
 
       #These inserts are in proper order. If they were not we would have to use
       #both sequel transaction and the wait_for_commit to avoid FK problems:
@@ -298,7 +298,7 @@ describe MetaExtractor do
     it "#extract must be a hash with all expected keys" do
       a_doc = @xtract.extract[0]
       a_doc.must_be_instance_of(Hash)
-      a_doc.keys.sort.must_equal(Meta.key_names.sort)
+      a_doc.keys.sort.must_equal(Project.field_names.sort)
     end
 
   end

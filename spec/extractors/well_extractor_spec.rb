@@ -37,6 +37,10 @@ describe WellExtractor do
 
   describe "when collecting well stats from a gxdb" do
 
+    it "creates a WellExtractor object" do
+      @xtract.must_be_instance_of(WellExtractor)
+    end
+
     it "#parcels must have single job if well count is less than BULK" do
       jobs = WellExtractor.parcels(@opts[:project])
       jobs.must_be_instance_of(Array)
@@ -62,11 +66,17 @@ describe WellExtractor do
       docs.size.must_equal(a_job[:bulk])
     end
 
+    #it "#extract must be a hash with all expected keys" do
+    #  a_doc = @xtract.extract[0]
+    #  a_doc.must_be_instance_of(Hash)
+    #  a_doc.keys.sort.must_equal(Meta.field_names.sort)
+    #end
     it "#extract doc must be a hash with all expected keys" do
+      skip
       a_job = WellExtractor.parcels(@opts[:project])[0]
       a_doc = WellExtractor.new(@opts).extract(a_job[:bulk], a_job[:mark])[0]
       a_doc.must_be_instance_of(Hash)
-      a_doc.keys.sort.must_equal(Well::FIELDS.keys.sort)
+      a_doc.keys.sort.must_equal(Well.field_names.sort)
     end
 
   end

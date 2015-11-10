@@ -1,39 +1,47 @@
-require "./lib/lc_discovery/utility"
-
-require "digest"
-
-# <model>:<label>:<
+require 'redis-objects'
 
 
 
 
-proj = "c:\\programdata\\geographix\\projects\\stratton"
-label = "my laB 123__4 cursdd   el \dux??*"
+class Person
+  attr_reader :name
+  alias :id :name
 
-#----------
-# When combined with redis-objects, the resultant key looks like:
-# <model>:<label>:<host>:<proj>:<field>
-# well:east texas:okc1ggx0001:c_programdata_geographix_projects_stratton:uwi
-# * everything is downcased, spaces are allowed in label
-def clean_redis_key(proj, label)
-  host = Discovery.parse_host(proj)
-  path = proj.gsub(/\\|\/|:/, "_").chomp.strip.squeeze("_").gsub(/^_|_$/,"")
-  "#{label}:#{host}:#{path}".downcase
+  include Redis::Objects
+
+  def initialize name
+    @name = name
+
+
+  end
+
+  FIELDS = [:age, :favorite_foods]
+
+  FIELDS.each do |f|
+    class_eval("def get_#{f}; self.#{f}.get; end")
+  end
+
+
+  def self.exists? name
+    # Here's a big assumption, if the id attribute exists, the entire
+    # object exists.  This might not work for your problem.
+    self.redis.exists "name:{#name}:id"
+  end
+
+  def self.find name
+    # new behaves like find when a record exists, so this works like
+    # find_or_create()
+    self.new name
+  end
+
+
+  
+
+  # native redis attributes with redis-objects
+  value :age
+  list :favorite_foods
+
 end
 
 
-puts sep_to_underscore("c:\\my path\\to\\stuff")
-puts sep_to_underscore("__\\x:/another/path")
-puts sep_to_underscore("\\\\server\\shaDDDDDre\\another/path")
-
-
-def hashy(s)
-  puts "md5:  #{Digest::MD5.hexdigest(s)}"
-  puts "sha1: #{Digest::SHA1.hexdigest(s)}"
-  puts "sha2: #{Digest::SHA2.hexdigest(s)}"
-end
-
-puts hashy("asdf")
-
-#Utility.clean_key(proj, label)
 
