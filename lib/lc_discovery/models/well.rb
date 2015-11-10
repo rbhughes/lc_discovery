@@ -1,544 +1,103 @@
-require "elasticsearch/persistence/model"
 require_relative "../lc_env"
 
+require 'redis-objects'
+require "awesome_print"
+
 class Well
-  include Elasticsearch::Persistence::Model
+  include Redis::Objects
 
-  self.gateway.client = Elasticsearch::Client.new url: LcEnv.elasticsearch_url
+  attr_reader :id
+  value :lc_id, expiration: Utility::REDIS_EXPIRY
 
-  index_name "discovery_wells"
+  value :label,              ilk: :base, expiration: Utility::REDIS_EXPIRY
+  value :project_id,         ilk: :base, expiration: Utility::REDIS_EXPIRY
+  value :project_name,       ilk: :base, expiration: Utility::REDIS_EXPIRY
+  value :project_home,       ilk: :base, expiration: Utility::REDIS_EXPIRY
+  value :project_host,       ilk: :base, expiration: Utility::REDIS_EXPIRY
+  value :project_path,       ilk: :base, expiration: Utility::REDIS_EXPIRY
 
-  settings index: { 
-    number_of_shards: 1,
-    number_of_replicas: 0,
-
-    analysis: {
-      analyzer: {
-        path_analyzer: {
-          tokenizer: "path_tokens"
-        }
-      },
-      tokenizer: {
-        path_tokens: {
-          type: "path_hierarchy",
-          delimiter: "/"
-        }
-      }
-    }
-  }
-
-  es_na = { mapping: { index: "not_analyzed" }}
-  es_pa = { mapping: { analyzer: "path_analyzer" }}
-  es_s  = { mapping: { type: "string" }}
-  es_o  = { mapping: { type: "object" }}
-
-  FIELDS = {
-    id: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: nil,
-      gxdb_table: nil,
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    label: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: nil,
-      gxdb_table: nil,
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    ##### base_doc #####
-    project_home: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: nil,
-      gxdb_table: nil,
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    project_host: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: nil,
-      gxdb_table: nil,
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    project_id: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: nil,
-      gxdb_table: nil,
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    project_name: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: nil,
-      gxdb_table: nil,
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    project_path: {
-      virtus_type: String,
-      es_mapping: es_pa,
-      gxdb_view: nil,
-      gxdb_table: nil,
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    ####################
-    well_id: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Well Id]",
-      gxdb_table: "WELL.UWI",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    source: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Source]",
-      gxdb_table: "WELL.PRIMARY_SOURCE",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    operator: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Operator]",
-      gxdb_table: "WELL.OPERATOR",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    state: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[State]",
-      gxdb_table: "WELL.PROVINCE_STATE",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    county: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[County]",
-      gxdb_table: "WELL.COUNTY",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    country: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Country]",
-      gxdb_table: "WELL.COUNTRY",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    well_name: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Well Name]",
-      gxdb_table: "WELL.WELL_NAME",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    well_number: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Well Number]",
-      gxdb_table: "WELL.WELL_NUMBER",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    common_well_name: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Common Well Name]",
-      gxdb_table: "WELL.COMMON_WELL_NAME",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    latitude: {
-      virtus_type: Float,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[Surface Latitude]",
-      gxdb_table: "WELL.SURFACE_LATITUDE",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    longitude: {
-      virtus_type: Float,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[Surface Longitude]",
-      gxdb_table: "WELL.SURFACE_LONGITUDE",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    lat: {
-      virtus_type: Float,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[Lat]",
-      gxdb_table: "WELL.SURFACE_LATITUDE",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    lng: {
-      virtus_type: Float,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[Lng]",
-      gxdb_table: "WELL.SURFACE_LONGITUDE",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    status: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Status]",
-      gxdb_table: "WELL.CURRENT_STATUS",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    classification: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Classification]",
-      gxdb_table: "WELL.CURRENT_CLASS",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    datum_elev: {
-      virtus_type: Float,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[Datum Elev]",
-      gxdb_table: "WELL.DEPTH_DATUM_ELEV",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    ground_elev: {
-      virtus_type: Float,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[Ground Elev]",
-      gxdb_table: "WELL.GROUND_ELEV",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    plugback_depth: {
-      virtus_type: Float,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[Plugback Depth]",
-      gxdb_table: "WELL.PLUGBACK_DEPTH",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    td: {
-      virtus_type: Float,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[TD]",
-      gxdb_table: "WELL.FINAL_TD",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    fm_at_td: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Fm at TD]",
-      gxdb_table: "WELL.TD_FORM",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    fm_alias_at_td: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Fm Alias at TD]",
-      gxdb_table: "WELL.GX_TD_FORM_ALIAS",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    spud_date: {
-      virtus_type: Date,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[Spud Date]",
-      gxdb_table: "WELL.SPUD_DATE",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    comp_date: {
-      virtus_type: Date,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[Comp Date]",
-      gxdb_table: "WELL.COMPLETION_DATE",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    data_date: {
-      virtus_type: Date,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[Data Date]",
-      gxdb_table: "WELL.ROW_CHANGED_DATE",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-
-    area: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Area]",
-      gxdb_table: "WELL.GEOLOGIC_PROVINCE",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    district: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[District]",
-      gxdb_table: "WELL.DISTRICT",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    field: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Field]",
-      gxdb_table: "WELL.ASSIGNED_FIELD",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    permit_number: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Permit Number]",
-      gxdb_table: "WELL.WELL_GOVT_ID",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    datum_type: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Datum Type]",
-      gxdb_table: "WELL.DEPTH_DATUM",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    alternate_id: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Alternate Id]",
-      gxdb_table: "WELL.GX_ALTERNATE_ID",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    old_id: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Old ID]",
-      gxdb_table: "WELL.GX_OLD_ID",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    user_1: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[User 1]",
-      gxdb_table: "WELL.GX_USER1",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    user_2: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[User 2]",
-      gxdb_table: "WELL.GX_USER2",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    lease_name: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Lease Name]",
-      gxdb_table: "WELL.LEASE_NAME",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    platform_id: {
-      virtus_type: Float,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[Platform ID]",
-      gxdb_table: "WELL.PLATFORM_ID",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    water_depth: {
-      virtus_type: Float,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[Water Depth]",
-      gxdb_table: "WELL.WATER_DEPTH",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    water_datum: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Water Datum]",
-      gxdb_table: "WELL.WATER_DATUM",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    parent_uwi_type: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Parent UWI Type]",
-      gxdb_table: "WELL.PARENT_RELATIONSHIP_TYPE",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    permit_date: {
-      virtus_type: Date,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[Permit Date]",
-      gxdb_table: "WELL.GX_PERMIT_DATE",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    user_date: {
-      virtus_type: Date,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[User Date]",
-      gxdb_table: "WELL.GX_USER_DATE",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    parent_uwi: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Parent UWI]",
-      gxdb_table: "WELL.PARENT_UWI",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    legal_survey_type: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Legal Survey Type]",
-      gxdb_table: "WELL.LEGAL_SURVEY_TYPE",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    location: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Location]",
-      gxdb_table: "WELL.GX_LOCATION_STRING",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    percent_allocation: {
-      virtus_type: Float,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Percent Allocation]",
-      gxdb_table: "WELL.GX_PERCENT_ALLOCATION",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    location: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Location]",
-      gxdb_table: "WELL.GX_LOCATION_STRING",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    row_changed_date: {
-      virtus_type: Date,
-      es_mapping: {},
-      gxdb_view: "WellHeader.[Row Changed Date]",
-      gxdb_table: "WELL.ROW_CHANGED_DATE",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    original_operator: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Original Operator]",
-      gxdb_table: "WELL.ORIGINAL_OPERATOR",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    internal_status: {
-      virtus_type: String,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Internal Status]",
-      gxdb_table: "WELL.GGX_INTERNAL_STATUS",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    wsn: {
-      virtus_type: Integer,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[WSN]",
-      gxdb_table: "WELL.GX_WSN",
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    surface_point: {
-      virtus_type: Hash,
-      es_mapping: es_o,
-      gxdb_view: nil,
-      gxdb_table: nil,
-      ppdm38: nil,
-      ppdm39: nil
-    },
-    proposed: {
-      virtus_type: Boolean,
-      es_mapping: es_na,
-      gxdb_view: "WellHeader.[Proposed]",
-      gxdb_table: "WELL.GX_PROPOSED_FLAG",
-      ppdm38: nil,
-      ppdm39: nil
-    }
-
-  }
+  value :well_id,            ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :source,             ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :operator,           ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :state,              ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :county,             ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :country,            ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :well_name,          ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :well_number,        ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :common_well_name,   ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :latitude,           ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :longitude,          ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :lat,                ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :lng,                ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :status,             ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :classification,     ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :datum_elev,         ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :ground_elev,        ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :plugback_depth,     ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :td,                 ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :fm_at_td,           ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :fm_alias_at_td,     ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :spud_date,          ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :comp_date,          ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :data_date,          ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :area,               ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :district,           ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :field,              ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :permit_number,      ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :datum_type,         ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :alternate_id,       ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :old_id,             ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :user_1,             ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :user_2,             ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :lease_name,         ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :platform_id,        ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :water_depth,        ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :water_datum,        ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :parent_uwi_type,    ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :permit_date,        ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :user_date,          ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :parent_uwi,         ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :legal_survey_type,  ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :location,           ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :percent_allocation, ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :location,           ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :row_changed_date,   ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :original_operator,  ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :internal_status,    ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :wsn,                ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :surface_point,      ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :proposed,           ilk: :data, expiration: Utility::REDIS_EXPIRY
 
 
-  FIELDS.each_pair do |column, v|
-    attribute column, v[:virtus_type], v[:es_mapping].dup #gotta dup!
+  #----------
+  def initialize(id)
+    #self.redis.select 1  <-- if you want to assign it to a different database
+    @id = id
+    self.lc_id = id
   end
 
 
-  validates :id, presence: true
-  validates :label, presence: true
-
-  after_create do
-    puts self.errors.inspect if self.errors
+  #----------
+  def populate(doc)
+    self.redis_objects.select{|k,v| v[:type] == :value && v[:ilk]}.each do |k,v|
+      self.method("#{k}=").call(doc[k])
+    end
+    
+    self.redis_objects.select{|k,v| v[:type] == :set}.each do |k,v|
+      doc[k].each { |v| self.instance_eval("#{k}<<'#{v}'") }
+    end
   end
 
-
-  after_save do
-    #puts "after_save callback sez::::: Successfully saved: #{self}"
+  #----------
+  # Delete an object and all it's fields TODO: make more efficient?
+  def purge(lc_id = self.id)
+    if (doomed = Meta.find(lc_id))
+      doomed.redis_objects.each do |o|
+        field = o[0]
+        self.method(field).call.del
+      end
+    end
+    return Meta.exists?(doomed) ? false : true
   end
-
-  #def gxdb_view(col)
-  #  FIELDS[col.to_sym][:gxdb_view]
-  #end
-  #def gxdb_table(col)
-  #  FIELDS[col.to_sym][:gxdb_table]
-  #end
-  #def ppdm38_for(col)
-  #  FIELDS[col.to_sym][:ppdm38]
-  #end
-  #def ppdm39_for(col)
-  #  FIELDS[col.to_sym][:ppdm39]
-  #end
-
-
-  #def self.native_columns
-  #  exclude = [:created_at, :updated_at]
-  #  self.new.attributes.except!(*exclude).keys.sort
-  #end
-
 
 end

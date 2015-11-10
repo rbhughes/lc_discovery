@@ -55,8 +55,8 @@ class WellExtractor
         doc = doc.dup
         row = Utility.lowercase_symbol_keys(row)
 
-        germ = "#{@project} #{@label} #{row[:well_id]}"
-        doc[:id] = Utility.lc_id(germ)
+        #germ = "#{@project} #{@label} #{row[:well_id]}"
+        #doc[:id] = Utility.lc_id(germ)
 
         #TODO: ensure this is correct format and queryable
         doc[:surface_point] = {

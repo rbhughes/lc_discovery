@@ -2,8 +2,9 @@ require_relative "./lc_env.rb"
 require_relative "./discovery.rb"
 require "digest/sha1"
 require "net/http"
+require "time"
 require "redis-objects"
-require 'connection_pool'
+require "connection_pool"
 
 
 
@@ -32,11 +33,11 @@ module Utility
   # <model>:<label>:<host>:<proj>:<field>
   # well:east texas:okc1ggx0001:c_programdata_geographix_projects_stratton:uwi
   # * everything is downcased, spaces are allowed in label
-  def project_key(proj, label)
-    host = Discovery.parse_host(proj)
-    proj = proj.gsub(/\\|\/|:/, "_").chomp.strip.squeeze("_").gsub(/^_|_$/,"")
-    "#{label}:#{host}:#{proj}".downcase
-  end
+  #def project_key(proj, label)
+  #  host = Discovery.parse_host(proj)
+  #  proj = proj.gsub(/\\|\/|:/, "_").chomp.strip.squeeze("_").gsub(/^_|_$/,"")
+  #  "#{label}:#{host}:#{proj}".downcase
+  #end
 
 
   def redis_pool
@@ -50,14 +51,17 @@ module Utility
   #----------
   # Every doc gets this for provenance 
   def base_doc(proj, label)
+    proj_host = Discovery.parse_host(proj)
+    norm_path =
+      proj.gsub(/\\|\/|:/, "_").chomp.strip.squeeze("_").gsub(/^_|_$/,"")
+
     {
       label: label,
-      #project_id: lc_id("#{proj} #{label}"),
-      project_id: self.project_key(proj,label),
+      project_id: "#{label}:#{proj_host}:#{norm_path}".downcase,
       project_path: proj,
       project_name: File.basename(proj),
       project_home: Discovery.parse_home(proj),
-      project_host: Discovery.parse_host(proj)
+      project_host: proj_host
     }
   end
 
@@ -77,6 +81,12 @@ module Utility
   #def camelized_class(str)
   #  str.to_s.split("_").map{|w| w.capitalize}.join.constantize
   #end
+
+  # Accepts time as int (like File.stat uses) and converst to utc.iso8601
+  def self.to_iso_date(i)
+    Time.at(i).utc.iso8601
+  end
+
 
   #----------
   def lowercase_symbol_keys(h)

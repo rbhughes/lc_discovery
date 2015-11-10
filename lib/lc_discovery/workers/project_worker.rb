@@ -3,7 +3,7 @@ require_relative "../extractors/meta_extractor"
 require_relative "../publisher"
 require_relative "../utility"
 
-class MetaWorker
+class ProjectWorker
   include Sidekiq::Worker
   include Utility
 
@@ -17,7 +17,7 @@ class MetaWorker
       logger.info msg
       redis.publish("lc_relay", msg)
 
-      extractor = MetaExtractor.new(project: path, label: label)
+      extractor = ProjectExtractor.new(project: path, label: label)
       docs = extractor.extract
 
       Publisher.new.write("meta", docs, store)

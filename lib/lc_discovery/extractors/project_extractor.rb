@@ -3,9 +3,9 @@ require "nokogiri"
 require "date"
 require_relative "../discovery"
 require_relative "../utility"
-require_relative "../models/meta"
+require_relative "../models/project"
 
-class MetaExtractor
+class ProjectExtractor
   include Discovery
 
   attr_accessor :project, :label, :gxdb
