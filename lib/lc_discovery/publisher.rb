@@ -16,17 +16,17 @@ class Publisher
 
     begin
 
-      ap docs
+      if store == "elasticsearch"
+        docs.each { |doc| model.create(doc) }
 
-      #if store == "elasticsearch"
-      #  docs.each { |doc| model.create(doc) }
-      #elsif store == "redis"
-      #  puts "FAKE REDIS"
-      #  ap "$"*80
-      #  ap docs
-      #else #assume stdout for now
-      #  ap docs
-      #end
+      elsif store == "redis"
+        puts "REDIS"
+        ap "$"*80
+        ap docs
+
+      else #assume stdout for now
+        ap docs
+      end
 
     rescue Exception => e
       puts "*"*40

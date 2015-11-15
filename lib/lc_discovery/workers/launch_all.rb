@@ -12,5 +12,5 @@ end
 
 require_relative "project_list_worker"
 require_relative "dispatch_worker"
-require_relative "meta_worker"
+require_relative "project_worker"
 require_relative "well_worker"

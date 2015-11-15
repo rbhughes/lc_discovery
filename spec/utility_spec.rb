@@ -10,11 +10,11 @@ require "awesome_print"
 
 describe Utility do
 
-  def testdoc_index_exists?
-    uri = URI("#{LcEnv.elasticsearch_url}/_cat/indices")
-    all = Net::HTTP.get(uri).split("\n").map{|x| x.split[2]}
-    all.include?("discovery_test_docs") ? true : false
-  end
+  #def testdoc_index_exists?
+  #  uri = URI("#{LcEnv.elasticsearch_url}/_cat/indices")
+  #  all = Net::HTTP.get(uri).split("\n").map{|x| x.split[2]}
+  #  all.include?("discovery_test_docs") ? true : false
+  #end
 
   describe "when mixin methods are used" do
 
@@ -35,14 +35,25 @@ describe Utility do
 
   describe "when class methods are invoked" do
 
-    before do
-      @es_url = LcEnv.elasticsearch_url
+    #before do
+    #  @es_url = LcEnv.elasticsearch_url
+    #end
+
+
+    it "#redis instance method must return a Redis handle" do
+      begin
+        Utility.redis_pool.must_be_instance_of(ConnectionPool)
+      rescue Redis::CannotConnectError => e
+        puts "(Could not initialize Utility#redis. Is the service running?)"
+        e.message.must_match(/^Error connecting to Redis/)
+      end
     end
+
 
     it "#base_doc creates a base document hash with expected attributes" do
       doc = Utility.base_doc("c:\\temp\\fake_home\\fake_proj", "fake_label")
       doc[:label].must_equal("fake_label")
-      doc[:project_id].must_equal("221930505d97f2e86e798e461efdc4202c36e007")
+      doc[:project_id].must_equal("fake_label:spinoza:c_temp_fake_home_fake_proj")
       doc[:project_path].must_equal("c:\\temp\\fake_home\\fake_proj")
       doc[:project_name].must_equal("fake_proj")
       doc[:project_home].must_equal("fake_home")
@@ -62,20 +73,25 @@ describe Utility do
       Utility.fwd_slasher(s5).must_equal(s5)
     end
 
-    it "#lc_id makes a hash of a string, does some normalization" do
-      cthul_a = "//Ph'ngLUI mglw'nafh/CthulHU R'lyeh WGAH'nagl fhtagn"
-      cthul_b = "\\\\Ph'nglui MGLW'nafh\\cthulhu r'lyeh wgah'NAGL fhtagn"
-      cthul_c = "//Ph'NGlui mglw'nafh/cthulhu r'lyeh wgah'nagl fhtagn"
-      cthul_d = "\\\\Ph'nglui mglw'nafh\\CTHULHU R'LYEH wgah'nagl FHTAGN"
+    #it "#lc_id makes a hash of a string, does some normalization" do
+    #  cthul_a = "//Ph'ngLUI mglw'nafh/CthulHU R'lyeh WGAH'nagl fhtagn"
+    #  cthul_b = "\\\\Ph'nglui MGLW'nafh\\cthulhu r'lyeh wgah'NAGL fhtagn"
+    #  cthul_c = "//Ph'NGlui mglw'nafh/cthulhu r'lyeh wgah'nagl fhtagn"
+    #  cthul_d = "\\\\Ph'nglui mglw'nafh\\CTHULHU R'LYEH wgah'nagl FHTAGN"
 
-      unspeakable = "6cafb8e2d9dc4c371ec8b9ca4452955cee5b5b1b"
+    #  unspeakable = "6cafb8e2d9dc4c371ec8b9ca4452955cee5b5b1b"
 
-      Utility.lc_id(cthul_a).must_equal(unspeakable)
-      Utility.lc_id(cthul_b).must_equal(unspeakable)
-      Utility.lc_id(cthul_c).must_equal(unspeakable)
-      Utility.lc_id(cthul_d).must_equal(unspeakable)
+    #  Utility.lc_id(cthul_a).must_equal(unspeakable)
+    #  Utility.lc_id(cthul_b).must_equal(unspeakable)
+    #  Utility.lc_id(cthul_c).must_equal(unspeakable)
+    #  Utility.lc_id(cthul_d).must_equal(unspeakable)
+    #end
+
+    it "#to_iso_date returns an iso date string given an integer" do
+      iso = Utility.to_iso_date(1447198943)
+      iso.must_be_instance_of(String)
+      iso.must_equal("2015-11-10T23:42:23Z")
     end
-
 
     it "#lowercase_symbol_keys normalizes hash keys (mainly in db schemas)" do
       h = {
@@ -99,54 +115,54 @@ describe Utility do
 
     # Assumes you have rights to drop/create the test index and that ES is up
     # maybe: settings = JSON.parse(Net::HTTP.get(settings_uri))
-    begin
+    #begin
 
-      it "#init_elasticsearch_index creates an index with settings/mappings" do
-        if testdoc_index_exists?
-          uri = URI("#{@es_url}/discovery_test_docs")
-          http = Net::HTTP.new(uri.host, uri.port)
-          req = Net::HTTP::Delete.new(uri.path)
-          http.request(req).must_be_instance_of(Net::HTTPOK)
-        end
+      #it "#init_elasticsearch_index creates an index with settings/mappings" do
+      #  if testdoc_index_exists?
+      #    uri = URI("#{@es_url}/discovery_test_docs")
+      #    http = Net::HTTP.new(uri.host, uri.port)
+      #    req = Net::HTTP::Delete.new(uri.path)
+      #    http.request(req).must_be_instance_of(Net::HTTPOK)
+      #  end
 
-        Utility.init_elasticsearch_index(:test_doc)
-        testdoc_index_exists?.must_equal(true)
+      #  Utility.init_elasticsearch_index(:test_doc)
+      #  testdoc_index_exists?.must_equal(true)
         
-        settings_uri = URI("#{@es_url}/discovery_test_docs/_settings")
-        settings = Net::HTTP.get(settings_uri)
-        settings.must_match(/settings/)
-        
-        mappings_uri = URI("#{@es_url}/discovery_test_docs/_mappings")
-        mappings = Net::HTTP.get(mappings_uri)
-        mappings.must_match(/mappings/)
-      end
+      #  settings_uri = URI("#{@es_url}/discovery_test_docs/_settings")
+      #  settings = Net::HTTP.get(settings_uri)
+      #  settings.must_match(/settings/)
+      #  
+      #  mappings_uri = URI("#{@es_url}/discovery_test_docs/_mappings")
+      #  mappings = Net::HTTP.get(mappings_uri)
+      #  mappings.must_match(/mappings/)
+      #end
 
 
-      it "#drop_elasticsearch_index deletes an elasticsearch index" do
-        Utility.init_elasticsearch_index(:test_doc)
-        Utility.drop_elasticsearch_index(:test_doc)
-        testdoc_index_exists?.must_equal(false)
-      end
+      #it "#drop_elasticsearch_index deletes an elasticsearch index" do
+      #  Utility.init_elasticsearch_index(:test_doc)
+      #  Utility.drop_elasticsearch_index(:test_doc)
+      #  testdoc_index_exists?.must_equal(false)
+      #end
 
 
-      it "#elasticsearch_index_present? checks whether an index exists" do
-        Utility.drop_elasticsearch_index(:test_doc)
-        a = testdoc_index_exists?
-        b = Utility.elasticsearch_index_present?(:discovery_test_docs)
-        a.must_equal(false)
-        b.must_equal(false)
+      #it "#elasticsearch_index_present? checks whether an index exists" do
+      #  Utility.drop_elasticsearch_index(:test_doc)
+      #  a = testdoc_index_exists?
+      #  b = Utility.elasticsearch_index_present?(:discovery_test_docs)
+      #  a.must_equal(false)
+      #  b.must_equal(false)
 
-        Utility.init_elasticsearch_index(:test_doc)
-        c = testdoc_index_exists?
-        d = Utility.elasticsearch_index_present?(:discovery_test_docs)
-        c.must_equal(true)
-        d.must_equal(true)
-      end
+      #  Utility.init_elasticsearch_index(:test_doc)
+      #  c = testdoc_index_exists?
+      #  d = Utility.elasticsearch_index_present?(:discovery_test_docs)
+      #  c.must_equal(true)
+      #  d.must_equal(true)
+      #end
 
-    rescue Errno::ECONNREFUSED => e
-      puts "(Could not initialize Elasticsearch. Is the service running?)"
-      e.message.must_match(/^No connection could be made/)
-    end
+    #rescue Errno::ECONNREFUSED => e
+    #  puts "(Could not initialize Elasticsearch. Is the service running?)"
+    #  e.message.must_match(/^No connection could be made/)
+    #end
 
 
     # Extractors are fully tested elsewhere. This mainly tests instantiation.)
@@ -154,11 +170,11 @@ describe Utility do
       valid_path = File.expand_path("../support/sample", __FILE__)
       bogus_path = "c:/crudler"
       proc {
-        Utility.cli_extract(:meta, valid_path, "a_label", "stdout")
+        Utility.cli_extract(:project, valid_path, "a_label", "stdout")
       }.must_output(/interpreters/)
 
       proc {
-        Utility.cli_extract(:meta, bogus_path, "a_label", "stdout").class
+        Utility.cli_extract(:project, bogus_path, "a_label", "stdout").class
       }.must_output(/Cannot access/)
     end
 

@@ -20,9 +20,6 @@ module Utility
   end
 
 
-  
-
-
 
   module_function
 
@@ -109,48 +106,46 @@ module Utility
   #
   #TODO: define where logger needs to happen
   #client.transport.logger.formatter = proc { |s, d, p, m| "\e[2m# #{m}\n\e[0m" }
-  def init_elasticsearch_index(type)
-    begin
-
-      model = invoke_lc_model(type)
-
-      model.gateway.client.indices.delete index: model.index_name rescue nil
-      model.gateway.client.indices.create index: model.index_name, body: {
-        settings: model.settings.to_hash, 
-        mappings: model.mappings.to_hash
-      }
-      true
-    rescue Exception => e
-      puts e.message
-      puts e.backtrace
-      return false
-    end
-  end
+  #def init_elasticsearch_index(type)
+  #  begin
+  #    model = invoke_lc_model(type)
+  #    model.gateway.client.indices.delete index: model.index_name rescue nil
+  #    model.gateway.client.indices.create index: model.index_name, body: {
+  #      settings: model.settings.to_hash, 
+  #      mappings: model.mappings.to_hash
+  #    }
+  #    true
+  #  rescue Exception => e
+  #    puts e.message
+  #    puts e.backtrace
+  #    return false
+  #  end
+  #end
 
 
   #----------
-  def drop_elasticsearch_index(type)
-    begin
-      model = invoke_lc_model(type)
-      model.gateway.client.indices.delete index: model.index_name #rescue nil
-      true
-    rescue Elasticsearch::Transport::Transport::Errors::NotFound => nf
-      #puts "No index found to delete."
-      true
-    rescue Exception => e
-      puts e.class
-      puts e.message
-      puts e.backtrace
-      return false
-    end
-  end
+  #def drop_elasticsearch_index(type)
+  #  begin
+  #    model = invoke_lc_model(type)
+  #    model.gateway.client.indices.delete index: model.index_name #rescue nil
+  #    true
+  #  rescue Elasticsearch::Transport::Transport::Errors::NotFound => nf
+  #    #puts "No index found to delete."
+  #    true
+  #  rescue Exception => e
+  #    puts e.class
+  #    puts e.message
+  #    puts e.backtrace
+  #    return false
+  #  end
+  #end
 
   #----------
-  def elasticsearch_index_present?(type)
-    uri = URI("#{LcEnv.elasticsearch_url}/_cat/indices")
-    all = Net::HTTP.get(uri).split("\n").map{|x| x.split[2]}
-    all.any?{ |s| s.casecmp(type.to_s)==0 } ? true : false
-  end
+  #def elasticsearch_index_present?(type)
+  #  uri = URI("#{LcEnv.elasticsearch_url}/_cat/indices")
+  #  all = Net::HTTP.get(uri).split("\n").map{|x| x.split[2]}
+  #  all.any?{ |s| s.casecmp(type.to_s)==0 } ? true : false
+  #end
 
 
   # Mirrors the enqueue behavior of Clowder's Utility.enqueue_extracts(home)

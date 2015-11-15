@@ -35,22 +35,25 @@ describe Publisher do
       @publisher = Publisher.new
     end
 
+    it "must write to redis if specified by store" do
+      @publisher.write(:test_doc, [@doc], "redis")
 
-    it "must write to elasticsearch if specified by store" do
-      @publisher.redis.expects(:publish).with(
-        "lc_relay", "Writing 1 TestDoc docs to elasticsearch.")
 
-      @publisher.write(:test_doc, [@doc], "elasticsearch")
-
-      model = Utility.invoke_lc_model(:test_doc)
-      model.to_s.must_equal("TestDoc")
-      doc = model.find(@doc[:id])
-      doc.must_be_instance_of(model)
-      doc.errors.messages.must_be_empty
-      doc.attributes.size.must_equal(@doc.size + 2) # created_at + updated_at
-      dead = model.find(@doc[:id]).destroy # clean up to be polite
-      dead["found"].must_equal(true)
     end
+
+    #it "must write to elasticsearch if specified by store" do
+    #  @publisher.redis.expects(:publish).with(
+    #    "lc_relay", "Writing 1 TestDoc docs to elasticsearch.")
+    #  @publisher.write(:test_doc, [@doc], "elasticsearch")
+    #  model = Utility.invoke_lc_model(:test_doc)
+    #  model.to_s.must_equal("TestDoc")
+    #  doc = model.find(@doc[:id])
+    #  doc.must_be_instance_of(model)
+    #  doc.errors.messages.must_be_empty
+    #  doc.attributes.size.must_equal(@doc.size + 2) # created_at + updated_at
+    #  dead = model.find(@doc[:id]).destroy # clean up to be polite
+    #  dead["found"].must_equal(true)
+    #end
 
 
     it "must write to stdout by default if store is nil" do
