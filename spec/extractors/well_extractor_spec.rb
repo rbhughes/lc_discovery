@@ -72,7 +72,6 @@ describe WellExtractor do
     #  a_doc.keys.sort.must_equal(Meta.field_names.sort)
     #end
     it "#extract doc must be a hash with all expected keys" do
-      skip
       a_job = WellExtractor.parcels(@opts[:project])[0]
       a_doc = WellExtractor.new(@opts).extract(a_job[:bulk], a_job[:mark])[0]
       a_doc.must_be_instance_of(Hash)

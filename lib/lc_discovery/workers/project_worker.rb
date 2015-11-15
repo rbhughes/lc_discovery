@@ -1,5 +1,5 @@
 require "sidekiq"
-require_relative "../extractors/meta_extractor"
+require_relative "../extractors/project_extractor"
 require_relative "../publisher"
 require_relative "../utility"
 
@@ -20,7 +20,7 @@ class ProjectWorker
       extractor = ProjectExtractor.new(project: path, label: label)
       docs = extractor.extract
 
-      Publisher.new.write("meta", docs, store)
+      Publisher.new.write("project", docs, store)
 
       redis.publish("lc_relay", "...")
 

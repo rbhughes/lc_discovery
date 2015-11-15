@@ -15,8 +15,8 @@ class DispatchWorker
       redis.publish("lc_relay", msg)
 
       case extract
-      when "META"
-        MetaWorker.perform_async(path, label, store)
+      when "PROJECT"
+        ProjectWorker.perform_async(path, label, store)
       when "WELL"
         WellExtractor.parcels(path).each do |job|
           WellWorker.perform_async(path, label, store, job[:bulk], job[:mark])

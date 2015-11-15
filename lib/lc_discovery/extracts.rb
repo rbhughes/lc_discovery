@@ -1,7 +1,7 @@
 #this should match clowder/config/initializers/extracts_discovery.rb
 
 types = %w(
-  META
+  PROJECT
   WELL
   SURVEY
   FORMATION
@@ -26,7 +26,7 @@ module Extracts
 
   # accepts an array of number indexes for selected types,
   # returns a hash of types and sum of 2**n values (bit banging)
-  # {:types =["META"], code => 1}
+  # {:types =["PROJECT"], code => 1}
   def decode(nums)
     types = []
     sum = nums.map do |n|
@@ -39,7 +39,7 @@ module Extracts
   end
 
   # returns a formatted array of strings with integer and data type. e.g.
-  # * 0 -- META
+  # * 0 -- PROJECT
   # * 1 -- WELL
   # * 2 -- SURVEY
   # * 3 -- FORMATION

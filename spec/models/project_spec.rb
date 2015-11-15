@@ -58,7 +58,6 @@ describe Project do
 
 
     @test_id = Project.lc_id(@doc)
-    @proj = Project.new(@test_id)
 
   end
 
@@ -72,12 +71,15 @@ describe Project do
 
 
     it "#new should create the lc_id field that captures the id" do
+      @proj = Project.new(@test_id)
       @proj.lc_id.get.must_equal(@test_id)
       @proj.id.must_equal(@test_id)
+      @proj.purge
     end
 
 
     it "#exists? should check if a Project exists for string, object or hash" do
+      skip
       as_string = Project.lc_id(@doc)
       as_proj = Project.new(as_string)
       as_hash = @doc
@@ -98,8 +100,10 @@ describe Project do
     end
 
 
-    #just compare strings. lc_id won't exist and surface_bounds is not done
+    #just compares strings. lc_id won't exist and surface_bounds is not done
     it "#populate loads expected document attributes" do
+      skip
+      @proj = Project.new(@test_id)
       @proj.populate(@doc)
       @proj.redis_objects.each do |o|
         field = o[0]
@@ -119,6 +123,8 @@ describe Project do
 
 
     it "#to_hash must return hash with numerics where possible" do
+      skip
+      @proj = Project.new(@test_id)
       @proj.populate(@doc)
       doc_hash = @proj.to_hash
       doc_hash.must_be_instance_of(Hash)
@@ -129,6 +135,8 @@ describe Project do
   
 
     it "#purge should delete the Project object and every field" do
+      skip
+      @proj = Project.new(@test_id)
       @proj.populate(@doc)
 
       doc_b = @doc.update({
@@ -157,6 +165,9 @@ describe Project do
 
 
     it "integer-based dates resolve to reasonable values" do
+      skip
+      @proj = Project.new(@test_id)
+      @proj.populate(@doc)
       today = Time.now
       drake = Time.parse(Date.parse("1859-08-27").to_s, Time.now)
       test_dates = [ 
@@ -166,17 +177,22 @@ describe Project do
       test_dates.each do |date_field|
         date_field.between?(drake, today).must_equal(true)
       end
+      @proj.purge
     end
 
 
     it "#try a number will cast a string to a number" do
+      skip
+      @proj = Project.new(@test_id)
       { "one" => "one", "22.22" => 22.22, 3 => 3, "4" => 4}.each do |k,v|
         @proj.try_a_number(k).must_equal(v)
       end
+      @proj.purge
     end
 
 
-    it "#find returns a Project object if the lc_id key exists" do
+    it "#find returns a single Project if given a string lc_id that exists" do
+      @proj = Project.new(@test_id)
       found = Project.find(@test_id)
       found.must_be_instance_of(Project)
       found.id.must_equal(@test_id)
@@ -189,10 +205,35 @@ describe Project do
 
       nope = Project.find("nope")
       nope.must_be_nil
+      @proj.purge
     end
     
-    it "#find_all returns sets of Project objects based on attributes supplied" do
-      skip
+    it "#find_a returns sets of Project objects based on attributes supplied" do
+
+      @proj = Project.new(@test_id)
+      @proj.populate(@doc)
+
+      opts = {
+        label: "fakery",
+        host: "spinoza"
+      }
+      x = Project.find(opts)
+      ap x
+
+
+      #ap "_______________"*40
+      #@proj = Project.new(@test_id)
+      #@proj.populate(@doc)
+      #cursor = 0
+      #all_keys   = []
+      #loop {
+      #  cursor, keys = @proj.redis.scan cursor, :match => "project:*:pro*"
+      #  all_keys += keys
+      #  break if cursor == "0"
+      #}
+      #ap all_keys
+      #ap "_______________"*40
+      @proj.purge
     end
 
   end
@@ -201,11 +242,16 @@ describe Project do
   describe "when checking a Project object's Redis fields" do
 
     it "has a proper Redis instance defined" do
+      skip
+      @proj = Project.new(@test_id)
       @proj.redis.to_s.must_match(/Redis::Objects/)
       @proj.purge
     end
 
+
     it "a proj object has expected fields defined" do
+      skip
+      @proj = Project.new(@test_id)
       fields = Project.field_names
       count = fields.size
 
@@ -218,7 +264,10 @@ describe Project do
       @proj.purge
     end
 
+
     it "#populate adds attributes that are found by redis exists" do
+      skip
+      @proj = Project.new(@test_id)
       @proj.populate(@doc)
       Project.field_names.each do |f|
         @proj.redis.exists(@proj.redis_field_key(f)).must_equal(true)

@@ -20,7 +20,7 @@ class Publisher
         docs.each { |doc| model.create(doc) }
 
       elsif store == "redis"
-        puts "FAKE REDIS"
+        puts "REDIS"
         ap "$"*80
         ap docs
 
