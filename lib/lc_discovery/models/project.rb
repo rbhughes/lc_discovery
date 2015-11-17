@@ -11,13 +11,6 @@ class Project < Base
   attr_reader :id
   value :lc_id, expiration: Utility::REDIS_EXPIRY
   
-  #value :label,           ilk: :base, expiration: Utility::REDIS_EXPIRY
-  #value :project_id,      ilk: :base, expiration: Utility::REDIS_EXPIRY
-  #value :project_name,    ilk: :base, expiration: Utility::REDIS_EXPIRY
-  #value :project_home,    ilk: :base, expiration: Utility::REDIS_EXPIRY
-  #value :project_host,    ilk: :base, expiration: Utility::REDIS_EXPIRY
-  #value :project_path,    ilk: :base, expiration: Utility::REDIS_EXPIRY
-
   value :db_coordsys,     ilk: :geo,  expiration: Utility::REDIS_EXPIRY
   value :map_coordsys,    ilk: :geo,  expiration: Utility::REDIS_EXPIRY
   value :esri_coordsys,   ilk: :geo,  expiration: Utility::REDIS_EXPIRY
@@ -86,8 +79,18 @@ class Project < Base
   #----------
   # redis-objects will turn it into project:
   def self.lc_id(doc)
-    doc[:project_id] # just project_id since "Project" is just a project
+    doc[:project_id]
   end
+
+
+  #----------
+  # just return an empty array since doc[:project_id] is the basic matcher
+  # Look in Base to see that it's really:
+  # [:label, :project_host, :normalized_project_path]
+  def self.matcher_fields
+    []
+  end
+
 
   #----------
   # watch out if lc_id exists the other attributes *probably* also exist

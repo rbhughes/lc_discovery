@@ -12,7 +12,7 @@ describe Project do
 
   before do 
 
-    @doc = {
+    @doc_a = {
       :label => "fakery",
       :project_id => "fakery:spinoza:c_dev_lc_discovery_spec_support_sample",
       :project_path => "c:/dev/lc_discovery/spec/support/sample",
@@ -56,33 +56,37 @@ describe Project do
       :activity_score => 62
     }
 
+    @doc_b = @doc_a.merge({
+      label:"boom", 
+      project_id: "boom:spinoza:c_dev_lc_discovery_spec_support_sample",
+    })
 
-    @test_id = Project.lc_id(@doc)
+    @lc_id_a = Project.lc_id(@doc_a)
+    @lc_id_b = Project.lc_id(@doc_b)
 
   end
 
 
-  describe "when creating, finding and deleting a Project object" do
+  describe "when creating and deleting a single Project object" do
 
     it "#lc_id generates the expected key string" do
       expected = "fakery:spinoza:c_dev_lc_discovery_spec_support_sample"
-      Project.lc_id(@doc).must_equal(expected)
+      Project.lc_id(@doc_a).must_equal(expected)
     end
 
 
     it "#new should create the lc_id field that captures the id" do
-      @proj = Project.new(@test_id)
-      @proj.lc_id.get.must_equal(@test_id)
-      @proj.id.must_equal(@test_id)
-      @proj.purge
+      proj = Project.new(@lc_id_a)
+      proj.lc_id.get.must_equal(@lc_id_a)
+      proj.id.must_equal(@lc_id_a)
+      proj.delete
     end
 
 
     it "#exists? should check if a Project exists for string, object or hash" do
-      skip
-      as_string = Project.lc_id(@doc)
+      as_string = Project.lc_id(@doc_a)
       as_proj = Project.new(as_string)
-      as_hash = @doc
+      as_hash = @doc_a
 
       as_string.must_be_instance_of(String)
       as_proj.must_be_instance_of(Project)
@@ -96,128 +100,126 @@ describe Project do
       Project.exists?(Object.new).must_equal(false)
       Project.exists?({boom:"slang"}).must_equal(false)
 
-      as_proj.purge
+      as_proj.delete
     end
 
 
     #just compares strings. lc_id won't exist and surface_bounds is not done
     it "#populate loads expected document attributes" do
-      skip
-      @proj = Project.new(@test_id)
-      @proj.populate(@doc)
-      @proj.redis_objects.each do |o|
+      proj = Project.new(@lc_id_a)
+      proj.populate(@doc_a)
+      proj.redis_objects.each do |o|
         field = o[0]
         next if [:lc_id, :surface_bounds].include?(field)
         redis_type = o[1][:type] 
         case redis_type
         when :value
-          @proj.method(field).call.value.to_s.must_equal(@doc[field].to_s)
+          proj.method(field).call.value.to_s.must_equal(@doc_a[field].to_s)
         when :set
-          @proj.method(field).call.members.sort.must_equal(
-            @doc[:interpreters].map(&:to_s).sort
+          proj.method(field).call.members.sort.must_equal(
+            @doc_a[:interpreters].map(&:to_s).sort
           )
         end
       end
-      @proj.purge
+      proj.delete
     end
 
 
-    it "#to_hash must return hash with numerics where possible" do
-      skip
-      @proj = Project.new(@test_id)
-      @proj.populate(@doc)
-      doc_hash = @proj.to_hash
-      doc_hash.must_be_instance_of(Hash)
-      @doc[:num_vectors].must_be_instance_of(String)
-      doc_hash[:num_vectors].must_be_instance_of(Fixnum)
-      @proj.purge
+    # note, the redis-objects are still defined because the object reference is
+    # not nil yet, but no keys exist in redis--it really did get deleted.
+    it "#delete should delete the Project object and all of its fields" do
+      proj = Project.new(@lc_id_a)
+      proj.populate(@doc_a)
+      Project.exists?(proj).must_equal(true)
+      proj.delete
+      Project.exists?(proj).must_equal(false)
+      proj.redis_objects.each do |o|
+        field = o[0]
+        redis_type = o[1][:type] 
+        case redis_type
+        when :value
+          proj.method(field).call.value.must_be_nil
+        when :set
+          proj.method(field).call.members.must_be_empty
+        end
+      end
     end
   
 
-    it "#purge should delete the Project object and every field" do
-      skip
-      @proj = Project.new(@test_id)
-      @proj.populate(@doc)
+    it "#delete should only affect the Project on which it is called" do
+      proj_a = Project.new(@lc_id_a)
+      proj_a.populate(@doc_a)
 
-      doc_b = @doc.update({
-        label:"boom", 
-        project_id: "boom:spinoza:c_dev_lc_discovery_spec_support_sample",
-      })
+      proj_b = Project.new(@lc_id_b)
+      proj_b.populate(@doc_b)
 
-      test_id_b = Project.lc_id(doc_b)
-      proj_b = Project.new(test_id_b)
-      proj_b.populate(doc_b)
-
-      Project.exists?(@proj).must_equal(true)
+      Project.exists?(proj_a).must_equal(true)
       Project.exists?(proj_b).must_equal(true)
 
-      @proj.purge("i_never_existed").must_equal(true)
-
-      @proj.purge.must_equal(true)
-      Project.exists?(@proj).must_equal(false)
+      proj_a.delete
+      Project.exists?(proj_a).must_equal(false)
       Project.exists?(proj_b).must_equal(true)
-      proj_b.purge
-      Project.exists?(proj_b).must_equal(false)
+      proj_b.delete
+    end
 
-      @proj.label.get.must_be_nil
-      proj_b.label.get.must_be_nil
+  end
+
+
+
+
+  describe "when finding Project objects" do
+
+    it "Project#find returns nil if lc_id string is not found" do
+      results = Project.find("nope")
+      results.must_be_empty
+    end
+
+    it "Project#find with lc_id string returns single (populated) Project" do
+      proj = Project.new(@lc_id_a)
+      proj.populate(@doc_a)
+      results = Project.find(@lc_id_a)
+      results.size.must_equal(1)
+      found = results[0]
+      found = Project.find(@lc_id_a)[0]
+      found.id.must_equal(@lc_id_a)
+      found.label.get.must_equal(@doc_a[:label])
+      found.project_id.get.must_equal(@doc_a[:project_id])
+      found.delete
+    end
+
+    it "Project#find with array of lc_id strings returns multiple Projects" do 
+      proj_a = Project.new(@lc_id_a)
+      proj_a.populate(@doc_a)
+      proj_b = Project.new(@lc_id_b)
+      proj_b.populate(@doc_b)
+
+      results = Project.find(["aaa","bbb","ccc"])
+      #results = Project.find([@lc_id_a, @lc_id_b, "non-existent_lc_id"])
+      #ap results
+
+      
+      proj_a.delete
+      proj_b.delete
     end
 
 
-    it "integer-based dates resolve to reasonable values" do
+    it "#find returns sets of Project objects based on attributes supplied" do
       skip
-      @proj = Project.new(@test_id)
-      @proj.populate(@doc)
-      today = Time.now
-      drake = Time.parse(Date.parse("1859-08-27").to_s, Time.now)
-      test_dates = [ 
-        Time.at(@proj.newest_file_mod.get.to_i),
-        Time.at(@proj.oldest_file_mod.get.to_i)
-      ]
-      test_dates.each do |date_field|
-        date_field.between?(drake, today).must_equal(true)
-      end
-      @proj.purge
-    end
 
+      @proj = Project.new(@lc_id_a)
+      @proj.populate(@doc_a)
 
-    it "#try a number will cast a string to a number" do
-      skip
-      @proj = Project.new(@test_id)
-      { "one" => "one", "22.22" => 22.22, 3 => 3, "4" => 4}.each do |k,v|
-        @proj.try_a_number(k).must_equal(v)
-      end
-      @proj.purge
-    end
-
-
-    it "#find returns a single Project if given a string lc_id that exists" do
-      @proj = Project.new(@test_id)
-      found = Project.find(@test_id)
-      found.must_be_instance_of(Project)
-      found.id.must_equal(@test_id)
-      found.label.get.must_equal(nil)
-
-      @proj.populate(@doc)
-      found = Project.find(@test_id)
-      found.id.must_equal(@test_id)
-      found.label.get.must_equal(@doc[:label])
-
-      nope = Project.find("nope")
-      nope.must_be_nil
-      @proj.purge
-    end
-    
-    it "#find_a returns sets of Project objects based on attributes supplied" do
-
-      @proj = Project.new(@test_id)
-      @proj.populate(@doc)
-
-      opts = {
+      ap @proj.project_id.get
+      #sooo... the idea is that the keys correspond to fields in the redis key
+      #and any values (if their keys match known keys) will be added to the 
+      #matcher string
+      args = {
+        project_id: "sssssssssssssss",
         label: "fakery",
-        host: "spinoza"
+        well_id: "321452345",
+        project_host: "spinoza"
       }
-      x = Project.find(opts)
+      x = Project.find(args)
       ap x
 
 
@@ -243,7 +245,7 @@ describe Project do
 
     it "has a proper Redis instance defined" do
       skip
-      @proj = Project.new(@test_id)
+      @proj = Project.new(@lc_id_a)
       @proj.redis.to_s.must_match(/Redis::Objects/)
       @proj.purge
     end
@@ -251,7 +253,7 @@ describe Project do
 
     it "a proj object has expected fields defined" do
       skip
-      @proj = Project.new(@test_id)
+      @proj = Project.new(@lc_id_a)
       fields = Project.field_names
       count = fields.size
 
@@ -267,8 +269,8 @@ describe Project do
 
     it "#populate adds attributes that are found by redis exists" do
       skip
-      @proj = Project.new(@test_id)
-      @proj.populate(@doc)
+      @proj = Project.new(@lc_id_a)
+      @proj.populate(@doc_a)
       Project.field_names.each do |f|
         @proj.redis.exists(@proj.redis_field_key(f)).must_equal(true)
       end
@@ -277,6 +279,47 @@ describe Project do
 
   end
 
+
+  describe "miscellaneous Project methods" do
+
+    it "#to_hash must return hash with numerics where possible" do
+      skip
+      proj = Project.new(@lc_id_a)
+      proj.populate(@doc_a)
+      doc_hash = proj.to_hash
+      doc_hash.must_be_instance_of(Hash)
+      @doc_a[:num_vectors].must_be_instance_of(String)
+      doc_hash[:num_vectors].must_be_instance_of(Fixnum)
+      proj.delete
+    end
+
+    it "integer-based dates resolve to reasonable values" do
+      skip
+      proj = Project.new(@lc_id_a)
+      proj.populate(@doc_a)
+      today = Time.now
+      drake = Time.parse(Date.parse("1859-08-27").to_s, Time.now)
+      test_dates = [ 
+        Time.at(proj.newest_file_mod.get.to_i),
+        Time.at(proj.oldest_file_mod.get.to_i)
+      ]
+      test_dates.each do |date_field|
+        date_field.between?(drake, today).must_equal(true)
+      end
+      proj.delete
+    end
+
+
+    it "#try a number will cast a string to a number" do
+      skip
+      proj = Project.new(@lc_id_a)
+      { "one" => "one", "22.22" => 22.22, 3 => 3, "4" => 4}.each do |k,v|
+        proj.try_a_number(k).must_equal(v)
+      end
+      proj.delete
+    end
+
+  end
 
 
 end

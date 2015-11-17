@@ -66,14 +66,28 @@ class Base
   #----------
   # Delete an object and all it's fields TODO: make more efficient?
   # Also get base_doc fields
-  def purge(lc_id = self.id)
-    if (doomed = self.class.find(lc_id))
-      (doomed.redis_objects.merge(Base.redis_objects)).each do |o|
-        field = o[0]
-        self.method(field).call.del
-      end
+  #def purge(lc_id = self.id)
+  #  if (doomed = self.class.find(lc_id))
+  #    (doomed.redis_objects.merge(Base.redis_objects)).each do |o|
+  #      field = o[0]
+  #      self.method(field).call.del
+  #    end
+  #  end
+  #  return Base.exists?(doomed) ? false : true
+  #end
+
+
+  def self.delete(lc_id)
+    #ap self.class.find(self.id)[0]
+
+  end
+
+  def delete
+    (self.redis_objects.merge(Base.redis_objects)).each do |o|
+      field = o[0]
+      self.method(field).call.del
     end
-    return Base.exists?(doomed) ? false : true
+    return Base.exists?(self) ? false : true
   end
 
 
@@ -88,34 +102,37 @@ class Base
   end
 
 
-  def self.match_by(o)
-    o
-  end
-
-
-  def self.matcher_string(args)
-    [
-      args[:label],
-      args[:host],
-      args[:matcher]
-    ].compact.join("*:*")
-
-  end
-
 
   #----------
-  # Find and retrieve an array of lc models by searching for the lc_id. Since
-  # each lc_id contains: <label> : <host> : <path_string>, match on those if
-  # they are supplied as hash options. Treat args as an lc_id string otherwise.
-  def self.find(args)
+  # combine the base_matcher (project_id) with whatever each lc model uses to
+  # establish uniqueness as defined by their self.matcher_fields method
+  def self.matcher_string(args)
+    #fields = [:label, :project_host, :norm_proj_path] + self.matcher_fields
 
+    fields = (args[:project_id] ? [:project_id] : 
+      [:label, :project_host, :norm_proj_path]) + self.matcher_fields
+
+    # set default values to "*"
+    defaults = (Hash[fields.map {|x| [x, "*"]}])
+
+    # replace "*" with values present in args
+    defaults.update(args.select { |k| defaults.key? k }) # 
+
+    # make it look like a redis key
+    defaults.values.join(":")
+  end
+
+
+  def self.find_by(args)
     if args.is_a?(Hash)
-      matcher = "#{self.to_s.downcase}:*#{matcher_string(args)}*:lc_id"
+      #matcher = "#{self.to_s.downcase}:*#{matcher_string(args)}*:lc_id"
+      matcher = matcher_string(args)
 
       cursor = 0
-      all_keys   = []
+      all_keys = []
+      hits = []
 
-      ap "matcher=#{matcher}"
+      ap "matcher=|#{matcher}|"
 
       loop {
         cursor, keys = self.redis.scan cursor, :match => matcher
@@ -132,7 +149,42 @@ class Base
       end
 
     else
-      self.exists?(args) ? self.new(args) : nil
+      self.find(args)
+    end
+  end
+
+  #----------
+  # Find and retrieve an array of lc models by searching for the lc_id. Since
+  # each lc_id contains: <label> : <host> : <path_string>, match on those if
+  # they are supplied as hash options. Treat args as an lc_id string otherwise.
+  def self.find(args)
+
+    if args.is_a?(Array)
+
+      cursor = 0
+      all_keys = []
+      hits = []
+
+      loop {
+        cursor, keys = self.redis.scan cursor
+        all_keys += keys
+        break if cursor == "0"
+      }
+
+      all_keys.each do |key|
+        lc_id = self.redis.get key
+        ap "-----------"
+        ap self.find(lc_id)
+        #hits << self.find(lc_id)[0]
+        #ap "POST_SCAN -->    #{lc_id}"
+        #ap "..."
+        #ap self.find(lc_id)
+        #ap "..."
+      end
+      #hits
+
+    else
+      self.exists?(args) ? [self.new(args)] : []
     end
 
   end
