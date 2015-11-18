@@ -1,4 +1,5 @@
 require_relative "../lc_env"
+require_relative "../utility"
 
 require 'redis-objects'
 require "awesome_print"
@@ -102,7 +103,6 @@ class Base
   end
 
 
-
   #----------
   # combine the base_matcher (project_id) with whatever each lc model uses to
   # establish uniqueness as defined by their self.matcher_fields method
@@ -132,7 +132,7 @@ class Base
       all_keys = []
       hits = []
 
-      ap "matcher=|#{matcher}|"
+      ap "matcher====  |#{matcher}|"
 
       loop {
         cursor, keys = self.redis.scan cursor, :match => matcher
@@ -142,51 +142,27 @@ class Base
 
       all_keys.each do |key|
         lc_id = self.redis.get key
-        ap "POST_SCAN -->    #{lc_id}"
+        hits << self.new(lc_id) if self.exists?(lc_id)
         #ap "..."
         #ap self.find(lc_id)
         #ap "..."
       end
+      hits
 
     else
       self.find(args)
     end
   end
 
+
   #----------
-  # Find and retrieve an array of lc models by searching for the lc_id. Since
-  # each lc_id contains: <label> : <host> : <path_string>, match on those if
-  # they are supplied as hash options. Treat args as an lc_id string otherwise.
-  def self.find(args)
-
-    if args.is_a?(Array)
-
-      cursor = 0
-      all_keys = []
-      hits = []
-
-      loop {
-        cursor, keys = self.redis.scan cursor
-        all_keys += keys
-        break if cursor == "0"
-      }
-
-      all_keys.each do |key|
-        lc_id = self.redis.get key
-        ap "-----------"
-        ap self.find(lc_id)
-        #hits << self.find(lc_id)[0]
-        #ap "POST_SCAN -->    #{lc_id}"
-        #ap "..."
-        #ap self.find(lc_id)
-        #ap "..."
-      end
-      #hits
-
-    else
-      self.exists?(args) ? [self.new(args)] : []
+  # Retrieve any valid models given an array (or string) of lc_ids
+  def self.find(*args)
+    hits = []
+    args.flatten.each do |lc_id|
+      hits << self.new(lc_id) if self.exists?(lc_id)
     end
-
+    hits
   end
 
 
