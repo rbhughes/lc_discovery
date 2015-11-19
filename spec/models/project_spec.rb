@@ -71,6 +71,18 @@ describe Project do
 
 
   describe "something unique to Project objects here" do
+    it "does a thing" do
+      proj = Project.new(@lc_id_a)
+      proj.populate(@doc_a)
+      ap proj.project_path.get
+      ap proj.project_host.get
+      ap "-"*30
+      
+      puts proj.inspect
+
+      #ap proj.methods
+      proj.delete
+    end
 
 
   end

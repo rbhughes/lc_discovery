@@ -10,12 +10,12 @@ class Base
   #attr_reader :id
   #value :lc_id, expiration: Utility::REDIS_EXPIRY
 
-  value :label,              ilk: :base, expiration: Utility::REDIS_EXPIRY
-  value :project_id,         ilk: :base, expiration: Utility::REDIS_EXPIRY
-  value :project_name,       ilk: :base, expiration: Utility::REDIS_EXPIRY
-  value :project_home,       ilk: :base, expiration: Utility::REDIS_EXPIRY
-  value :project_host,       ilk: :base, expiration: Utility::REDIS_EXPIRY
-  value :project_path,       ilk: :base, expiration: Utility::REDIS_EXPIRY
+  value :label,        ilk: :base, expiration: Utility::REDIS_EXPIRY
+  value :project_id,   ilk: :base, expiration: Utility::REDIS_EXPIRY
+  value :project_name, ilk: :base, expiration: Utility::REDIS_EXPIRY
+  value :project_home, ilk: :base, expiration: Utility::REDIS_EXPIRY
+  value :project_host, ilk: :base, expiration: Utility::REDIS_EXPIRY
+  value :project_path, ilk: :base, expiration: Utility::REDIS_EXPIRY
 
   #----------
   def initialize(id)
@@ -40,11 +40,19 @@ class Base
     end
   end
 
+
+
+  #----------
+  def self.base_and_child_redis_objects(obj)
+    return obj.redis_objects unless obj.class.superclass.name == "Base"
+    obj.class.superclass.redis_objects.merge(obj.redis_objects)
+  end
+  
   #----------
   # messy but works
   def to_hash
     h = {}
-    self.redis_objects.each do |o|
+    Base.base_and_child_redis_objects(self).each do |o|
       field = o[0]
       redis_type = o[1][:type] 
       case redis_type
@@ -104,13 +112,19 @@ class Base
 
 
   #----------
-  # combine the base_matcher (project_id) with whatever each lc model uses to
-  # establish uniqueness as defined by their self.matcher_fields method
+  # Construct a string that tries to match lc_id keys. If any of the hash args 
+  # are sub-components of project_id (:label, :project_host, :norm_proj_path),
+  # include them instead of project_id.
+  # TODO: check escaping ":" character
   def self.matcher_string(args)
-    #fields = [:label, :project_host, :norm_proj_path] + self.matcher_fields
 
-    fields = (args[:project_id] ? [:project_id] : 
-      [:label, :project_host, :norm_proj_path]) + self.matcher_fields
+    proj_id_fields = [:label, :project_host, :norm_project_path]
+
+    if (args.keys & proj_id_fields).empty?
+      fields = self.lc_id_fields
+    else
+      fields = proj_id_fields + self.lc_id_fields.reject{ |x| x == :project_id }
+    end
 
     # set default values to "*"
     defaults = (Hash[fields.map {|x| [x, "*"]}])
@@ -118,21 +132,18 @@ class Base
     # replace "*" with values present in args
     defaults.update(args.select { |k| defaults.key? k }) # 
 
-    # make it look like a redis key
-    defaults.values.join(":")
+    # make it look like a redis lc_id key
+    "#{self.to_s.downcase}:#{defaults.values.join(":")}:lc_id"
   end
 
 
   def self.find_by(args)
     if args.is_a?(Hash)
-      #matcher = "#{self.to_s.downcase}:*#{matcher_string(args)}*:lc_id"
       matcher = matcher_string(args)
 
       cursor = 0
       all_keys = []
       hits = []
-
-      ap "matcher====  |#{matcher}|"
 
       loop {
         cursor, keys = self.redis.scan cursor, :match => matcher
@@ -143,9 +154,6 @@ class Base
       all_keys.each do |key|
         lc_id = self.redis.get key
         hits << self.new(lc_id) if self.exists?(lc_id)
-        #ap "..."
-        #ap self.find(lc_id)
-        #ap "..."
       end
       hits
 
