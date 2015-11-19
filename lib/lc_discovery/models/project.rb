@@ -39,19 +39,15 @@ class Project < Base
 
   ############################################################################
 
+
   #----------
-  # redis-objects will turn it into project:
-  def self.lc_id(doc)
-    doc[:project_id]
+  def self.lc_id_fields
+    [:project_id]
   end
 
-
   #----------
-  # just return an empty array since doc[:project_id] is the basic matcher
-  # Look in Base to see that it's really:
-  # [:label, :project_host, :normalized_project_path]
-  def self.matcher_fields
-    []
+  def self.lc_id(doc)
+    lc_id_fields.map{ |x| doc[x] }.join(":")
   end
 
 
