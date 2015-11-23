@@ -1,0 +1,27 @@
+= +lc_discovery+   LogicalCat for GeoGraphix Discovery
+---
+
+home :: http://logicalcat.com
+
+== Description
+
+== Generating Documentation
+
+Once installed, you can create documentation using the +rdoc+ command
+
+  $ rdoc [options] [names...]
+
+
+== Bugs
+
+
+== License
+
+LogicalCat is Copyright (c) 2010-2015, R. Bryan Hughes.
+Portions copyright others, see individual files and LEGAL.rdoc for details.
+
+== Warranty
+
+This software is provided "as is" and without any express or implied
+warranties, including, without limitation, the implied warranties of
+merchantability and fitness for a particular purpose.

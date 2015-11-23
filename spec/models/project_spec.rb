@@ -61,33 +61,105 @@ describe Project do
       project_id: "boom:spinoza:c_dev_lc_discovery_spec_support_sample",
     })
 
-    @lc_id_a = Project.lc_id(@doc_a)
-    @lc_id_b = Project.lc_id(@doc_b)
+    @id_a = Project.gen_id(@doc_a)
+    @id_b = Project.gen_id(@doc_b)
+
+    @project_a = Project.new(@id_a)
+    @project_a.populate(@doc_a)
+
+    @project_b = Project.new(@id_b)
+    @project_b.populate(@doc_b)
 
   end
 
+  def cleanup
+    @project_a.delete
+    @project_b.delete
+    ap "!"*1000 unless (Project.redis.keys "*").empty?
+  end
 
 
+  describe "when creating, deleting and finding Project objects" do
 
-
-  describe "something unique to Project objects here" do
-    it "does a thing" do
-      proj = Project.new(@lc_id_a)
-      proj.populate(@doc_a)
-      ap proj.project_path.get
-      ap proj.project_host.get
-      ap "-"*30
-      
-      puts proj.inspect
-
-      #ap proj.methods
-      proj.delete
+    it "Project gets created and stored in Redis" do
+      Project.exists?(@project_a).must_equal(true)
+      cleanup
     end
 
+    it "Project descends from Base but has child key prefix" do
+      @project_a.class.superclass.name.must_equal("Base")
+      @project_a.redis.keys("project:*:lc_id").wont_be_empty
+      cleanup
+    end
+
+    # just compares strings for now (not an ORM)
+    it "#populate loads expected document attributes" do
+      @project_a.all_redis_objects.each do |o|
+        field = o[0]
+        next if [:lc_id].include?(field)
+        redis_type = o[1][:type] 
+        case redis_type
+        when :value
+          @project_a.method(field).call.get.to_s.must_equal(@doc_a[field].to_s)
+        when :set
+          @project_a.method(field).call.get.sort.must_equal(
+            @doc_a[field].map(&:to_s).sort
+          )
+        end
+      end
+      cleanup
+    end
+
+    it "#find and #find_by work as expected" do
+      results = Project.find([@project_a, @id_b, "nonsense", @doc_a])
+      results.size.must_equal(2)
+      results[0].must_be_instance_of(Project)
+      results[1].must_be_instance_of(Project)
+      results[0].to_hash.wont_equal(results[1].to_hash)
+      args = {
+        label: @doc_b[:label],
+      }
+      results = Project.find_by(args)
+      results.size.must_equal(1)
+      results[0].to_hash.must_equal(@project_b.to_hash)
+      cleanup
+    end
+
+    it "#delete works as expected" do
+      Project.exists?(@project_a).must_equal(true)
+      Project.exists?(@project_b).must_equal(true)
+      count = Project.delete([@project_a, "nonsense"])
+      count.must_equal(1)
+      Project.exists?(@project_a).must_equal(false)
+      Project.exists?(@project_b).must_equal(true)
+      @project_b.delete
+      Project.exists?(@project_b).must_equal(false)
+      cleanup
+    end
 
   end
 
 
+  describe "when checking a Project object's Redis fields" do
+
+    it "has a proper Redis instance defined" do
+      @project_a.redis.to_s.must_match(/Redis::Objects/)
+      cleanup
+    end
+
+    it "a Project object has expected fields defined" do
+      all_fields = Project.all_redis_objects.keys
+      count = all_fields.size
+      all_fields.each do |f|
+        @project_a.all_redis_objects.keys.must_include(f)
+        @project_a.redis.exists(@project_a.redis_field_key(f)).must_equal(true)
+        count -= 1
+      end
+      count.must_equal(0)
+      cleanup
+    end
+
+  end
 
 
 

@@ -45,9 +45,8 @@ describe ProjectExtractor do
       docs.must_be_empty
     end
 
-
-
   end
+
 
   describe "when collecting filesystem stats" do
     include TestConstruct::Helpers
@@ -152,7 +151,8 @@ describe ProjectExtractor do
     end
 
   end
- 
+
+
   describe "when collecting database stats" do
 
     before do
@@ -241,7 +241,6 @@ describe ProjectExtractor do
       
     end
 
-
     after do
       @xtract.gxdb[:well].delete
       @xtract.gxdb[:gx_well_curve].delete
@@ -255,7 +254,6 @@ describe ProjectExtractor do
       @xtract.gxdb[:well_dir_srvy_station].delete
     end
 
-
     it "#surface_bounds must collect a bounding box of lon/lat pairs" do
       box = @xtract.surface_bounds
       box[:location][:type].must_equal("polygon")
@@ -266,7 +264,6 @@ describe ProjectExtractor do
       box[:location][:coordinates][0].must_include([-122.0, 37.4])
       box[:location][:coordinates][0].wont_include([nil, 37.5])
     end
-
 
     it "#proj_db_stats must collect counts and ages for various data types" do
       # note: the ages get stripped from the final doc
@@ -296,12 +293,9 @@ describe ProjectExtractor do
     it "#extract must be a hash with all expected keys" do
       a_doc = @xtract.extract[0]
       a_doc.must_be_instance_of(Hash)
-<<<<<<< HEAD:spec/extractors/meta_extractor_spec.rb
-      a_doc.keys.sort.must_equal(Meta.key_names.sort)
-
-=======
       a_doc.keys.sort.must_equal(Project.field_names.sort)
->>>>>>> work:spec/extractors/project_extractor_spec.rb
+      a_doc[:lc_id] = "fake" #gets added when writing to redis, add now
+      a_doc.keys.sort.must_equal(Project.all_redis_objects.keys.sort)
     end
 
   end
