@@ -53,9 +53,6 @@ class ProjectExtractor
 
       doc = Utility.base_doc(@project, @label)
 
-      #germ = "#{@project} #{@label}" # must match clowder
-      #doc[:id] = Utility.lc_id(germ)
-
       doc.merge!(interpreters)
       doc.merge!(version_and_coordsys)
       doc.merge!(proj_file_stats)

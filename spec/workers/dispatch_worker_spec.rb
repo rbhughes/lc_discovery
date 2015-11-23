@@ -39,7 +39,7 @@ describe DispatchWorker do
     end
 
 
-    # could not declare TestWorker constants multiple times, so two tests here
+    # should not declare TestWorker constants multiple times, so two tests here
     it "Sidekiq logger catches unknown extract type, redis.publish called" do
       dispatch = DispatchWorker.new
       dispatch.redis.stubs(:publish).returns("pub")

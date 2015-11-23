@@ -2,7 +2,7 @@ require_relative "../lc_env"
 require_relative "../utility"
 require_relative "./base"
 
-require 'redis-objects'
+require "redis-objects"
 require "awesome_print"
 
 # Extract metadata from Project objects. Unlike other models which represent
