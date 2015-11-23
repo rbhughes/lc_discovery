@@ -1,0 +1,15 @@
+--- !ruby/object:RDoc::Options
+encoding: UTF-8
+static_path: []
+rdoc_include:
+- .
+charset: UTF-8
+exclude: !ruby/regexp /.*\.log|\.*\.bat|gemspec|Gemfile|Rakefile/
+hyperlink_all: false
+line_numbers: false
+main_page: 
+markup: rdoc
+show_hash: false
+tab_width: 8
+title: LogicalCat lc_discovery
+visibility: :protected

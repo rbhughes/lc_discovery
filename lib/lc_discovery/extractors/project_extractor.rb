@@ -5,13 +5,25 @@ require_relative "../discovery"
 require_relative "../utility"
 require_relative "../models/project"
 
+#####
+# Collect metadata from GeoGraphix Discovery projects. This includes the folder
+# and files that constitute a project as well as content stored in the Sybase
+# SQLAnywhere database.
+#
+# The +project_extractor+ assembles a single document per project, but returns
+# and array to be consistent with other Extractors.
 class ProjectExtractor
   include Discovery
 
   attr_accessor :project, :label, :gxdb
-  BULK = 10
 
-  #----------
+  #BULK = 10 * not implemented for ProjectExtractor
+
+  ###
+  # Create a new extractor.
+  # :: *opts* <Hash> options for this project defines the following attributes
+  # :: +project+ : a full path to the project (likely UNC with hidden share)
+  # :: +label+ : a user-defined tag that identifies this object
   def initialize(opts)
     unless File.exists?(opts[:project])
       puts "Cannot access project: #{opts[:project]}"
@@ -24,6 +36,17 @@ class ProjectExtractor
 
 
   #----------
+  ###
+  # Create a new object. The id string value also gets assigned to the lc_id key
+  # so that it can be searched like any other redis object.
+  # :: *id* <String> a sort of natual key identifying the project and object
+  # A typical lc_id key structure:
+  #
+  # <code>model_type:project_id+:<model-specific-id-field(s)>:lc_id</code>
+  #
+  # ...where +project_id+ is a composite of:
+  #
+  # <code>label:project_host:normalized_project_path</code>
   def extract
     begin
       return [] unless (@project && @gxdb)
