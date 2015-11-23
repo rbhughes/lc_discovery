@@ -1,22 +1,19 @@
 require_relative "../lc_env"
+require_relative "../utility"
+require_relative "./base"
 
-require 'redis-objects'
+require "redis-objects"
 require "awesome_print"
 
-class Well
+###
+#
+class Well < Base
   include Redis::Objects
-
-  attr_reader :id
-  value :lc_id, expiration: Utility::REDIS_EXPIRY
-
-  value :label,              ilk: :base, expiration: Utility::REDIS_EXPIRY
-  value :project_id,         ilk: :base, expiration: Utility::REDIS_EXPIRY
-  value :project_name,       ilk: :base, expiration: Utility::REDIS_EXPIRY
-  value :project_home,       ilk: :base, expiration: Utility::REDIS_EXPIRY
-  value :project_host,       ilk: :base, expiration: Utility::REDIS_EXPIRY
-  value :project_path,       ilk: :base, expiration: Utility::REDIS_EXPIRY
+  self.redis_prefix = self.to_s.downcase
 
   value :well_id,            ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :wsn,                ilk: :data, expiration: Utility::REDIS_EXPIRY
+  value :proposed,           ilk: :data, expiration: Utility::REDIS_EXPIRY
   value :source,             ilk: :data, expiration: Utility::REDIS_EXPIRY
   value :operator,           ilk: :data, expiration: Utility::REDIS_EXPIRY
   value :state,              ilk: :data, expiration: Utility::REDIS_EXPIRY
@@ -64,40 +61,19 @@ class Well
   value :row_changed_date,   ilk: :data, expiration: Utility::REDIS_EXPIRY
   value :original_operator,  ilk: :data, expiration: Utility::REDIS_EXPIRY
   value :internal_status,    ilk: :data, expiration: Utility::REDIS_EXPIRY
-  value :wsn,                ilk: :data, expiration: Utility::REDIS_EXPIRY
   value :surface_point,      ilk: :data, expiration: Utility::REDIS_EXPIRY
-  value :proposed,           ilk: :data, expiration: Utility::REDIS_EXPIRY
 
+  def self.id_fields
+    [:project_id, :proposed, :wsn, :well_id]
+  end
 
-  #----------
+  def self.gen_id(doc)
+    id_fields.map{ |x| doc[x] }.join(":")
+  end
+
   def initialize(id)
-    #self.redis.select 1  <-- if you want to assign it to a different database
     @id = id
-    self.lc_id = id
   end
 
-
-  #----------
-  def populate(doc)
-    self.redis_objects.select{|k,v| v[:type] == :value && v[:ilk]}.each do |k,v|
-      self.method("#{k}=").call(doc[k])
-    end
-    
-    self.redis_objects.select{|k,v| v[:type] == :set}.each do |k,v|
-      doc[k].each { |v| self.instance_eval("#{k}<<'#{v}'") }
-    end
-  end
-
-  #----------
-  # Delete an object and all it's fields TODO: make more efficient?
-  def purge(lc_id = self.id)
-    if (doomed = Meta.find(lc_id))
-      doomed.redis_objects.each do |o|
-        field = o[0]
-        self.method(field).call.del
-      end
-    end
-    return Meta.exists?(doomed) ? false : true
-  end
-
+  Redis::Objects.redis = Utility.redis_pool
 end

@@ -72,7 +72,7 @@ describe Base do
 
   end
 
-  def cleanup
+  after do
     @kid_a.delete
     @kid_b.delete
     ap "!"*1000 unless (Kid.redis.keys "*").empty?
@@ -84,7 +84,6 @@ describe Base do
     it "Base#lc_id generates the expected key string" do
       id = "my_label:my_project_host:my_norm_proj_path:123-45-6789"
       Kid.gen_id(@doc_a).must_equal(id)
-      cleanup
     end
 
     it "Base#parse_id can get lc_id string from various object types" do
@@ -103,7 +102,6 @@ describe Base do
       id_string.must_equal(@id_a)
       id_kid.must_equal(@id_a)
       id_hash.must_equal(@id_a)
-      cleanup
     end
 
     it "Base#exists? should check if a Kid exists for string, object or hash" do
@@ -122,7 +120,6 @@ describe Base do
       Kid.exists?("bogus").must_equal(false)
       Kid.exists?(Object.new).must_equal(false)
       Kid.exists?({boom:"slang"}).must_equal(false)
-      cleanup
     end
 
     # just compares strings for now (not an ORM)
@@ -140,7 +137,6 @@ describe Base do
           )
         end
       end
-      cleanup
     end
 
     # note, the redis-objects are still defined because the object reference is
@@ -159,7 +155,6 @@ describe Base do
           @kid_a.method(field).call.members.must_be_empty
         end
       end
-      cleanup
     end
 
     it "#delete should only affect the Kid upon which it is called" do
@@ -168,7 +163,6 @@ describe Base do
       @kid_a.delete
       Kid.exists?(@kid_a).must_equal(false)
       Kid.exists?(@kid_b).must_equal(true)
-      cleanup
     end
 
   end
@@ -183,7 +177,6 @@ describe Base do
       count.must_equal(2)
       Kid.exists?(@kid_a).must_equal(false)
       Kid.exists?(@kid_b).must_equal(false)
-      cleanup
     end
 
     it "Kid#delete accepts a string lc_id" do
@@ -192,7 +185,6 @@ describe Base do
       Kid.delete(@id_a)
       Kid.exists?(@kid_a).must_equal(false)
       Kid.exists?(@kid_b).must_equal(true)
-      cleanup
     end
 
   end
@@ -204,14 +196,12 @@ describe Base do
       results = Kid.find("nope")
       results.must_be_instance_of(Array)
       results.must_be_empty
-      cleanup
     end
 
     it "Kid#find with array of invalid lc_id strings returns empty array" do
       results = Kid.find(["nope_one", "nope_two"])
       results.must_be_instance_of(Array)
       results.must_be_empty
-      cleanup
     end
 
     it "Kid#find given valid lc_id string returns single Kid" do
@@ -220,7 +210,6 @@ describe Base do
       found = results[0]
       found = Kid.find(@id_a)[0]
       found.to_hash.must_equal(@kid_a.to_hash)
-      cleanup
     end
 
     it "Kid#find with array of string and Hash returns array of Kids" do 
@@ -229,7 +218,6 @@ describe Base do
       results.must_be_instance_of(Array)
       results[0].must_be_instance_of(Kid)
       results[1].must_be_instance_of(Kid)
-      cleanup
     end
 
     it "Kid#find with array with various dup objects returns unique array" do 
@@ -238,7 +226,6 @@ describe Base do
       results.must_be_instance_of(Array)
       results[0].must_be_instance_of(Kid)
       results[1].must_be_instance_of(Kid)
-      cleanup
     end
 
   end
@@ -253,7 +240,6 @@ describe Base do
       results = Kid.find_by([@id_a, @id_b])
       results.must_be_instance_of(Array)
       results.size.must_equal(2)
-      cleanup
     end
 
     it "#find_by will return nothing if match is not possible" do
@@ -264,7 +250,6 @@ describe Base do
       results = Kid.find_by(args)
       results.must_be_instance_of(Array)
       results.must_be_empty
-      cleanup
     end
 
     it "#find_by can discriminate using a base field (like label)" do
@@ -275,7 +260,6 @@ describe Base do
       results.must_be_instance_of(Array)
       results.size.must_equal(1)
       results[0].to_hash.must_equal(@kid_b.to_hash)
-      cleanup
     end
 
     it "#find_by can discriminate using child's lc_id field (like kid_ssn)" do
@@ -286,7 +270,6 @@ describe Base do
       results.must_be_instance_of(Array)
       results.size.must_equal(1)
       results[0].to_hash.must_equal(@kid_a.to_hash)
-      cleanup
     end
 
     it "#find_by can return multiple hits if the field matches multiple docs" do
@@ -299,7 +282,6 @@ describe Base do
       results[0].must_be_instance_of(Kid)
       results[1].must_be_instance_of(Kid)
       results[0].to_hash.wont_equal(results[1].to_hash)
-      cleanup
     end
 
   end
@@ -309,7 +291,6 @@ describe Base do
 
     it "has a proper Redis instance defined" do
       @kid_a.redis.to_s.must_match(/Redis::Objects/)
-      cleanup
     end
 
     it "a Kid object has expected fields defined" do
@@ -321,7 +302,6 @@ describe Base do
         count -= 1
       end
       count.must_equal(0)
-      cleanup
     end
 
   end
@@ -341,7 +321,6 @@ describe Base do
       doc_hash.must_be_instance_of(Hash)
       @doc_a[:num_toys].must_be_instance_of(String)
       doc_hash[:num_toys].must_be_instance_of(Fixnum)
-      cleanup
     end
 
     it "integer-based dates resolve to reasonable values" do
@@ -354,21 +333,18 @@ describe Base do
       test_dates.each do |date_field|
         date_field.between?(drake, today).must_equal(true)
       end
-      cleanup
     end
 
     it "#try a number will cast a string to a number" do
       { "one" => "one", "22.22" => 22.22, 3 => 3, "4" => 4}.each do |k,v|
         @kid_a.try_a_number(k).must_equal(v)
       end
-      cleanup
     end
 
     it "Base#matcher_string returns wildcards for missing project_id fields" do
       Base.stubs(:id_fields).returns([]) 
       s = Base.matcher_string(@args)
       s.must_equal("base:*:fake_host:*:lc_id")
-      cleanup
     end
 
     it "Base#matcher_string uses project_id sub-fields if present" do
@@ -376,7 +352,6 @@ describe Base do
       @args[:project_id] = "bogus:project:stuff"
       s = Base.matcher_string(@args)
       s.must_equal("base:*:fake_host:*:lc_id")
-      cleanup
     end
 
     it "Base#matcher_string will not add unknown fields" do
@@ -385,7 +360,6 @@ describe Base do
       s = Base.matcher_string(@args)
       s.wont_match(/ignored/)
       s.must_equal("base:*:fake_host:*:lc_id")
-      cleanup
     end
 
     it "Base#matcher_string includes fields from id_fields" do
@@ -394,7 +368,6 @@ describe Base do
       @args[:last_name] = "holmes"
       s = Base.matcher_string(@args)
       s.must_equal("base:*:fake_host:*:sherlock:holmes:lc_id")
-      cleanup
     end
 
   end

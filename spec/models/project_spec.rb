@@ -72,7 +72,7 @@ describe Project do
 
   end
 
-  def cleanup
+  after do
     @project_a.delete
     @project_b.delete
     ap "!"*1000 unless (Project.redis.keys "*").empty?
@@ -83,16 +83,14 @@ describe Project do
 
     it "Project gets created and stored in Redis" do
       Project.exists?(@project_a).must_equal(true)
-      cleanup
     end
 
     it "Project descends from Base but has child key prefix" do
       @project_a.class.superclass.name.must_equal("Base")
       @project_a.redis.keys("project:*:lc_id").wont_be_empty
-      cleanup
     end
 
-    # just compares strings for now (not an ORM)
+    # just compares strings for now
     it "#populate loads expected document attributes" do
       @project_a.all_redis_objects.each do |o|
         field = o[0]
@@ -107,7 +105,6 @@ describe Project do
           )
         end
       end
-      cleanup
     end
 
     it "#find and #find_by work as expected" do
@@ -122,7 +119,6 @@ describe Project do
       results = Project.find_by(args)
       results.size.must_equal(1)
       results[0].to_hash.must_equal(@project_b.to_hash)
-      cleanup
     end
 
     it "#delete works as expected" do
@@ -134,7 +130,6 @@ describe Project do
       Project.exists?(@project_b).must_equal(true)
       @project_b.delete
       Project.exists?(@project_b).must_equal(false)
-      cleanup
     end
 
   end
@@ -144,7 +139,6 @@ describe Project do
 
     it "has a proper Redis instance defined" do
       @project_a.redis.to_s.must_match(/Redis::Objects/)
-      cleanup
     end
 
     it "a Project object has expected fields defined" do
@@ -156,11 +150,12 @@ describe Project do
         count -= 1
       end
       count.must_equal(0)
-      cleanup
     end
 
   end
 
 
+  #describe "when doing something more specific" do
+  #end
 
 end

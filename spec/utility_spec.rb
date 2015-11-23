@@ -4,17 +4,11 @@ require "minitest/pride"
 require 'mocha/mini_test'
 require_relative "../lib/lc_discovery/utility"
 require_relative "../lib/lc_discovery/lc_env"
-require_relative "../lib/lc_discovery/models/test_doc"
 
 require "awesome_print"
 
 describe Utility do
 
-  #def testdoc_index_exists?
-  #  uri = URI("#{LcEnv.elasticsearch_url}/_cat/indices")
-  #  all = Net::HTTP.get(uri).split("\n").map{|x| x.split[2]}
-  #  all.include?("discovery_test_docs") ? true : false
-  #end
 
   describe "when mixin methods are used" do
 
@@ -34,11 +28,6 @@ describe Utility do
 
 
   describe "when class methods are invoked" do
-
-    #before do
-    #  @es_url = LcEnv.elasticsearch_url
-    #end
-
 
     it "#redis instance method must return a Redis handle" do
       begin
@@ -73,20 +62,6 @@ describe Utility do
       Utility.fwd_slasher(s5).must_equal(s5)
     end
 
-    #it "#lc_id makes a hash of a string, does some normalization" do
-    #  cthul_a = "//Ph'ngLUI mglw'nafh/CthulHU R'lyeh WGAH'nagl fhtagn"
-    #  cthul_b = "\\\\Ph'nglui MGLW'nafh\\cthulhu r'lyeh wgah'NAGL fhtagn"
-    #  cthul_c = "//Ph'NGlui mglw'nafh/cthulhu r'lyeh wgah'nagl fhtagn"
-    #  cthul_d = "\\\\Ph'nglui mglw'nafh\\CTHULHU R'LYEH wgah'nagl FHTAGN"
-
-    #  unspeakable = "6cafb8e2d9dc4c371ec8b9ca4452955cee5b5b1b"
-
-    #  Utility.lc_id(cthul_a).must_equal(unspeakable)
-    #  Utility.lc_id(cthul_b).must_equal(unspeakable)
-    #  Utility.lc_id(cthul_c).must_equal(unspeakable)
-    #  Utility.lc_id(cthul_d).must_equal(unspeakable)
-    #end
-
     it "#to_iso_date returns an iso date string given an integer" do
       iso = Utility.to_iso_date(1447198943)
       iso.must_be_instance_of(String)
@@ -105,68 +80,9 @@ describe Utility do
     end
 
 
-    it "#invoke_lc_model should instantiate an lc_discovery model" do
-      Utility.invoke_lc_model(:test_doc).name.must_equal("TestDoc")
-      Utility.invoke_lc_model(:test_doc)::FIELDS.must_be_instance_of(Hash)
-      Utility.invoke_lc_model("test_doc").name.must_equal("TestDoc")
-      proc { Utility.invoke_lc_model(:nope) }.must_raise(LoadError)
-    end
-
-
-    # Assumes you have rights to drop/create the test index and that ES is up
-    # maybe: settings = JSON.parse(Net::HTTP.get(settings_uri))
-    #begin
-
-      #it "#init_elasticsearch_index creates an index with settings/mappings" do
-      #  if testdoc_index_exists?
-      #    uri = URI("#{@es_url}/discovery_test_docs")
-      #    http = Net::HTTP.new(uri.host, uri.port)
-      #    req = Net::HTTP::Delete.new(uri.path)
-      #    http.request(req).must_be_instance_of(Net::HTTPOK)
-      #  end
-
-      #  Utility.init_elasticsearch_index(:test_doc)
-      #  testdoc_index_exists?.must_equal(true)
-        
-      #  settings_uri = URI("#{@es_url}/discovery_test_docs/_settings")
-      #  settings = Net::HTTP.get(settings_uri)
-      #  settings.must_match(/settings/)
-      #  
-      #  mappings_uri = URI("#{@es_url}/discovery_test_docs/_mappings")
-      #  mappings = Net::HTTP.get(mappings_uri)
-      #  mappings.must_match(/mappings/)
-      #end
-
-
-      #it "#drop_elasticsearch_index deletes an elasticsearch index" do
-      #  Utility.init_elasticsearch_index(:test_doc)
-      #  Utility.drop_elasticsearch_index(:test_doc)
-      #  testdoc_index_exists?.must_equal(false)
-      #end
-
-
-      #it "#elasticsearch_index_present? checks whether an index exists" do
-      #  Utility.drop_elasticsearch_index(:test_doc)
-      #  a = testdoc_index_exists?
-      #  b = Utility.elasticsearch_index_present?(:discovery_test_docs)
-      #  a.must_equal(false)
-      #  b.must_equal(false)
-
-      #  Utility.init_elasticsearch_index(:test_doc)
-      #  c = testdoc_index_exists?
-      #  d = Utility.elasticsearch_index_present?(:discovery_test_docs)
-      #  c.must_equal(true)
-      #  d.must_equal(true)
-      #end
-
-    #rescue Errno::ECONNREFUSED => e
-    #  puts "(Could not initialize Elasticsearch. Is the service running?)"
-    #  e.message.must_match(/^No connection could be made/)
-    #end
-
-
     # Extractors are fully tested elsewhere. This mainly tests instantiation.)
     it "#cli_extract initializes and runs an extractor" do
+      skip
       valid_path = File.expand_path("../support/sample", __FILE__)
       bogus_path = "c:/crudler"
       proc {

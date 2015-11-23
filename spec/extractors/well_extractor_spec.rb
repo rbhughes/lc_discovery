@@ -7,8 +7,6 @@ require_relative "../../lib/lc_discovery/models/well"
 
 describe WellExtractor do
 
-
-  #wellheader view vs well table!!!!
   before do
     @opts = {
       project: File.expand_path("../../support/sample", __FILE__),
@@ -66,16 +64,12 @@ describe WellExtractor do
       docs.size.must_equal(a_job[:bulk])
     end
 
-    #it "#extract must be a hash with all expected keys" do
-    #  a_doc = @xtract.extract[0]
-    #  a_doc.must_be_instance_of(Hash)
-    #  a_doc.keys.sort.must_equal(Meta.field_names.sort)
-    #end
     it "#extract doc must be a hash with all expected keys" do
       a_job = WellExtractor.parcels(@opts[:project])[0]
       a_doc = WellExtractor.new(@opts).extract(a_job[:bulk], a_job[:mark])[0]
       a_doc.must_be_instance_of(Hash)
-      a_doc.keys.sort.must_equal(Well.field_names.sort)
+      a_doc[:lc_id] = "fake" #gets added when writing to redis, add now
+      a_doc.keys.sort.must_equal(Well.all_redis_objects.keys.sort)
     end
 
   end
