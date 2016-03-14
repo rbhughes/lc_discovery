@@ -11,6 +11,7 @@ require "awesome_print"
 describe Project do
 
   before do 
+    Redis::Objects.redis.select 1 
 
     @doc_a = {
       :label => "fakery",
@@ -75,7 +76,7 @@ describe Project do
   after do
     @project_a.delete
     @project_b.delete
-    ap "!"*1000 unless (Project.redis.keys "*").empty?
+    ap "!"*1000 unless (Project.redis.keys "project*").empty?
   end
 
 

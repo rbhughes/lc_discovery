@@ -6,6 +6,7 @@ require "time"
 require "redis-objects"
 require "connection_pool"
 
+require "awesome_print"
 
 
 module Utility
@@ -71,6 +72,14 @@ module Utility
 
 
 
+  #----------
+  # TODO: add a rescue for unknown model?
+  def invoke_model(type)
+    model_path = File.join(File.dirname(__FILE__),"models/#{type}.rb")
+    require model_path
+    type.to_s.split("_").collect(&:capitalize).join.constantize
+  end
+
 
   # Mirrors the enqueue behavior of Clowder's Utility.enqueue_extracts(home)
   def cli_extract(extract, path, label, store)
@@ -85,7 +94,7 @@ module Utility
 
       extractor = "#{extract.capitalize}Extractor".constantize
       worker = "#{extract.capitalize}Worker".constantize
-      bulk = extractor::BULK
+      bulk = extractor::BULK || 1
       publisher = Publisher.new
 
       if extractor.respond_to?(:parcels)

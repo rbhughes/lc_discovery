@@ -9,22 +9,18 @@ class Publisher
   def write(type, docs, store)
     return if docs.empty? #TODO check this behavior
 
-    model = Utility.invoke_lc_model(type)
-
-    msg = "Writing #{docs.size} #{model} docs to #{store}."
-    redis.publish("lc_relay", msg)
+    model = Utility.invoke_model(type)
 
     begin
 
-      if store == "elasticsearch"
-        docs.each { |doc| model.create(doc) }
+      if store == "redis"
 
-      elsif store == "redis"
-        puts "REDIS"
-        ap "$"*80
-        ap docs
+        redis.publish("lc_relay", "publishing #{docs.size} #{model} doc(s)")
+        docs.each do |doc|
+          model.new(model.gen_id(doc)).populate(doc)
+        end
 
-      else #assume stdout for now
+      else #assume stdout
         ap docs
       end
 
