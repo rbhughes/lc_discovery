@@ -17,7 +17,7 @@ class ProjectExtractor
 
   attr_accessor :project, :label, :gxdb
 
-  #BULK = 10 * not implemented for ProjectExtractor
+  BULK = 10 # maybe used by publisher later? mostly non-applicable now
 
   ###
   # Create a new extractor.

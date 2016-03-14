@@ -252,7 +252,6 @@ command :run_extracts do |c|
     @config["homes"].select { |h| h["active"] }.each do |home|
       home["projects"].select { |p| p["active"] }.each do |proj|
 
-        #store = "stdout" #TODO: add option for csv, elasticsearch, etc?
         store = "redis" #TODO: add option for csv, elasticsearch, etc?
 
         Extracts.assigned(proj["extract_code"]).each do |extract|

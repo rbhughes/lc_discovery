@@ -9,7 +9,7 @@ require_relative "../lib/lc_discovery/lc_env"
 
 describe Discovery do
 
-  describe "when locating projects" do
+  describe "when locating projects by recursing filesystem" do
     include TestConstruct::Helpers
 
     it "#ggx_project? must match potential projects by file types" do

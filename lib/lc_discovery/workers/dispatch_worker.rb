@@ -12,7 +12,9 @@ class DispatchWorker
   def perform(extract, path, label, store)
     begin
       msg = "lc_discovery #{extract} | #{path} | #{label} | #{store}"
+
       redis.publish("lc_relay", msg)
+      puts msg #TODO: MERGE THIS INTO LOGGER!
 
       case extract
       when "PROJECT"

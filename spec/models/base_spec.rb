@@ -39,6 +39,8 @@ end
 describe Base do
 
   before do
+    Redis::Objects.redis.select 1
+
     @doc_a = { 
       project_id: "my_label:my_project_host:my_norm_proj_path",
       label: "my_label", 
@@ -75,7 +77,8 @@ describe Base do
   after do
     @kid_a.delete
     @kid_b.delete
-    ap "!"*1000 unless (Kid.redis.keys "*").empty?
+    ap "!"*1000 unless (Kid.redis.keys "kid*").empty?
+    ap "!"*1000 unless (Kid.redis.keys "base*").empty?
   end
 
 
